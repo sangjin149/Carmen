@@ -1,8 +1,7 @@
 import { styled } from "styled-components";
-
-import Image from "@ui/Image.jsx";
-
 import { TodaysSchedule, Calendar, Star } from "@icons";
+
+import Image from "@ui/Image";
 
 export default function SidebarMenu() {
     return (

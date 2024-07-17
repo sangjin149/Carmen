@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
 
-import MenuItem from "@components/GroupMenuItem.jsx";
+import MenuItem from "@components/GroupMenuItem";
 
 export default function GroupMenu() {
     return (

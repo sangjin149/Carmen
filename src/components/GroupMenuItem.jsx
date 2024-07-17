@@ -1,8 +1,7 @@
 import { styled } from "styled-components";
-
-import Image from "@ui/Image.jsx";
-
 import { Dot } from "@icons";
+
+import Image from "@ui/Image";
 
 export default function GroupMenuItem({ groupName, groupColor }) {
     return (

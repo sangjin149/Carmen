@@ -1,11 +1,10 @@
 import { styled } from "styled-components";
-
-import Button from "@ui/Button.jsx";
-import Header from "@components/Header.jsx";
-import SidebarMenu from "@components/SidebarMenu.jsx";
-import GroupMenu from "@components/GroupMenu.jsx";
-
 import AddScheduleIcon from "@icons/Add.png";
+
+import Button from "@ui/Button";
+import Header from "@components/Header";
+import SidebarMenu from "@components/SidebarMenu";
+import GroupMenu from "@components/GroupMenu";
 
 export default function Sidebar() {
     return (

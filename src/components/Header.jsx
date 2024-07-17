@@ -1,10 +1,9 @@
 import { styled } from "styled-components";
-
-import Button from "@ui/Button.jsx";
 import LogoIcon from "@assets/Logo.png";
-
 import AlarmIcon from "@icons/Alarm.png";
 import FoldIcon from "@icons/FoldSidebar.png";
+
+import Button from "@ui/Button";
 
 export default function Header() {
     return (
