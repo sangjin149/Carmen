@@ -1,33 +1,14 @@
-import Add from "./Add.png";
-import Alarm from "./Alarm.png";
-import Calendar from "./Calendar.png";
-import Dot from "./Dot.js";
-import EditHomeSchedule from "./EditHomeSchedule.png";
-import FoldSidebar from "./FoldSidebar.png";
-import HomeScheduleAlarm from "./HomeScheduleAlarm.png";
-import HomeScheduleLocation from "./HomeScheduleLocation.png";
-import ScheduleRepeat from "./ScheduleRepeat.png";
-import ScheduleStar from "./ScheduleStar.png";
-import ScheduleTime from "./ScheduleTime.png";
-import Star from "./Star.png";
-import TodaysSchedule from "./TodaysSchedule.png";
-import UnfoldHomeSchedule from "./UnfoldHomeSchedule.png";
-import UnfoldSidebar from "./UnfoldSidebar.png";
-
-export {
-    Add,
-    Alarm,
-    Calendar,
-    Dot,
-    EditHomeSchedule,
-    FoldSidebar,
-    HomeScheduleAlarm,
-    HomeScheduleLocation,
-    ScheduleRepeat,
-    ScheduleStar,
-    ScheduleTime,
-    Star,
-    TodaysSchedule,
-    UnfoldHomeSchedule,
-    UnfoldSidebar,
-};
+export { default as ScheduleAlarm } from "./ScheduleAlarm";
+export { default as ScheduleEdit } from "./ScheduleEdit";
+export { default as ScheduleFold } from "./ScheduleFold";
+export { default as ScheduleLocation } from "./ScheduleLocation";
+export { default as ScheduleTime } from "./ScheduleTime";
+export { default as ScheduleUnfold } from "./ScheduleUnfold";
+export { default as SidebarAddSchedule } from "./SidebarAddSchedule";
+export { default as SidebarAlarm } from "./SidebarAlarm";
+export { default as SidebarCalendar } from "./SidebarCalendar";
+export { default as SidebarFold } from "./SidebarFold";
+export { default as SidebarToday } from "./SidebarToday";
+export { default as SidebarUnfold } from "./SidebarUnfold";
+export { default as Star } from "./Star";
+export { default as Dot } from "./Dot";
