@@ -1,12 +1,24 @@
 import { styled } from "styled-components";
+import { ScheduleTime, ScheduleLocation, ScheduleAlarm } from "@icons";
+
+import Image from "@ui/Image";
 
 export default function ScheduleDetail() {
     return (
         <Container>
             <Title>일정 제목</Title>
-            <Time>17:00 ~ 18:00</Time>
-            <Location>경기도 갑을시 병정구 무기대로 경신동</Location>
-            <Alarm>추후 구현 예정</Alarm>
+            <Time>
+                <Image svg={ScheduleTime} alt="time icon" containerStyle={IconContainerStyle} />
+                17:00 ~ 18:00
+            </Time>
+            <Location>
+                <Image svg={ScheduleLocation} alt="location icon" containerStyle={IconContainerStyle} />
+                경기도 갑을시 병정구 무기대로 경신동
+            </Location>
+            <Alarm>
+                <Image svg={ScheduleAlarm} alt="alarm icon" containerStyle={IconContainerStyle} />
+                추후 구현 예정
+            </Alarm>
             <Details>
                 대통령이 궐위된 때 또는 대통령 당선자가 사망하거나 판결 기타의 사유로 그 자격을 상실한 때에는 60일
                 이내에 후임자를 선거한다. 대법원장과 대법관이 아닌 법관은 대법관회의의 동의를 얻어 대법원장이 임명한다.
@@ -37,16 +49,33 @@ const Title = styled.h3`
 `;
 
 const Time = styled.div`
+    display: flex;
+    flex-direction: row;
     font-size: 12px;
 `;
 
 const Location = styled.div`
+    display: flex;
+    flex-direction: row;
     font-size: 12px;
 `;
 
 const Alarm = styled.div`
+    padding-bottom: 4px;
+    display: flex;
+    flex-direction: row;
     font-size: 12px;
 `;
+
+const IconContainerStyle = {
+    width: "16px",
+    height: "16px",
+    paddingRight: "2px",
+
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+};
 
 const Details = styled.div`
     font-size: 10px;
