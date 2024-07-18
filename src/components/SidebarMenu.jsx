@@ -1,5 +1,5 @@
 import { styled } from "styled-components";
-import { TodaysSchedule, Calendar, Star } from "@icons";
+import { SidebarToday, SidebarCalendar, Star } from "@icons";
 
 import Image from "@ui/Image";
 
@@ -7,17 +7,12 @@ export default function SidebarMenu() {
     return (
         <Container>
             <MenuItem>
-                <Image
-                    src={TodaysSchedule}
-                    style={TodayIconStyle}
-                    containerStyle={IconContainerStyle}
-                    alt="today icon"
-                />
+                <Image svg={SidebarToday} style={TodayIconStyle} containerStyle={IconContainerStyle} alt="today icon" />
                 오늘의 일정
             </MenuItem>
             <MenuItem>
                 <Image
-                    src={Calendar}
+                    svg={SidebarCalendar}
                     style={CalendarIconStyle}
                     containerStyle={IconContainerStyle}
                     alt="calendar icon"
@@ -25,7 +20,7 @@ export default function SidebarMenu() {
                 달력
             </MenuItem>
             <MenuItem>
-                <Image src={Star} style={StarIconStyle} containerStyle={IconContainerStyle} alt="star icon" />
+                <Image svg={Star} style={StarIconStyle} containerStyle={IconContainerStyle} alt="star icon" />
                 중요한 일정
             </MenuItem>
         </Container>

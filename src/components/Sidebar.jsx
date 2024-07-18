@@ -1,6 +1,7 @@
 import { styled } from "styled-components";
-import AddScheduleIcon from "@icons/Add.png";
+import { SidebarAddSchedule } from "@icons";
 
+import Image from "@ui/Image";
 import Button from "@ui/Button";
 import Header from "@components/Header";
 import SidebarMenu from "@components/SidebarMenu";
@@ -12,7 +13,7 @@ export default function Sidebar() {
             <Header />
             <nav>
                 <AddScheduleButton>
-                    <AddIcon src={AddScheduleIcon} alt="add schedule icon" />
+                    <AddIcon svg={SidebarAddSchedule} alt="add schedule icon" />
                     <strong>작업 추가</strong>
                 </AddScheduleButton>
                 <SidebarMenu />
@@ -47,7 +48,7 @@ const AddScheduleButton = styled(Button)`
     filter: drop-shadow(0px 4px 4px rgb(0, 0, 0, 0.25));
 `;
 
-const AddIcon = styled.img`
+const AddIcon = styled(Image)`
     padding-left: 4px;
     padding-right: 12px;
 `;

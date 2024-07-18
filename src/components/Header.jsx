@@ -1,9 +1,9 @@
 import { styled } from "styled-components";
 import LogoIcon from "@assets/Logo.png";
-import AlarmIcon from "@icons/Alarm.png";
-import FoldIcon from "@icons/FoldSidebar.png";
+import { SidebarAlarm, SidebarFold } from "@icons";
 
 import Button from "@ui/Button";
+import Image from "@ui/Image";
 
 export default function Header() {
     return (
@@ -11,10 +11,10 @@ export default function Header() {
             <Logo src={LogoIcon} alt="logo" />
             <ButtonContainer>
                 <HeaderButton>
-                    <img src={AlarmIcon} alt="alarm" />
+                    <Image svg={SidebarAlarm} alt="alarm" />
                 </HeaderButton>
                 <HeaderButton>
-                    <img src={FoldIcon} alt="fold" />
+                    <Image svg={SidebarFold} alt="fold" />
                 </HeaderButton>
             </ButtonContainer>
         </Container>
