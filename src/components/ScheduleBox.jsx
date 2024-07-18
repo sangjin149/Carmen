@@ -1,7 +1,9 @@
 import { styled } from "styled-components";
+import { ScheduleFold } from "@icons";
 
 import Button from "@ui/Button";
 import ScheduleDetail from "@/components/ScheduleDetail";
+import Image from "src/ui/Image";
 
 export default function ScheduleBox() {
     return (
@@ -9,7 +11,11 @@ export default function ScheduleBox() {
             <SubInfoContainer />
             <ScheduleDetail />
             <Stripe />
-            <FoldButton />
+            <ActionBox>
+                <FoldButton>
+                    <Image svg={ScheduleFold} />
+                </FoldButton>
+            </ActionBox>
         </Container>
     );
 }
@@ -33,8 +39,14 @@ const Stripe = styled.div`
     background-color: #7fa9fd;
 `;
 
+const ActionBox = styled.div`
+    display: flex;
+    flex-direction: column;
+`;
+
 const FoldButton = styled(Button)`
-    width: 60px;
+    width: 58px;
+    height: 68px;
     display: flex;
     align-items: center;
     justify-content: center;
