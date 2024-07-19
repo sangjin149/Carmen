@@ -3,6 +3,7 @@ import { styled } from "styled-components";
 import Sidebar from "@components/Sidebar.jsx";
 import Clock from "@components/Clock";
 import HomeScheduleList from "@components/HomeScheduleList";
+import HomeTodoList from "@components/HomeTodoList";
 
 export default function Homepage() {
     return (
@@ -12,6 +13,7 @@ export default function Homepage() {
                 <Clock />
                 <Content>
                     <HomeScheduleList />
+                    <HomeTodoList />
                 </Content>
             </Container>
         </div>
