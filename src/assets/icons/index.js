@@ -2,6 +2,7 @@ export { default as ScheduleAlarm } from "./ScheduleAlarm";
 export { default as ScheduleEdit } from "./ScheduleEdit";
 export { default as ScheduleFold } from "./ScheduleFold";
 export { default as ScheduleLocation } from "./ScheduleLocation";
+export { default as ScheduleStar } from "./ScheduleStar";
 export { default as ScheduleTime } from "./ScheduleTime";
 export { default as ScheduleUnfold } from "./ScheduleUnfold";
 export { default as SidebarAddSchedule } from "./SidebarAddSchedule";

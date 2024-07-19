@@ -1,14 +1,17 @@
 import { styled } from "styled-components";
-import { ScheduleFold } from "@icons";
+import { Dot, ScheduleFold, ScheduleStar } from "@icons";
 
 import Button from "@ui/Button";
 import ScheduleDetail from "@/components/ScheduleDetail";
 import Image from "src/ui/Image";
 
-export default function ScheduleBox() {
+export default function ScheduleBox({ star, active }) {
     return (
         <Container>
-            <SubInfoContainer />
+            <SubInfoContainer>
+                {star && <Image svg={ScheduleStar} alt="starred schedule" />}
+                {active && <Image svg={Dot} width={16} height={16} fill="#AAD9BB" alt="active schedule" />}
+            </SubInfoContainer>
             <ScheduleDetail />
             <Stripe />
             <ActionBox>
@@ -32,6 +35,12 @@ const Container = styled.div`
 
 const SubInfoContainer = styled.div`
     width: 40px;
+    padding-top: 8px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1px;
 `;
 
 const Stripe = styled.div`
