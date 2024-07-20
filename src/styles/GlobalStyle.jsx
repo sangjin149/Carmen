@@ -25,6 +25,23 @@ const GlobalStyle = createGlobalStyle`
   ul, li {
     list-style: none;
   }
+
+  button {
+    color: inherit;
+  }
+
+  svg {
+    height: 100%;
+    width: 100%;
+    fill: currentColor;
+    pointer-events: none;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth; 
+  }
+}
 `;
 
 export default GlobalStyle;
