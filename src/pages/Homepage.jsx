@@ -7,7 +7,7 @@ import HomeTodoList from "@components/HomeTodoList";
 
 export default function Homepage() {
     return (
-        <div style={{ height: "500px", display: "flex", flexDirection: "row" }}>
+        <div style={{ display: "flex", flexDirection: "row" }}>
             <Sidebar />
             <Container>
                 <Clock />
@@ -21,8 +21,8 @@ export default function Homepage() {
 }
 
 const Container = styled.div`
-    padding-top: 52px;
-    padding-left: 16px;
+    padding-top: 3rem;
+    padding-left: 1rem;
 
     display: flex;
     flex-direction: column;

@@ -3,49 +3,53 @@ import LogoIcon from "@assets/Logo.png";
 import { SidebarAlarm, SidebarFold } from "@icons";
 
 import Button from "@ui/Button";
-import Image from "@ui/Image";
+import Svg from "@ui/Svg";
 
 export default function Header() {
     return (
         <Container>
             <Logo src={LogoIcon} alt="logo" />
-            <ButtonContainer>
+            <ButtonPanel>
                 <HeaderButton>
-                    <Image svg={SidebarAlarm} alt="alarm" />
+                    <Svg src={SidebarAlarm} alt="alarm" containerStyle={AlarmContainerStyle} />
                 </HeaderButton>
                 <HeaderButton>
-                    <Image svg={SidebarFold} alt="fold" />
+                    <Svg src={SidebarFold} alt="fold" containerStyle={FoldContainerStyle} />
                 </HeaderButton>
-            </ButtonContainer>
+            </ButtonPanel>
         </Container>
     );
 }
 
 const Container = styled.header`
-    width: 100%;
-    height: 40px;
-    padding-bottom: 12px;
+    height: 2.5rem;
 
     display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
+    place-content: center;
 `;
 
 const Logo = styled.img`
-    width: 128px;
-    height: 40px;
+    width: 8rem;
 `;
 
-const ButtonContainer = styled.div`
+const ButtonPanel = styled.div`
     height: 100%;
-    padding-top: 4px;
+    flex-grow: 1;
 
     display: flex;
-    flex-direction: row;
-    align-items: center;
+    place-content: center flex-end;
 `;
 
 const HeaderButton = styled(Button)`
-    width: 30px;
+    width: 2rem;
 `;
+
+const AlarmContainerStyle = {
+    paddingBottom: "1px",
+    paddingLeft: "4px",
+};
+
+const FoldContainerStyle = {
+    paddingTop: "8px",
+    paddingLeft: "4px",
+};

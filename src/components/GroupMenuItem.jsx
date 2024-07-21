@@ -1,31 +1,23 @@
 import { styled } from "styled-components";
-import { Dot } from "@icons";
-
-import Image from "@ui/Image";
 
 export default function GroupMenuItem({ groupName, groupColor }) {
-    return (
-        <Item>
-            <Bullet svg={Dot} alt="dot icon" fill={groupColor ?? "#FF8181"} containerStyle={bulletContainerStyle} />
-            {groupName ?? "이름 없음"}
-        </Item>
-    );
+    return <Item>{groupName ?? "이름 없음"}</Item>;
 }
 
 const Item = styled.li`
-    height: 32px;
+    height: 2rem;
+
     display: flex;
     align-items: center;
-`;
 
-const Bullet = styled(Image)`
-    width: 12px;
-    height: 12px;
-    padding: 6px;
-    padding-top: 8px;
-`;
+    font-size: 0.875rem;
 
-const bulletContainerStyle = {
-    display: "flex",
-    alignItems: "center",
-};
+    &::before {
+        content: "";
+        width: 1rem;
+        height: 1rem;
+        margin-right: 0.4rem;
+        background-color: black;
+        clip-path: circle(6px);
+    }
+`;

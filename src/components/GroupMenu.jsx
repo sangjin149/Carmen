@@ -4,7 +4,7 @@ import MenuItem from "@components/GroupMenuItem";
 
 export default function GroupMenu() {
     return (
-        <div>
+        <div style={{ flexGrow: 1 }}>
             <Title>일정 분류</Title>
             <List>
                 <MenuItem />
@@ -18,12 +18,11 @@ export default function GroupMenu() {
 }
 
 const Title = styled.div`
-    height: 32px;
-    line-height: 32px;
+    height: 3rem;
+    line-height: 3rem;
+    font-size: 1.25rem;
 `;
 
 const List = styled.ul`
-    list-style: none;
-    padding-left: 0;
-    margin-top: 0;
+    margin-top: 0px;
 `;

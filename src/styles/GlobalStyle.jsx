@@ -26,8 +26,9 @@ const GlobalStyle = createGlobalStyle`
     font-size: 1rem;
   }
 
-  ul, li {
+  ul, ol, li {
     list-style: none;
+    padding-left: 0px;
   }
 
   button {
