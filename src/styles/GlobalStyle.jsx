@@ -18,6 +18,10 @@ const GlobalStyle = createGlobalStyle`
     font-size: 1.5rem;
   }
 
+  h3 {
+    font-size: 1rem;
+  }
+
   p {
     font-size: 1rem;
   }
@@ -31,10 +35,15 @@ const GlobalStyle = createGlobalStyle`
   }
 
   svg {
+    display: block;
     height: 100%;
     width: 100%;
     fill: currentColor;
     pointer-events: none;
+  }
+
+  img {
+    object-fit: contain;
   }
 
   @media (prefers-reduced-motion: no-preference) {

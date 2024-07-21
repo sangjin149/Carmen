@@ -28,8 +28,8 @@ export default function HomeTodoList() {
 }
 
 const Container = styled.section`
-    width: 340px;
-    padding-left: 16px;
+    width: 20rem;
+    padding-left: 1rem;
     display: flex;
     flex-direction: column;
 `;
@@ -84,10 +84,6 @@ const TodoTitleContainer = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
-`;
-
-const TodoTitle = styled.h4`
-    margin: 0;
 `;
 
 const TodoDetail = styled.div`

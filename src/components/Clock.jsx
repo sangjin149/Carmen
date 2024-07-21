@@ -53,7 +53,7 @@ const Date = styled.div`
 `;
 
 const Time = styled.div`
-    height: 64px;
-    line-height: 56px;
-    font-size: 80px;
+    height: 4rem;
+    line-height: 4.5rem;
+    font-size: 5rem;
 `;

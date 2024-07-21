@@ -12,8 +12,8 @@ export default function HomeScheduleList() {
     );
 }
 
-const Container = styled.div`
+const Container = styled.section`
     display: flex;
     flex-direction: column;
-    gap: 22px;
+    gap: 1.5rem;
 `;
