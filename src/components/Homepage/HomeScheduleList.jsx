@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
 
-import ScheduleBox from "@components/ScheduleBox";
+import { ScheduleBox } from "@components/Homepage";
 
 export default function HomeScheduleList() {
     return (

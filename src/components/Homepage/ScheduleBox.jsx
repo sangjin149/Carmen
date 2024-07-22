@@ -2,7 +2,7 @@ import { styled } from "styled-components";
 import { ScheduleFold } from "@icons";
 
 import Button from "@ui/Button";
-import ScheduleDetail from "@/components/ScheduleDetail";
+import { ScheduleDetail } from "@components/Homepage";
 import Svg from "src/ui/Svg";
 
 export default function ScheduleBox({ star, active }) {

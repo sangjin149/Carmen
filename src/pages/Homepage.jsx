@@ -1,11 +1,10 @@
 import { styled } from "styled-components";
 
-import Sidebar from "@components/Sidebar.jsx";
-import Clock from "@components/Clock";
-import HomeScheduleList from "@components/HomeScheduleList";
-import HomeTodoList from "@components/HomeTodoList";
+import { Sidebar } from "@components/Sidebar";
+import { Clock, HomeScheduleList, HomeTodoList } from "@components/Homepage";
 
 export default function Homepage() {
+    //router 적용 후 레이아웃 수정 예정
     return (
         <div style={{ display: "flex", flexDirection: "row" }}>
             <Sidebar />

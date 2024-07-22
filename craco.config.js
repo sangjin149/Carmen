@@ -10,6 +10,7 @@ module.exports = {
             "@icons": path.resolve(__dirname, "src/assets/icons"),
             "@ui": path.resolve(__dirname, "src/ui"),
             "@styles": path.resolve(__dirname, "src/styles"),
+            "@utils": path.resolve(__dirname, "src/utils"),
         },
     },
 };

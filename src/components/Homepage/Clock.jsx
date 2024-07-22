@@ -1,15 +1,7 @@
 import { styled } from "styled-components";
 import { useState, useEffect } from "react";
 
-function updateClock() {
-    let now = new window.Date();
-    const month = (now.getMonth() + 1).toString().padStart(2, "0");
-    const day = now.getDate().toString().padStart(2, "0");
-    const hours = now.getHours().toString().padStart(2, "0");
-    const minutes = now.getMinutes().toString().padStart(2, "0");
-    const seconds = now.getSeconds().toString().padStart(2, "0");
-    return { month, day, hours, minutes, seconds };
-}
+import { updateClock } from "@utils/time";
 
 export default function Clock() {
     const [time, setTime] = useState({
@@ -20,12 +12,15 @@ export default function Clock() {
         seconds: "00",
     });
 
+    const [hidden, setHidden] = useState(true);
+
     function updateTime() {
         setTime(updateClock());
     }
 
     useEffect(() => {
         const interval = setInterval(updateTime, 1000);
+        setHidden(false);
         return () => {
             clearInterval(interval);
         };
@@ -33,12 +28,18 @@ export default function Clock() {
 
     return (
         <Container>
-            <Date>
-                {time.month}.{time.day}
-            </Date>
-            <Time>
-                {time.hours}:{time.minutes}
-            </Time>
+            {setHidden ? (
+                "HIDDEN"
+            ) : (
+                <>
+                    <Date>
+                        {time.month}.{time.day}
+                    </Date>
+                    <Time>
+                        {time.hours}:{time.minutes}
+                    </Time>
+                </>
+            )}
         </Container>
     );
 }
