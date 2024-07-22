@@ -26,35 +26,38 @@ export default function Clock() {
         };
     }, []);
 
-    if (timeNotUpdated) return <Container>Loading</Container>;
-
     return (
         <Container>
-            <Date>
-                {time.month}.{time.date} {time.day}
-            </Date>
+            <Date>{timeNotUpdated ? "" : `${time.month}.${time.date} ${time.day}`}</Date>
             <Time>
-                {time.hours}:{time.minutes}
+                {timeNotUpdated ? <LoadingIndicator>Loading...</LoadingIndicator> : `${time.hours}:${time.minutes}`}
             </Time>
         </Container>
     );
 }
 
 const Container = styled.div`
+    height: 6rem;
     width: 26rem;
 
     display: flex;
     flex-direction: column;
     align-items: flex-end;
+    justify-content: flex-end;
 `;
 
 const Date = styled.div`
+    height: 2rem;
     text-align: end;
-    font-size: 1.375rem;
+    font-size: 1.25rem;
 `;
 
 const Time = styled.div`
     height: 4rem;
     line-height: 4.5rem;
+    font-size: 5rem;
+`;
+
+const LoadingIndicator = styled.div`
     font-size: 5rem;
 `;
