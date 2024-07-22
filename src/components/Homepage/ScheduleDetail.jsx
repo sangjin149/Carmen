@@ -3,7 +3,7 @@ import { ScheduleTime, ScheduleLocation, ScheduleAlarm } from "@icons";
 
 import Svg from "@ui/Svg";
 
-export default function ScheduleDetail({ content }) {
+export default function ScheduleDetail({ content, isFolded }) {
     return (
         <Container>
             <Title>{content.title}</Title>
@@ -19,7 +19,7 @@ export default function ScheduleDetail({ content }) {
                 <Svg src={ScheduleAlarm} alt="alarm icon" containerStyle={AlarmStyle} />
                 추후 구현 예정
             </Alarm>
-            <Description>{content.description}</Description>
+            {!isFolded && <Description>{content.description}</Description>}
         </Container>
     );
 }
