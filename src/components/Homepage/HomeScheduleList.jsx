@@ -1,9 +1,16 @@
 import { styled } from "styled-components";
 
 import { ScheduleBox } from "@components/Homepage";
-import generateDummyData from "src/utils/dummySchedule";
+import generateDummyData from "@utils/dummySchedule";
 
-const DUMMY_DATA = generateDummyData(8);
+function sortScheduleByDate(prevSchedule, nextSchedule) {
+    const prevTime = prevSchedule.time.replace(" ", "").replace(".", "").replace(":", "");
+    const nextTime = nextSchedule.time.replace(" ", "").replace(".", "").replace(":", "");
+
+    return prevTime - nextTime;
+}
+
+const DUMMY_DATA = generateDummyData(16).sort(sortScheduleByDate);
 
 export default function HomeScheduleList() {
     return (
