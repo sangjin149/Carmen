@@ -1,17 +1,31 @@
 import { styled } from "styled-components";
 import { ScheduleFold } from "@icons";
+import { useState } from "react";
 
 import Button from "@ui/Button";
+import Svg from "@ui/Svg";
 import { ScheduleDetail } from "@components/Homepage";
-import Svg from "src/ui/Svg";
 
-export default function ScheduleBox({ star, active }) {
+export default function ScheduleBox({ schedule }) {
+    const content = {
+        title: schedule.title,
+        time: schedule.time,
+        location: schedule.location,
+        description: schedule.description,
+    };
+
+    const [isFolded, setFolded] = useState(false);
+
+    const handleFoldClick = () => {
+        setFolded((prevIsFolded) => !prevIsFolded);
+    };
+
     return (
         <Container>
-            <SubInfoContainer></SubInfoContainer>
-            <ScheduleDetail />
+            <SubInfoContainer />
+            <ScheduleDetail content={content} />
             <ActionBox>
-                <FoldButton>
+                <FoldButton onClick={handleFoldClick}>
                     <Svg src={ScheduleFold} />
                 </FoldButton>
             </ActionBox>
@@ -21,11 +35,12 @@ export default function ScheduleBox({ star, active }) {
 
 const Container = styled.div`
     width: 26rem;
-
     position: relative;
     display: flex;
     border: 1px solid #b1b1b1;
     border-radius: 8px;
+
+    transition: max-height 0.3s ease-out;
 
     &::before {
         content: "";
@@ -49,7 +64,7 @@ const ActionBox = styled.div`
 
 const FoldButton = styled(Button)`
     width: 4rem;
-    height: 68px;
+    height: 8.25rem;
     display: flex;
     align-items: center;
     justify-content: center;

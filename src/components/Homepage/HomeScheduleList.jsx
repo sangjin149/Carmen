@@ -1,13 +1,16 @@
 import { styled } from "styled-components";
 
 import { ScheduleBox } from "@components/Homepage";
+import generateDummyData from "src/utils/dummySchedule";
+
+const DUMMY_DATA = generateDummyData(8);
 
 export default function HomeScheduleList() {
     return (
         <Container>
-            <ScheduleBox star active />
-            <ScheduleBox />
-            <ScheduleBox />
+            {DUMMY_DATA.map((schedule) => (
+                <ScheduleBox schedule={schedule} key={schedule.id} />
+            ))}
         </Container>
     );
 }

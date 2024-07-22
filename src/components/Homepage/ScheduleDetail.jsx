@@ -3,30 +3,30 @@ import { ScheduleTime, ScheduleLocation, ScheduleAlarm } from "@icons";
 
 import Svg from "@ui/Svg";
 
-export default function ScheduleDetail() {
+export default function ScheduleDetail({ content }) {
     return (
         <Container>
-            <Title>일정 제목</Title>
+            <Title>{content.title}</Title>
             <Time>
                 <Svg src={ScheduleTime} alt="time icon" containerStyle={ClockStyle} center />
-                17:00 ~ 18:00
+                {content.time}
             </Time>
             <Location>
                 <Svg src={ScheduleLocation} alt="location icon" containerStyle={LocationStyle} />
-                경기도 갑을시 병정구 무기대로 경신동
+                {content.location}
             </Location>
             <Alarm>
                 <Svg src={ScheduleAlarm} alt="alarm icon" containerStyle={AlarmStyle} />
                 추후 구현 예정
             </Alarm>
-            <Description>본문 글자 크기 16pt 목표로 모든 디자인 수정하기 가능할까...</Description>
+            <Description>{content.description}</Description>
         </Container>
     );
 }
 
 const Container = styled.article`
     width: 310px;
-    padding-top: 0.5rem;
+    padding: 0.5rem 0;
 
     display: flex;
     flex-direction: column;
@@ -35,7 +35,7 @@ const Container = styled.article`
 const Title = styled.h3`
     height: 1.5rem;
     margin: 0px;
-    margin-bottom: 4px;
+    margin-bottom: 0.5rem;
     font-size: 0.875rem;
     line-height: 1.5rem;
     font-family: "NanumSquareB";
@@ -43,7 +43,7 @@ const Title = styled.h3`
 
 const Details = styled.div`
     height: 1.5rem;
-    margin-top: 4px;
+    margin-bottom: 0.25rem;
     display: flex;
     font-size: 0.875rem;
     line-height: 1.5rem;
@@ -62,19 +62,19 @@ const IconContainerStyle = {
 
 const ClockStyle = {
     ...IconContainerStyle,
-    paddingTop: "4px",
+    paddingTop: "0.25rem",
     paddingLeft: "1px",
 };
 
 const LocationStyle = {
     ...IconContainerStyle,
-    paddingTop: "4px",
+    paddingTop: "0.25rem",
     paddingLeft: "2px",
 };
 
 const AlarmStyle = {
     ...IconContainerStyle,
-    paddingTop: "4px",
+    paddingTop: "0.25rem",
 };
 
 const Description = styled.div`
