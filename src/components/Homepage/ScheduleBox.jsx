@@ -36,10 +36,12 @@ export default function ScheduleBox({ schedule }) {
 const Container = styled.div`
     width: 26rem;
     position: relative;
+    z-index: 2;
     display: flex;
     border: 1px solid #b1b1b1;
     border-radius: 8px;
 
+    background-color: white;
     &::before {
         content: "";
         width: 4px;
