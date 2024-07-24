@@ -7,26 +7,19 @@ import Svg from "@ui/Svg";
 import { ScheduleDetail } from "@components/Homepage";
 
 export default function ScheduleBox({ schedule }) {
-    const content = {
-        title: schedule.title,
-        time: schedule.time,
-        location: schedule.location,
-        description: schedule.description,
-    };
+    const [foldBox, setFoldBox] = useState(true);
 
-    const [isFolded, setFolded] = useState(true);
-
-    const handleFoldClick = () => {
-        setFolded((prevIsFolded) => !prevIsFolded);
+    const handleFoldButtonClick = () => {
+        setFoldBox((prevIsFolded) => !prevIsFolded);
     };
 
     return (
         <Container>
             <SubInfoContainer />
-            <ScheduleDetail content={content} isFolded={isFolded} />
+            <ScheduleDetail schedule={schedule} hideDescription={foldBox} />
             <ActionBox>
-                <FoldButton onClick={handleFoldClick}>
-                    <Svg src={isFolded ? ScheduleUnfold : ScheduleFold} />
+                <FoldButton onClick={handleFoldButtonClick}>
+                    <Svg src={foldBox ? ScheduleUnfold : ScheduleFold} />
                 </FoldButton>
             </ActionBox>
         </Container>

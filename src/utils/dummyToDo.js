@@ -1,6 +1,6 @@
 import { getRandomId, getRandomString, getRandomParagraphs, getRandomColor } from "./dummyTool";
 
-export function generateDummyToDo(groupCount) {
+export default function generateDummyToDo(groupCount) {
     const dummyData = [];
     for (let i = 0; i < groupCount; i++) {
         const randomNameLength = Math.floor(Math.random() * 5) + 3;

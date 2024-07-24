@@ -3,23 +3,59 @@ import { ScheduleTime, ScheduleLocation, ScheduleAlarm } from "@icons";
 
 import Svg from "@ui/Svg";
 
-export default function ScheduleDetail({ content, isFolded }) {
+function getProcessedTime(date, displayAs24 = true) {
+    const month = date.getMonth();
+    const day = date.getDate();
+    const hour = date.getHours();
+    const minute = date.getMinutes();
+
+    let dateDisplay = `${month + 1}월 ${day}일`;
+
+    const today = new window.Date();
+    const tomorrow = new window.Date();
+    tomorrow.setDate(today.getDate() + 1);
+
+    if (tomorrow.toDateString() === date.toDateString()) dateDisplay = "내일";
+    if (today.toDateString() === date.toDateString()) dateDisplay = "오늘";
+
+    let processedHour = hour;
+    let processedMinute = minute;
+    let ojunOhoo = "";
+
+    if (!displayAs24) {
+        ojunOhoo = hour > 11 ? "오전 " : "오후 ";
+        processedHour = hour > 12 ? hour - 12 : hour;
+    }
+
+    processedHour = processedHour.toString().padStart(2, "0");
+    processedMinute = processedMinute.toString().padStart(2, "0");
+
+    const timeDisplay = `${ojunOhoo} ${processedHour}:${processedMinute}`;
+
+    return `${dateDisplay} ${timeDisplay}`;
+}
+
+export default function ScheduleDetail({ schedule, hideDescription }) {
+    const { date } = schedule;
+
+    const processedTime = getProcessedTime(date);
+
     return (
         <Container>
-            <Title>{content.title}</Title>
-            <Time>
-                <Svg src={ScheduleTime} alt="time icon" containerStyle={ClockStyle} center />
-                {content.time}
-            </Time>
-            <Location>
-                <Svg src={ScheduleLocation} alt="location icon" containerStyle={LocationStyle} />
-                {content.location}
-            </Location>
-            <Alarm>
-                <Svg src={ScheduleAlarm} alt="alarm icon" containerStyle={AlarmStyle} />
+            <Title>{schedule.title}</Title>
+            <Details>
+                <Svg src={ScheduleTime} alt="time icon" containerStyle={clockStyle} center />
+                {processedTime}
+            </Details>
+            <Details>
+                <Svg src={ScheduleLocation} alt="location icon" containerStyle={locationStyle} />
+                {schedule.location}
+            </Details>
+            <Details>
+                <Svg src={ScheduleAlarm} alt="alarm icon" containerStyle={alarmStyle} />
                 추후 구현 예정
-            </Alarm>
-            {!isFolded && <Description>{content.description}</Description>}
+            </Details>
+            {!hideDescription && <Description>{schedule.description}</Description>}
         </Container>
     );
 }
@@ -33,9 +69,15 @@ const Container = styled.article`
 `;
 
 const Title = styled.h3`
+    width: 310px;
     height: 1.5rem;
     margin: 0px;
     margin-bottom: 0.5rem;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
     font-size: 0.875rem;
     line-height: 1.5rem;
     font-family: "NanumSquareB";
@@ -49,31 +91,25 @@ const Details = styled.div`
     line-height: 1.5rem;
 `;
 
-const Time = styled(Details)``;
-
-const Location = styled(Details)``;
-
-const Alarm = styled(Details)``;
-
-const IconContainerStyle = {
+const iconContainerStyle = {
     width: "1.5rem",
     height: "1.5rem",
 };
 
-const ClockStyle = {
-    ...IconContainerStyle,
+const clockStyle = {
+    ...iconContainerStyle,
     paddingTop: "0.25rem",
     paddingLeft: "1px",
 };
 
-const LocationStyle = {
-    ...IconContainerStyle,
+const locationStyle = {
+    ...iconContainerStyle,
     paddingTop: "0.25rem",
     paddingLeft: "2px",
 };
 
-const AlarmStyle = {
-    ...IconContainerStyle,
+const alarmStyle = {
+    ...iconContainerStyle,
     paddingTop: "0.25rem",
 };
 

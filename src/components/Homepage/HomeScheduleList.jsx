@@ -2,21 +2,11 @@ import { styled } from "styled-components";
 
 import Progressbar from "@ui/Progressbar";
 import { ScheduleBox } from "@components/Homepage";
-import generateDummyData from "@utils/dummySchedule";
 
-function sortScheduleByDate(prevSchedule, nextSchedule) {
-    const prevTime = prevSchedule.time.replace(" ", "").replace(".", "").replace(":", "");
-    const nextTime = nextSchedule.time.replace(" ", "").replace(".", "").replace(":", "");
-
-    return prevTime - nextTime;
-}
-
-const DUMMY_DATA = generateDummyData(16).sort(sortScheduleByDate);
-
-export default function HomeScheduleList() {
+export default function HomeScheduleList({ scheduleList }) {
     return (
         <Container>
-            {DUMMY_DATA.map((schedule) => (
+            {scheduleList.map((schedule) => (
                 <ScheduleBox schedule={schedule} key={schedule.id} />
             ))}
             <ProgressbarWrapper>
