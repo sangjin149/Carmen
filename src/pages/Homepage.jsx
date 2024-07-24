@@ -1,19 +1,24 @@
 import { styled } from "styled-components";
 
-import Sidebar from "@components/Sidebar.jsx";
-import Clock from "@components/Clock";
-import HomeScheduleList from "@components/HomeScheduleList";
-import HomeTodoList from "@components/HomeTodoList";
+import { Sidebar } from "@components/Sidebar";
+import { Clock, HomeScheduleList, HomeTodoList } from "@components/Homepage";
+import generateDummyTodo from "@utils/dummyToDo";
+import generateDummySchedule from "@utils/dummySchedule";
+
+const DUMMY_SCHEDULE_LIST = generateDummySchedule(16);
+const DUMMY_TODO_LIST = generateDummyTodo(4);
 
 export default function Homepage() {
+    //router 적용 후 레이아웃 수정 예정
+
     return (
         <div style={{ display: "flex", flexDirection: "row" }}>
             <Sidebar />
             <Container>
                 <Clock />
                 <Content>
-                    <HomeScheduleList />
-                    <HomeTodoList />
+                    <HomeScheduleList scheduleList={DUMMY_SCHEDULE_LIST} />
+                    <HomeTodoList todoGroupList={DUMMY_TODO_LIST} />
                 </Content>
             </Container>
         </div>

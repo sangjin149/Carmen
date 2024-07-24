@@ -1,17 +1,17 @@
 import { styled } from "styled-components";
 
-import MenuItem from "@components/GroupMenuItem";
+import { GroupMenuItem } from "@components/Sidebar";
 
 export default function GroupMenu() {
     return (
         <div style={{ flexGrow: 1 }}>
             <Title>일정 분류</Title>
             <List>
-                <MenuItem />
-                <MenuItem />
-                <MenuItem />
-                <MenuItem />
-                <MenuItem />
+                <GroupMenuItem />
+                <GroupMenuItem />
+                <GroupMenuItem />
+                <GroupMenuItem />
+                <GroupMenuItem />
             </List>
         </div>
     );

@@ -1,28 +1,23 @@
 import { styled } from "styled-components";
 import { useState, useEffect } from "react";
 
-function updateClock() {
-    let now = new window.Date();
-    const month = (now.getMonth() + 1).toString().padStart(2, "0");
-    const day = now.getDate().toString().padStart(2, "0");
-    const hours = now.getHours().toString().padStart(2, "0");
-    const minutes = now.getMinutes().toString().padStart(2, "0");
-    const seconds = now.getSeconds().toString().padStart(2, "0");
-    return { month, day, hours, minutes, seconds };
-}
+import { updateClock } from "@utils/time";
 
 export default function Clock() {
     const [time, setTime] = useState({
         month: "1",
-        day: "01",
+        date: "00",
         hours: "00",
         minutes: "00",
         seconds: "00",
+        day: "None",
     });
 
     function updateTime() {
         setTime(updateClock());
     }
+
+    const timeNotUpdated = time.date === "00";
 
     useEffect(() => {
         const interval = setInterval(updateTime, 1000);
@@ -33,27 +28,36 @@ export default function Clock() {
 
     return (
         <Container>
-            <Date>
-                {time.month}.{time.day}
-            </Date>
+            <Date>{timeNotUpdated ? "" : `${time.month}.${time.date} ${time.day}`}</Date>
             <Time>
-                {time.hours}:{time.minutes}
+                {timeNotUpdated ? <LoadingIndicator>Loading...</LoadingIndicator> : `${time.hours}:${time.minutes}`}
             </Time>
         </Container>
     );
 }
 
 const Container = styled.div`
+    height: 6rem;
+    width: 26rem;
+
     display: flex;
     flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-end;
 `;
 
 const Date = styled.div`
+    height: 2rem;
     text-align: end;
+    font-size: 1.25rem;
 `;
 
 const Time = styled.div`
     height: 4rem;
     line-height: 4.5rem;
+    font-size: 5rem;
+`;
+
+const LoadingIndicator = styled.div`
     font-size: 5rem;
 `;

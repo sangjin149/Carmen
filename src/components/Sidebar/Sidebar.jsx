@@ -3,9 +3,7 @@ import { SidebarAddSchedule } from "@icons";
 
 import Svg from "@ui/Svg";
 import Button from "@ui/Button";
-import Header from "@components/Header";
-import SidebarMenu from "@components/SidebarMenu";
-import GroupMenu from "@components/GroupMenu";
+import { Header, SidebarMenu, GroupMenu } from "@components/Sidebar";
 
 export default function Sidebar() {
     return (
