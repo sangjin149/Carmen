@@ -1,6 +1,4 @@
 import { styled } from "styled-components";
-
-import { Sidebar } from "@components/Sidebar";
 import { Clock, HomeScheduleList, HomeTodoList } from "@components/Homepage";
 import generateDummyTodo from "@utils/dummyToDo";
 import generateDummySchedule from "@utils/dummySchedule";
