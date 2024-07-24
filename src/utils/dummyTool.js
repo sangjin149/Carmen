@@ -4,6 +4,7 @@ const ALPPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const alphabet = "abcdefghijklmnopqrstuvwxyz";
 const Alphabet = ALPPHABET + alphabet;
 const NUMBERS = "0123456789";
+const HEXADECIMAL = "0123456789ABCDEF";
 
 export function getRandomInt(range1, range2 = 0) {
     const min = range1 - range2 < 0 ? range1 : range2;
@@ -40,7 +41,7 @@ export function getRandomId() {
 
 export function getRandomColor() {
     const length = 6;
-    const characters = alphabet + NUMBERS;
+    const characters = HEXADECIMAL;
     return `#${getRandomStringFromCharacters(length, characters)}`;
 }
 
