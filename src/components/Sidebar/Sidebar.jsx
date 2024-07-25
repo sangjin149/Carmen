@@ -4,6 +4,7 @@ import { SidebarAddSchedule } from "@icons";
 import Svg from "@ui/Svg";
 import Button from "@ui/Button";
 import { Header, SidebarMenu, GroupMenu } from "@components/Sidebar";
+import { Link } from "react-router-dom";
 
 export default function Sidebar() {
     return (
@@ -13,7 +14,9 @@ export default function Sidebar() {
                 <AddButtonContainer>
                     <AddScheduleButton>
                         <AddIcon src={SidebarAddSchedule} alt="add schedule icon" />
-                        <strong>작업 추가</strong>
+                        <AddScheduleLink to="/addschedule">
+                            <strong>작업 추가</strong>
+                        </AddScheduleLink>
                     </AddScheduleButton>
                 </AddButtonContainer>
                 <SidebarMenu />
@@ -53,6 +56,11 @@ const AddScheduleButton = styled(Button)`
 
     font-family: "NanumSquareB";
     filter: drop-shadow(0px 4px 4px rgb(0, 0, 0, 0.25));
+`;
+
+const AddScheduleLink = styled(Link)`
+    text-decoration: none;
+    color: black;
 `;
 
 const AddIcon = styled(Svg)`
