@@ -15,10 +15,34 @@ const router = createBrowserRouter([
         element: <MainLayout />,
         children: [
             {
-                path: "/",
+                index: true,
                 element: <Homepage />,
             },
+            {
+                path: "/addschedule",
+                element: <div>새 작업 추가</div>,
+            },
+            {
+                path: "/today",
+                element: <div>오늘의 일정</div>,
+            },
+            {
+                path: "/calendar",
+                element: <div>달력</div>,
+            },
+            {
+                path: "/important",
+                element: <div>중요 일정</div>,
+            },
+            {
+                path: "/groups/:groupid",
+                element: <div>그룹 일정</div>,
+            },
         ],
+    },
+    {
+        path: "/login",
+        element: <div>Login Screen</div>,
     },
 ]);
 
