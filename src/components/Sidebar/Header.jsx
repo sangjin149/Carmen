@@ -1,14 +1,17 @@
 import { styled } from "styled-components";
+import { Link } from "react-router-dom";
 import LogoIcon from "@assets/Logo.png";
-import { SidebarAlarm, SidebarFold } from "@icons";
 
+import { SidebarAlarm, SidebarFold } from "@icons";
 import Button from "@ui/Button";
 import Svg from "@ui/Svg";
 
 export default function Header() {
     return (
         <Container>
-            <Logo src={LogoIcon} alt="logo" />
+            <Link to="/">
+                <Logo src={LogoIcon} alt="logo" />
+            </Link>
             <ButtonPanel>
                 <HeaderButton>
                     <Svg src={SidebarAlarm} alt="alarm" containerStyle={AlarmContainerStyle} />

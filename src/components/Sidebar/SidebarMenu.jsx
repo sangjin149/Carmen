@@ -1,35 +1,35 @@
 import { styled } from "styled-components";
 import { SidebarToday, SidebarCalendar, Star } from "@icons";
+import { NavLink } from "react-router-dom";
 
 import Svg from "@ui/Svg";
 
 export default function SidebarMenu() {
     return (
         <Container>
-            <MenuItem>
-                <Svg src={SidebarToday} containerStyle={TodayIconContainerStyle} alt="today icon" />
-                오늘의 일정
-            </MenuItem>
-            <MenuItem>
-                <Svg src={SidebarCalendar} containerStyle={CalendarIconContainerStyle} alt="calendar icon" />
-                달력
-            </MenuItem>
-            <MenuItem>
-                <Svg src={Star} containerStyle={StarIconContainerStyle} alt="star icon" />
-                중요한 일정
-            </MenuItem>
+            <li>
+                <MenuItem to="/today">
+                    <Svg src={SidebarToday} containerStyle={TodayIconContainerStyle} alt="today icon" />
+                    오늘의 일정
+                </MenuItem>
+            </li>
+            <li>
+                <MenuItem to="/calendar">
+                    <Svg src={SidebarCalendar} containerStyle={CalendarIconContainerStyle} alt="calendar icon" />
+                    달력
+                </MenuItem>
+            </li>
+            <li>
+                <MenuItem to="/important">
+                    <Svg src={Star} containerStyle={StarIconContainerStyle} alt="star icon" />
+                    중요한 일정
+                </MenuItem>
+            </li>
         </Container>
     );
 }
 
 const Container = styled.ul``;
-
-const MenuItem = styled.li`
-    display: flex;
-    align-items: center;
-    height: 2.5rem;
-    font-size: 1.125rem;
-`;
 
 const IconContainerStyle = {
     width: "1.75rem",
@@ -55,3 +55,12 @@ const StarIconContainerStyle = {
     paddingLeft: "4px",
     paddingTop: "8px",
 };
+
+const MenuItem = styled(NavLink)`
+    display: flex;
+    align-items: center;
+    height: 2.5rem;
+    font-size: 1.125rem;
+    text-decoration: none;
+    color: black;
+`;
