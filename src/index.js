@@ -13,6 +13,7 @@ const router = createBrowserRouter([
     {
         path: "/",
         element: <MainLayout />,
+        errorElement: <div>잘못된 경로인 듯?</div>,
         children: [
             {
                 index: true,
