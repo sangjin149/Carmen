@@ -1,5 +1,23 @@
-import { styled } from "styled-components";
+import { forwardRef, useImperativeHandle, useRef } from "react";
+import { createPortal } from "react-dom";
 
-export default function Modal(params) {
-    return <div>modal</div>;
-}
+const Modal = forwardRef(function ResultModal({ children }, ref) {
+    const dialog = useRef();
+
+    useImperativeHandle(ref, () => {
+        return {
+            open() {
+                dialog.current.showModal();
+            },
+        };
+    });
+
+    return createPortal(
+        <dialog ref={dialog} className="result-modal">
+            {children}
+        </dialog>,
+        document.getElementById("modal")
+    );
+});
+
+export default Modal;
