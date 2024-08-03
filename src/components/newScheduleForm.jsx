@@ -119,7 +119,6 @@ const DescriptionInput = styled.textarea`
     resize: none;
     max-height: 52rem;
     width: 100%;
-    outline: none;
     border: none;
 `;
 

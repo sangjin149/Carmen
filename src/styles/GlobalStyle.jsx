@@ -47,6 +47,14 @@ const GlobalStyle = createGlobalStyle`
     object-fit: contain;
   }
 
+  input {
+    outline: none;
+  }
+
+  textarea {
+    outline: none;
+  }
+
   @media (prefers-reduced-motion: no-preference) {
   html {
     scroll-behavior: smooth; 
