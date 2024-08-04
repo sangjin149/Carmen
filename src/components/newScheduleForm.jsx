@@ -16,21 +16,34 @@ const inputInfo = {
     },
     time: {
         initialValue: "2024년 4월 18일",
-        validation: (newValue) => {},
+        validation: (newValue) => "",
     },
     alarm: {
         initialValue: "1시간 전",
-        validation: (newValue) => {},
+        validation: (newValue) => "",
     },
 };
 
+function dummySubmit(formResult) {
+    console.table(formResult);
+}
+
 export default function NewScheduleForm() {
-    const { inputValues, errors, handleInputValueChange, handleSubmit } = useForm(inputInfo);
+    const { inputValues, errors, onInputValueChange, onSubmit } = useForm(inputInfo, dummySubmit);
+    function handleSubmit(e) {
+        e.preventDefault();
+        onSubmit();
+    }
 
     return (
         <FakeCon>
             <Container>
-                <TitleInput placeholder="제목을 입력해주세요" />
+                <TitleInput
+                    placeholder="제목을 입력해주세요"
+                    onChange={(e) => {
+                        onInputValueChange("title", e.target.value);
+                    }}
+                />
                 <AdditionalInfos>
                     <AdditionalInfo>
                         <Svg
@@ -43,7 +56,12 @@ export default function NewScheduleForm() {
                             center
                         />
                         <AdditionalInfoLabel>시간</AdditionalInfoLabel>
-                        <AdditionalInfoInput placeholder="2024년 4월 18일" />
+                        <AdditionalInfoInput
+                            placeholder="2024년 4월 18일"
+                            onChange={(e) => {
+                                onInputValueChange("time", e.target.value);
+                            }}
+                        />
                     </AdditionalInfo>
                     <AdditionalInfo>
                         <Svg
@@ -56,7 +74,12 @@ export default function NewScheduleForm() {
                             center
                         />
                         <AdditionalInfoLabel>알람</AdditionalInfoLabel>
-                        <AdditionalInfoInput placeholder="현재 알람 없음" />
+                        <AdditionalInfoInput
+                            placeholder="현재 알람 없음"
+                            onChange={(e) => {
+                                onInputValueChange("alarm", e.target.value);
+                            }}
+                        />
                     </AdditionalInfo>
                     <AdditionalInfo>
                         <Svg
@@ -74,7 +97,7 @@ export default function NewScheduleForm() {
                 <DescriptionInput placeholder="일정 설명..." />
                 <Control>
                     <CancelButton>취소</CancelButton>
-                    <ConfirmButton>분류</ConfirmButton>
+                    <ConfirmButton onClick={handleSubmit}>분류</ConfirmButton>
                 </Control>
             </Container>
         </FakeCon>

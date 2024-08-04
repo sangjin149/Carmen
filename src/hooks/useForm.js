@@ -5,30 +5,29 @@ function sortFormInfo(inputInformation) {
     const validations = {};
 
     for (const inputName in inputInformation) {
-        initialValues[inputName] = inputInformation[inputName];
-        validations[inputName] = inputInformation[inputName];
+        initialValues[inputName] = inputInformation[inputName].initialValue;
+        validations[inputName] = inputInformation[inputName].validation;
     }
 
     return { initialValues, validations };
 }
 
-export default function useForm(inputInformation) {
+export default function useForm(inputInformation, submitFunction) {
     const { initialValues, validations } = sortFormInfo(inputInformation);
 
     const [inputValues, setInputValues] = useState(initialValues);
     const errors = {};
 
-    function handleInputValueChange(key, newValue) {
+    function onInputValueChange(key, newValue) {
         const validationMessage = validations[key](newValue);
         errors[key] = validationMessage;
         if (validationMessage.length > 0) return;
         setInputValues((oldValue) => ({ ...oldValue, [key]: newValue }));
     }
 
-    async function handleSubmit() {
-        console.log("제출");
-        console.table(inputValues);
+    async function onSubmit() {
+        submitFunction(inputValues);
     }
 
-    return { inputValues, errors, handleInputValueChange, handleSubmit };
+    return { inputValues, errors, onInputValueChange, onSubmit };
 }
