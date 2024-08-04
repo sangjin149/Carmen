@@ -1,11 +1,25 @@
 import { useState } from "react";
 
-export default function useForm(initialValue, validation) {
-    const [inputValues, setInputValues] = useState(initialValue);
+function sortFormInfo(inputInformation) {
+    const initialValues = {};
+    const validations = {};
+
+    for (const inputName in inputInformation) {
+        initialValues[inputName] = inputInformation[inputName];
+        validations[inputName] = inputInformation[inputName];
+    }
+
+    return { initialValues, validations };
+}
+
+export default function useForm(inputInformation) {
+    const { initialValues, validations } = sortFormInfo(inputInformation);
+
+    const [inputValues, setInputValues] = useState(initialValues);
     const errors = {};
 
     function handleInputValueChange(key, newValue) {
-        const validationMessage = validation[key](newValue);
+        const validationMessage = validations[key](newValue);
         errors[key] = validationMessage;
         if (validationMessage.length > 0) return;
         setInputValues((oldValue) => ({ ...oldValue, [key]: newValue }));

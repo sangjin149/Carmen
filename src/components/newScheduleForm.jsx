@@ -1,9 +1,32 @@
 import { styled } from "styled-components";
 import Svg from "@ui/Svg";
+import { useForm } from "@hooks";
 import { ScheduleTime, ScheduleAlarm, SidebarAddSchedule } from "@icons";
 import Button from "@ui/Button";
 
+const inputInfo = {
+    //TODO: isRequired 추가
+    title: {
+        initialValue: "",
+        validation: (newValue) => {
+            let errorMessage = "";
+            if (newValue.length < 1) return "제목을 입력해주세요!";
+            return errorMessage;
+        },
+    },
+    time: {
+        initialValue: "2024년 4월 18일",
+        validation: (newValue) => {},
+    },
+    alarm: {
+        initialValue: "1시간 전",
+        validation: (newValue) => {},
+    },
+};
+
 export default function NewScheduleForm() {
+    const { inputValues, errors, handleInputValueChange, handleSubmit } = useForm(inputInfo);
+
     return (
         <FakeCon>
             <Container>
