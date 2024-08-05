@@ -11,6 +11,7 @@ module.exports = {
             "@ui": path.resolve(__dirname, "src/ui"),
             "@styles": path.resolve(__dirname, "src/styles"),
             "@utils": path.resolve(__dirname, "src/utils"),
+            "@hooks": path.resolve(__dirname, "src/hooks"),
         },
     },
 };
