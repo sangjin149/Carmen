@@ -3,6 +3,7 @@ import Svg from "@ui/Svg";
 import { useForm } from "@hooks";
 import { ScheduleTime, ScheduleAlarm, SidebarAddSchedule } from "@icons";
 import Button from "@ui/Button";
+import DateInput from "@components/newScheduleForm/DateInput";
 
 const inputInfo = {
     //TODO: isRequired 추가
@@ -56,12 +57,7 @@ export default function NewScheduleForm() {
                             center
                         />
                         <AdditionalInfoLabel>시간</AdditionalInfoLabel>
-                        <AdditionalInfoInput
-                            placeholder="2024년 4월 18일"
-                            onChange={(e) => {
-                                onInputValueChange("time", e.target.value);
-                            }}
-                        />
+                        <DateInput />
                     </AdditionalInfo>
                     <AdditionalInfo>
                         <Svg
