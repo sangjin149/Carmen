@@ -3,7 +3,7 @@ import Svg from "@ui/Svg";
 import { useForm } from "@hooks";
 import { ScheduleTime, ScheduleAlarm, SidebarAddSchedule } from "@icons";
 import Button from "@ui/Button";
-import DateInput from "@components/newScheduleForm/DateInput";
+import { DateInput, ScheduleOption } from "./";
 
 const inputInfo = {
     //TODO: isRequired 추가
