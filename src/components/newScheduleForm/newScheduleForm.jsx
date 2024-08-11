@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
 import { useForm } from "@hooks";
 import Button from "@ui/Button";
-import { DateInput, OptionLabel } from "./";
+import { DateInput, OptionLabel } from ".";
 
 const inputInfo = {
     //TODO: isRequired 추가
