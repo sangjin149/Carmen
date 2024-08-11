@@ -8,8 +8,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ConfigProvider } from "antd";
 import koKR from "antd/locale/ko_KR";
 
-import Homepage from "@pages/Homepage";
-import NewScheduleForm from "@components/newScheduleForm";
+import NewScheduleForm from "@components/NewScheduleForm";
 import MainLayout from "@pages/MainLayout";
 
 const router = createBrowserRouter([

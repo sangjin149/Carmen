@@ -2,6 +2,7 @@ import { styled } from "styled-components";
 import { useForm } from "@hooks";
 import Button from "@ui/Button";
 import { DateInput, OptionLabel } from ".";
+import dayjs from "dayjs";
 
 const inputInfo = {
     //TODO: isRequired 추가
@@ -14,7 +15,7 @@ const inputInfo = {
         },
     },
     time: {
-        initialValue: "2024년 4월 18일",
+        initialValue: dayjs(),
         validation: (newValue) => "",
     },
     alarm: {
@@ -28,7 +29,7 @@ function dummySubmit(formResult) {
 }
 
 export default function NewScheduleForm() {
-    const { inputValues, errors, onInputValueChange, onSubmit } = useForm(inputInfo, dummySubmit);
+    const { inputValues, onInputValueChange, onSubmit } = useForm(inputInfo, dummySubmit);
     function handleSubmit(e) {
         e.preventDefault();
         onSubmit();
@@ -45,7 +46,10 @@ export default function NewScheduleForm() {
                 />
                 <OptionList>
                     <OptionLabel optionType="time">
-                        <DateInput />
+                        <DateInput
+                            value={inputValues.time}
+                            onChange={(newValue) => onInputValueChange("time", newValue)}
+                        />
                     </OptionLabel>
                     <OptionLabel optionType="alarm">
                         <AdditionalInfoInput
