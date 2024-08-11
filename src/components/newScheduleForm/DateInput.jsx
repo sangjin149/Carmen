@@ -1,5 +1,3 @@
-import { styled } from "styled-components";
-
 import { DatePicker } from "antd";
 
 export default function DateInput(params) {
@@ -8,11 +6,12 @@ export default function DateInput(params) {
     //TODO: Form과 연결(param 설정)
     //TODO: Label 클릭시 다시 열리는 현상 수정
     //TODO: enter 입력시 제출하는 현상 수정
+    //TODO: 시간 입력칸을 키보드 입력으로 받기
 
     return (
         <DatePicker
-            showTime={{ format: "YY-MM-DD HH:mm" }}
-            format="YY-MM-DD HH:mm"
+            format="YY년 MM월 DD일 H시 m분"
+            showTime={{ format: "YY/MM/DD H시 m분" }}
             onChange={(value, dateString) => {
                 console.log("Selected Time: ", value);
                 console.log("Formatted Selected Time: ", dateString);
@@ -20,11 +19,11 @@ export default function DateInput(params) {
             style={InputStyle}
             variant="borderless"
             size="large"
-            inputReadOnly={true}
         />
     );
 }
 
 const InputStyle = {
+    width: "12.75rem",
     padding: 0,
 };
