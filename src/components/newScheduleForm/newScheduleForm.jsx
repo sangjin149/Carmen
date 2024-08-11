@@ -1,9 +1,7 @@
 import { styled } from "styled-components";
-import Svg from "@ui/Svg";
 import { useForm } from "@hooks";
-import { ScheduleTime, ScheduleAlarm, SidebarAddSchedule } from "@icons";
 import Button from "@ui/Button";
-import { DateInput, ScheduleOption } from "./";
+import { DateInput, OptionLabel } from "./";
 
 const inputInfo = {
     //TODO: isRequired 추가
@@ -45,51 +43,20 @@ export default function NewScheduleForm() {
                         onInputValueChange("title", e.target.value);
                     }}
                 />
-                <AdditionalInfos>
-                    <AdditionalInfo>
-                        <Svg
-                            src={ScheduleTime}
-                            alt="clock icon"
-                            style={IconStyle}
-                            containerStyle={IconContaierStyle}
-                            width={16}
-                            height={16}
-                            center
-                        />
-                        <AdditionalInfoLabel>시간</AdditionalInfoLabel>
+                <OptionList>
+                    <OptionLabel optionType="time">
                         <DateInput />
-                    </AdditionalInfo>
-                    <AdditionalInfo>
-                        <Svg
-                            src={ScheduleAlarm}
-                            alt="alarm icon"
-                            style={IconStyle}
-                            containerStyle={IconContaierStyle}
-                            width={16}
-                            height={16}
-                            center
-                        />
-                        <AdditionalInfoLabel>알람</AdditionalInfoLabel>
+                    </OptionLabel>
+                    <OptionLabel optionType="alarm">
                         <AdditionalInfoInput
                             placeholder="현재 알람 없음"
                             onChange={(e) => {
                                 onInputValueChange("alarm", e.target.value);
                             }}
                         />
-                    </AdditionalInfo>
-                    <AdditionalInfo>
-                        <Svg
-                            src={SidebarAddSchedule}
-                            alt="clock icon"
-                            style={IconStyle}
-                            containerStyle={{ ...IconContaierStyle, paddingLeft: "2px" }}
-                            width={12}
-                            height={12}
-                            center
-                        />
-                        <AdditionalInfoLabel>속성 추가...</AdditionalInfoLabel>
-                    </AdditionalInfo>
-                </AdditionalInfos>
+                    </OptionLabel>
+                    <OptionLabel optionType="add"></OptionLabel>
+                </OptionList>
                 <DescriptionInput placeholder="일정 설명..." />
                 <Control>
                     <CancelButton>취소</CancelButton>
@@ -119,35 +86,11 @@ const TitleInput = styled.input`
     font-weight: 900;
 `;
 
-const AdditionalInfos = styled.div`
+const OptionList = styled.div`
     padding: 8px 0px;
     display: flex;
     flex-direction: column;
     gap: 2px;
-`;
-
-const AdditionalInfo = styled.label`
-    height: 24px;
-    display: flex;
-    align-items: center;
-`;
-
-const IconContaierStyle = {
-    width: "21px",
-    height: "24px",
-    display: "flex",
-};
-
-const IconStyle = {
-    width: "1rem",
-    height: "1rem",
-};
-
-const AdditionalInfoLabel = styled.div`
-    width: 7rem;
-    padding-left: 4px;
-    font-size: 1rem;
-    line-height: 1.125rem;
 `;
 
 const AdditionalInfoInput = styled.input`
