@@ -41,7 +41,7 @@ export default function OptionLabel({ optionType, children }) {
 }
 
 const Container = styled.label`
-    height: 24px;
+    height: 1.5rem;
     display: flex;
     align-items: center;
 `;
