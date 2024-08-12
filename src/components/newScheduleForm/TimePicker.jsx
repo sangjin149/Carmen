@@ -5,7 +5,7 @@ import dayjs from "dayjs";
 
 const FORMAT = "A h시 m분";
 
-export default function TimeInput(params) {
+export default function TimePicker(params) {
     const [value, setValue] = useState(dayjsToString(dayjs(), FORMAT));
 
     function handleChange(e) {
