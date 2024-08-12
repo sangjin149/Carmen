@@ -37,7 +37,7 @@ export default function NewScheduleForm() {
 
     return (
         <FakeCon>
-            <Container>
+            <Container onSubmit={(e) => e.preventDefault()}>
                 <TitleInput
                     placeholder="제목을 입력해주세요"
                     onChange={(e) => {
@@ -71,11 +71,11 @@ export default function NewScheduleForm() {
     );
 }
 
-const FakeCon = styled.form`
+const FakeCon = styled.div`
     width: 560px;
 `;
 
-const Container = styled.div`
+const Container = styled.form`
     width: 100%;
     padding: 1rem;
     display: flex;
