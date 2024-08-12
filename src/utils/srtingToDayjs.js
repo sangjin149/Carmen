@@ -8,10 +8,20 @@ timePrefix.forEach((prefix) => {
     timePatterns.forEach((pattern) => availablePatterns.push(prefix + pattern));
 });
 
-export default function stringToDayjs(timeStr) {
+export function stringToDayjs(timeStr) {
     let newStr = timeStr.trim();
     newStr = newStr.replace("오전", "AM").replace("오후", "PM");
 
-    if (!dayjs(newStr, availablePatterns).isValid()) return console.log("unavailable!");
+    if (!dayjs(newStr, availablePatterns).isValid()) {
+        console.warn(`Unavailable timeStr pattern!!: ${timeStr}`);
+        return dayjs();
+    }
+
     return dayjs(newStr, availablePatterns);
+}
+
+export function dayjsToString(dayjs, format, toKo = true) {
+    let newStr = dayjs.format(format);
+    if (toKo) newStr = newStr.replace("AM", "오전").replace("PM", "오후");
+    return newStr;
 }

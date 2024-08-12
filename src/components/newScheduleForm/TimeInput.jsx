@@ -1,12 +1,12 @@
 import { styled } from "styled-components";
-import stringToDayjs from "@utils/srtingToDayjs";
+import { stringToDayjs, dayjsToString } from "@utils/srtingToDayjs";
 import { useState } from "react";
 import dayjs from "dayjs";
 
-const FORMAT = "HH시 mm분";
+const FORMAT = "A h시 m분";
 
 export default function TimeInput(params) {
-    const [value, setValue] = useState(dayjs().format(FORMAT));
+    const [value, setValue] = useState(dayjsToString(dayjs(), FORMAT));
 
     function handleChange(e) {
         const newValue = e.target.value;
@@ -14,11 +14,11 @@ export default function TimeInput(params) {
     }
 
     function handleBlur(e) {
-        const newValue = e.target.value;
-        setValue(stringToDayjs(newValue).format(FORMAT));
+        const newValue = stringToDayjs(e.target.value);
+        setValue(dayjsToString(newValue, FORMAT).format(FORMAT));
     }
 
-    return <Input type="text" onChange={handleChange} onBlur={handleBlur} value={value} placeholder="00시 00분" />;
+    return <Input type="text" onChange={handleChange} onBlur={handleBlur} value={value} />;
 }
 
 const Input = styled.input`
