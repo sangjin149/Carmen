@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
 import { useForm } from "@hooks";
 import Button from "@ui/Button";
-import { DateInput, OptionLabel } from ".";
+import { OptionLabel, DateTimePicker } from ".";
 import dayjs from "dayjs";
 
 const inputInfo = {
@@ -46,7 +46,7 @@ export default function NewScheduleForm() {
                 />
                 <OptionList>
                     <OptionLabel optionType="time">
-                        <DateInput
+                        <DateTimePicker
                             value={inputValues.time}
                             onChange={(newValue) => onInputValueChange("time", newValue)}
                         />

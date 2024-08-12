@@ -25,3 +25,11 @@ export function dayjsToString(dayjs, format, toKo = true) {
     if (toKo) newStr = newStr.replace("AM", "오전").replace("PM", "오후");
     return newStr;
 }
+
+export function updateDate(oldDate, newDate) {
+    return oldDate.year(newDate.year()).month(newDate.month()).date(newDate.date());
+}
+
+export function updateTime(oldTime, newTime) {
+    return oldTime.hour(newTime.hour()).minute(newTime.minute());
+}

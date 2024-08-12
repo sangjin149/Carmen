@@ -1,18 +1,18 @@
 import { DatePicker as AntdDatePicker } from "antd";
+import { updateDate } from "@utils/myDayjsUtil";
 
-//TODO: 키보드 입력 거름망
-
-export default function DatePicker({ onChange, ...props }) {
-    //TODO: Form과 연결(param 설정)
-    //TODO: Label 클릭시 다시 열리는 현상 수정
-    //TODO: enter 입력시 제출하는 현상 수정
+export default function DatePicker({ value: formDate, onChange, ...props }) {
+    function handleChange(pickedDate) {
+        //Ant design onChange 콜백은 event 가 아니라 value, formattedValue를 인자로 받음
+        const newValue = updateDate(formDate, pickedDate);
+        onChange(newValue);
+    }
 
     return (
         <AntdDatePicker
             format="YY년 MM월 DD일"
-            onChange={(newValue) => {
-                onChange(newValue);
-            }}
+            value={formDate}
+            onChange={handleChange}
             style={InputStyle}
             variant="borderless"
             size="large"
