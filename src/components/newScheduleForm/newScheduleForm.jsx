@@ -2,6 +2,7 @@ import { styled } from "styled-components";
 import { useForm } from "@hooks";
 import Button from "@ui/Button";
 import { OptionLabel, DateTimePicker } from ".";
+import { DropDown } from "@ui";
 import dayjs from "dayjs";
 
 const inputInfo = {
@@ -52,12 +53,7 @@ export default function NewScheduleForm() {
                         />
                     </OptionLabel>
                     <OptionLabel optionType="alarm">
-                        <AdditionalInfoInput
-                            placeholder="현재 알람 없음"
-                            onChange={(e) => {
-                                onInputValueChange("alarm", e.target.value);
-                            }}
-                        />
+                        <DropDown />
                     </OptionLabel>
                     <OptionLabel optionType="add"></OptionLabel>
                 </OptionList>
@@ -95,12 +91,6 @@ const OptionList = styled.div`
     display: flex;
     flex-direction: column;
     gap: 2px;
-`;
-
-const AdditionalInfoInput = styled.input`
-    flex-grow: 1;
-    border: none;
-    font-size: 1rem;
 `;
 
 const DescriptionInput = styled.textarea`

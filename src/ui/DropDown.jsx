@@ -1,6 +1,7 @@
 import { Svg } from "@ui";
 import { styled } from "styled-components";
 import { ArrowDropDown } from "@icons";
+import { useState } from "react";
 
 const DUMMY = [
     { name: "item1", key: "item1", value: "1시간 전" },
@@ -10,16 +11,32 @@ const DUMMY = [
     { name: "item5", key: "item5", value: "일주일 전" },
 ];
 
-export default function DropDown(props) {
+export default function DropDown({ ...props }) {
+    const [showMenu, setShowMenu] = useState(false);
+    const [inputValue, setInputValue] = useState("");
+
+    function handleInputClick() {
+        setShowMenu((oldShowMenu) => !oldShowMenu);
+    }
+
+    function handleMenuItemClick(menuValue) {
+        setShowMenu(false);
+        setInputValue(menuValue);
+    }
+
     return (
-        <Container>
-            <TextInput placeholder="입력 없음" />
+        <Container onClick={handleInputClick}>
+            <TextInput placeholder="입력 없음" value={inputValue} readOnly {...props} />
             <Svg src={ArrowDropDown} containerStyle={DropDownIconStyle} />
-            <DropDownMenu>
-                {DUMMY.map(({ key, value }) => (
-                    <MenuItem key={key}>{value}</MenuItem>
-                ))}
-            </DropDownMenu>
+            {showMenu && (
+                <DropDownMenu>
+                    {DUMMY.map(({ key, value }) => (
+                        <MenuItem key={key} onClick={() => handleMenuItemClick(value)}>
+                            {value}
+                        </MenuItem>
+                    ))}
+                </DropDownMenu>
+            )}
         </Container>
     );
 }
@@ -28,9 +45,11 @@ const Container = styled.label`
     position: relative;
     display: flex;
     align-items: center;
+    cursor: pointer;
 `;
 
 const TextInput = styled.input`
+    width: 4.5rem;
     padding: 0px;
     font-size: 1rem;
     font-family: "NanumGothic";
@@ -38,8 +57,8 @@ const TextInput = styled.input`
 `;
 
 const DropDownIconStyle = {
-    width: "16px",
-    height: "16px",
+    width: "24px",
+    height: "24px",
 };
 
 const DropDownMenu = styled.ul`
@@ -49,11 +68,10 @@ const DropDownMenu = styled.ul`
 
     display: flex;
     flex-direction: column;
-    gap: 0.125rem;
 
     width: 62.5%;
     min-width: 6rem;
-    padding: 0.5rem 0px;
+    padding: 0.375rem 0px;
     margin: 0px;
 
     border-radius: 0.5rem;
@@ -63,6 +81,7 @@ const DropDownMenu = styled.ul`
 `;
 
 const MenuItem = styled.li`
-    padding: 0.25rem 0.75rem;
+    padding: 0.375rem 0.75rem;
     font-size: 0.75rem;
+    cursor: pointer;
 `;
