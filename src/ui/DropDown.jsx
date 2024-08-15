@@ -4,15 +4,7 @@ import { ArrowDropDown } from "@icons";
 import { useCallback, useState } from "react";
 import ClickAwayListener from "./ClickAwayListener";
 
-const DUMMY = [
-    { name: "item1", key: "item1", value: "1시간 전" },
-    { name: "item2", key: "item2", value: "10분 전" },
-    { name: "item3", key: "item3", value: "5분 전" },
-    { name: "item4", key: "item4", value: "1일 전" },
-    { name: "item5", key: "item5", value: "일주일 전" },
-];
-
-export default function DropDown({ ...props }) {
+export default function DropDown({ itemList, onChange, ...props }) {
     const [showMenu, setShowMenu] = useState(false);
     const [inputValue, setInputValue] = useState("");
 
@@ -20,9 +12,10 @@ export default function DropDown({ ...props }) {
         setShowMenu((oldShowMenu) => !oldShowMenu);
     }
 
-    function handleMenuItemClick(menuValue) {
+    function handleMenuItemClick(description, menuValue) {
         setShowMenu(false);
-        setInputValue(menuValue);
+        setInputValue(description);
+        onChange(menuValue);
     }
 
     const handleOutsideClick = useCallback(() => {
@@ -38,13 +31,13 @@ export default function DropDown({ ...props }) {
                 </Button>
                 {showMenu && (
                     <DropDownMenu>
-                        {DUMMY.map(({ key, value }) => (
+                        {itemList.map(({ key, value, description }) => (
                             <MenuItem
                                 key={key}
-                                onClick={() => handleMenuItemClick(value)}
+                                onClick={() => handleMenuItemClick(description, value)}
                                 className={`${inputValue === value ? "selected" : null}`}
                             >
-                                {value}
+                                {description}
                             </MenuItem>
                         ))}
                     </DropDownMenu>

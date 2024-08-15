@@ -25,35 +25,40 @@ const inputInfo = {
     },
 };
 
+const alarmList = [
+    { key: "1 minute", value: "1 minute", description: "1분 전" },
+    { key: "5 minute", value: "5 minute", description: "5분 전" },
+    { key: "10 minute", value: "10 minute", description: "10분 전" },
+    { key: "1 hour", value: "1 hour", description: "한시간 전" },
+    { key: "1 day", value: "1 day", description: "하루 전" },
+];
+
 function dummySubmit(formResult) {
     console.table(formResult);
 }
 
 export default function NewScheduleForm() {
     const { inputValues, onInputValueChange, onSubmit } = useForm(inputInfo, dummySubmit);
+
     function handleSubmit(e) {
         e.preventDefault();
         onSubmit();
     }
 
+    function generateChageHandler(key) {
+        return (newValue) => onInputValueChange(key, newValue);
+    }
+
     return (
         <FakeCon>
             <Container onSubmit={(e) => e.preventDefault()}>
-                <TitleInput
-                    placeholder="제목을 입력해주세요"
-                    onChange={(e) => {
-                        onInputValueChange("title", e.target.value);
-                    }}
-                />
+                <TitleInput placeholder="제목을 입력해주세요" onChange={generateChageHandler("title")} />
                 <OptionList>
                     <OptionLabel optionType="time">
-                        <DateTimePicker
-                            value={inputValues.time}
-                            onChange={(newValue) => onInputValueChange("time", newValue)}
-                        />
+                        <DateTimePicker value={inputValues.time} onChange={generateChageHandler("time")} />
                     </OptionLabel>
                     <OptionLabel optionType="alarm">
-                        <DropDown />
+                        <DropDown itemList={alarmList} onChange={generateChageHandler("alarm")} />
                     </OptionLabel>
                     <OptionLabel optionType="add"></OptionLabel>
                 </OptionList>
