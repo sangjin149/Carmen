@@ -37,7 +37,11 @@ export default function DropDown({ ...props }) {
                 {showMenu && (
                     <DropDownMenu>
                         {DUMMY.map(({ key, value }) => (
-                            <MenuItem key={key} onClick={() => handleMenuItemClick(value)}>
+                            <MenuItem
+                                key={key}
+                                onClick={() => handleMenuItemClick(value)}
+                                className={`${inputValue === value ? "selected" : null}`}
+                            >
                                 {value}
                             </MenuItem>
                         ))}
@@ -91,4 +95,11 @@ const MenuItem = styled.li`
     padding: 0.375rem 0.75rem;
     font-size: 0.75rem;
     cursor: pointer;
+    &:hover {
+        background-color: #f0f0f0;
+    }
+
+    &.selected {
+        font-weight: bold;
+    }
 `;
