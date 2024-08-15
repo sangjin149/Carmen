@@ -1,4 +1,4 @@
-import { Svg } from "@ui";
+import { Button, Svg } from "@ui";
 import { styled } from "styled-components";
 import { ArrowDropDown } from "@icons";
 import { useCallback, useState } from "react";
@@ -33,7 +33,9 @@ export default function DropDown({ ...props }) {
         <ClickAwayListener onClickAway={handleOutsideClick}>
             <Container onClick={handleInputClick}>
                 <TextInput placeholder="입력 없음" value={inputValue} readOnly {...props} />
-                <Svg src={ArrowDropDown} containerStyle={DropDownIconStyle} />
+                <Button>
+                    <Svg src={ArrowDropDown} containerStyle={DropDownIconStyle} />
+                </Button>
                 {showMenu && (
                     <DropDownMenu>
                         {DUMMY.map(({ key, value }) => (
@@ -52,7 +54,7 @@ export default function DropDown({ ...props }) {
     );
 }
 
-const Container = styled.label`
+const Container = styled.div`
     position: relative;
     display: flex;
     align-items: center;
