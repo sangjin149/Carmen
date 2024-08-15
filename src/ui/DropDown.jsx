@@ -1,8 +1,8 @@
 import { Svg } from "@ui";
 import { styled } from "styled-components";
 import { ArrowDropDown } from "@icons";
-import { useState, useRef, useCallback } from "react";
-import { useClickAway } from "@hooks";
+import { useCallback, useState } from "react";
+import ClickAwayListener from "./ClickAwayListener";
 
 const DUMMY = [
     { name: "item1", key: "item1", value: "1시간 전" },
@@ -15,7 +15,6 @@ const DUMMY = [
 export default function DropDown({ ...props }) {
     const [showMenu, setShowMenu] = useState(false);
     const [inputValue, setInputValue] = useState("");
-    const containerRef = useRef();
 
     function handleInputClick() {
         setShowMenu((oldShowMenu) => !oldShowMenu);
@@ -26,24 +25,26 @@ export default function DropDown({ ...props }) {
         setInputValue(menuValue);
     }
 
-    const handleClickAway = useCallback(() => console.log("clicked outside"), []);
-
-    useClickAway(containerRef, handleClickAway);
+    const handleOutsideClick = useCallback(() => {
+        setShowMenu(false);
+    }, []);
 
     return (
-        <Container ref={containerRef} onClick={handleInputClick}>
-            <TextInput placeholder="입력 없음" value={inputValue} readOnly {...props} />
-            <Svg src={ArrowDropDown} containerStyle={DropDownIconStyle} />
-            {showMenu && (
-                <DropDownMenu>
-                    {DUMMY.map(({ key, value }) => (
-                        <MenuItem key={key} onClick={() => handleMenuItemClick(value)}>
-                            {value}
-                        </MenuItem>
-                    ))}
-                </DropDownMenu>
-            )}
-        </Container>
+        <ClickAwayListener onClickAway={handleOutsideClick}>
+            <Container onClick={handleInputClick}>
+                <TextInput placeholder="입력 없음" value={inputValue} readOnly {...props} />
+                <Svg src={ArrowDropDown} containerStyle={DropDownIconStyle} />
+                {showMenu && (
+                    <DropDownMenu>
+                        {DUMMY.map(({ key, value }) => (
+                            <MenuItem key={key} onClick={() => handleMenuItemClick(value)}>
+                                {value}
+                            </MenuItem>
+                        ))}
+                    </DropDownMenu>
+                )}
+            </Container>
+        </ClickAwayListener>
     );
 }
 
