@@ -22,6 +22,12 @@ export default function DropDown({ itemList, onChange, ...props }) {
         setShowMenu(false);
     }, []);
 
+    const generateMenuItemClassName = (itemDescription) => {
+        let className = "";
+        if (itemDescription === inputValue) className += "selected ";
+        return className.trim();
+    };
+
     return (
         <ClickAwayListener onClickAway={handleOutsideClick}>
             <Container onClick={handleInputClick}>
@@ -35,7 +41,7 @@ export default function DropDown({ itemList, onChange, ...props }) {
                             <MenuItem
                                 key={key}
                                 onClick={() => handleMenuItemClick(description, value)}
-                                className={`${inputValue === value ? "selected" : null}`}
+                                className={generateMenuItemClassName(description)}
                             >
                                 {description}
                             </MenuItem>
