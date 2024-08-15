@@ -6,5 +6,7 @@ export default function Button({ children, ...props }) {
 
 const ButtonComponent = styled.button`
     border: none;
+    padding: 0px;
     background-color: transparent;
+    cursor: pointer;
 `;
