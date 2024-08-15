@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import FontStyles from "@styles/fontStyles";
 import GlobalStyle from "@styles/GlobalStyle";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -7,8 +7,6 @@ import koKR from "antd/locale/ko_KR";
 
 import NewScheduleForm from "@components/NewScheduleForm";
 import MainLayout from "@pages/MainLayout";
-import { clickAwayContext } from "@contexts";
-import { styled } from "styled-components";
 
 const router = createBrowserRouter([
     {
@@ -49,12 +47,6 @@ const router = createBrowserRouter([
 ]);
 
 export default function App(params) {
-    const [clickedElement, setClickedElement] = useState(null);
-
-    function handleAppClicked(e) {
-        setClickedElement(e.target);
-    }
-
     return (
         <React.StrictMode>
             <FontStyles />
@@ -68,14 +60,8 @@ export default function App(params) {
                     },
                 }}
             >
-                <clickAwayContext.Provider value={{ clickedElement }}>
-                    <ClickAwayListener onClick={handleAppClicked}>
-                        <RouterProvider router={router} />
-                    </ClickAwayListener>
-                </clickAwayContext.Provider>
+                <RouterProvider router={router} />
             </ConfigProvider>
         </React.StrictMode>
     );
 }
-
-const ClickAwayListener = styled.div``;
