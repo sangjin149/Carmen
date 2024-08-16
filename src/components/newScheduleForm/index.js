@@ -3,6 +3,7 @@ import { useForm } from "@hooks";
 import Button from "@ui/Button";
 import OptionLabel from "./OptionLabel";
 import DateTimePicker from "./DateTimePicker";
+import DescriptionInput from "./DescriptionInput";
 import { DropDown } from "@ui";
 import dayjs from "dayjs";
 
@@ -97,14 +98,6 @@ const OptionList = styled.div`
     display: flex;
     flex-direction: column;
     gap: 2px;
-`;
-
-const DescriptionInput = styled.textarea`
-    height: fit-content;
-    resize: none;
-    max-height: 52rem;
-    width: 100%;
-    border: none;
 `;
 
 const Control = styled.div`
