@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
 import Svg from "@ui/Svg";
-import { ScheduleTime, ScheduleAlarm, SidebarAddSchedule } from "@icons";
+import { ScheduleTime, ScheduleAlarm, SidebarAddSchedule, Draft } from "@icons";
 
 const LABELS = {
     time: {
@@ -17,6 +17,11 @@ const LABELS = {
         src: SidebarAddSchedule,
         alt: "add icon",
         text: "속성 추가...",
+    },
+    group: {
+        src: Draft,
+        alt: "group icon",
+        text: "분류",
     },
 };
 

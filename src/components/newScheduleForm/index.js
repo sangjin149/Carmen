@@ -56,6 +56,7 @@ export default function NewScheduleForm() {
             <Container onSubmit={(e) => e.preventDefault()}>
                 <TitleInput placeholder="제목을 입력해주세요" onChange={generateChangeHandler("title")} />
                 <OptionList>
+                    <OptionLabel optionType="group"></OptionLabel>
                     <OptionLabel optionType="time">
                         <DateTimePicker value={inputValues.time} onChange={generateChangeHandler("time")} />
                     </OptionLabel>
