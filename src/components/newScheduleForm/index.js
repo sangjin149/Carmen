@@ -47,20 +47,20 @@ export default function NewScheduleForm() {
         onSubmit();
     }
 
-    function generateChageHandler(key) {
+    function generateChangeHandler(key) {
         return (newValue) => onInputValueChange(key, newValue);
     }
 
     return (
         <FakeCon>
             <Container onSubmit={(e) => e.preventDefault()}>
-                <TitleInput placeholder="제목을 입력해주세요" onChange={generateChageHandler("title")} />
+                <TitleInput placeholder="제목을 입력해주세요" onChange={generateChangeHandler("title")} />
                 <OptionList>
                     <OptionLabel optionType="time">
-                        <DateTimePicker value={inputValues.time} onChange={generateChageHandler("time")} />
+                        <DateTimePicker value={inputValues.time} onChange={generateChangeHandler("time")} />
                     </OptionLabel>
                     <OptionLabel optionType="alarm">
-                        <DropDown itemList={alarmList} onChange={generateChageHandler("alarm")} />
+                        <DropDown itemList={alarmList} onChange={generateChangeHandler("alarm")} />
                     </OptionLabel>
                     <OptionLabel optionType="add"></OptionLabel>
                 </OptionList>
@@ -106,8 +106,16 @@ const Control = styled.div`
     justify-content: flex-end;
 `;
 
-const CancelButton = styled(Button)``;
+const CancelButton = styled(Button)`
+    width: 4rem;
+    height: 2rem;
+`;
 
 const ConfirmButton = styled(Button)`
-    color: "#909090";
+    width: 4rem;
+    height: 2rem;
+
+    border-radius: 0.25rem;
+    background-color: black;
+    color: white;
 `;
