@@ -15,3 +15,4 @@ export { default as Star } from "./Star";
 export { default as Dot } from "./Dot";
 export { default as Check } from "./Check";
 export { default as ArrowDropDown } from "./ArrowDropDown";
+export { default as Draft } from "./Draft";
