@@ -13,8 +13,8 @@ export default function Icon({ src, containerWidth, containerHeight, size, ...pr
 }
 
 const Container = styled.div`
-    width: ${({ width }) => width};
-    height: ${({ height }) => height};
+    width: ${({ width }) => width}px;
+    height: ${({ height }) => height}px;
     display: flex;
     justify-content: center;
     align-items: center;
