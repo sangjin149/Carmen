@@ -2,27 +2,27 @@ import { styled } from "styled-components";
 import { SidebarToday, SidebarCalendar, Star } from "@icons";
 import { NavLink } from "react-router-dom";
 
-import Svg from "@ui/Svg";
+import { Icon } from "@ui";
 
 export default function SidebarMenu() {
     return (
         <Container>
             <li>
                 <MenuItem to="/today">
-                    <Svg src={SidebarToday} containerStyle={TodayIconContainerStyle} alt="today icon" />
-                    오늘의 일정
+                    <Icon src={SidebarToday} alt="today icon" containerWidth={22} />
+                    <MenuLabel>오늘의 일정</MenuLabel>
                 </MenuItem>
             </li>
             <li>
                 <MenuItem to="/calendar">
-                    <Svg src={SidebarCalendar} containerStyle={CalendarIconContainerStyle} alt="calendar icon" />
-                    달력
+                    <Icon src={SidebarCalendar} alt="calendar icon" containerWidth={22} />
+                    <MenuLabel>달력</MenuLabel>
                 </MenuItem>
             </li>
             <li>
                 <MenuItem to="/important">
-                    <Svg src={Star} containerStyle={StarIconContainerStyle} alt="star icon" />
-                    중요한 일정
+                    <Icon src={Star} alt="star icon" containerWidth={22} />
+                    <MenuLabel>중요한 일정</MenuLabel>
                 </MenuItem>
             </li>
         </Container>
@@ -31,31 +31,6 @@ export default function SidebarMenu() {
 
 const Container = styled.ul``;
 
-const IconContainerStyle = {
-    width: "1.75rem",
-    height: "100%",
-    marginRight: "0.5rem",
-    display: "flex",
-};
-
-const TodayIconContainerStyle = {
-    ...IconContainerStyle,
-    paddingLeft: "3px",
-    paddingTop: "6px",
-};
-
-const CalendarIconContainerStyle = {
-    ...IconContainerStyle,
-    paddingLeft: "5px",
-    paddingTop: "9px",
-};
-
-const StarIconContainerStyle = {
-    ...IconContainerStyle,
-    paddingLeft: "4px",
-    paddingTop: "8px",
-};
-
 const MenuItem = styled(NavLink)`
     display: flex;
     align-items: center;
@@ -63,4 +38,8 @@ const MenuItem = styled(NavLink)`
     font-size: 1.125rem;
     text-decoration: none;
     color: black;
+`;
+
+const MenuLabel = styled.div`
+    padding-left: 0.5rem;
 `;

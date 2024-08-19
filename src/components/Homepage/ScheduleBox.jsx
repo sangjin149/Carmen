@@ -1,9 +1,8 @@
 import { styled } from "styled-components";
-import { ScheduleFold, ScheduleUnfold } from "@icons";
 import { useState } from "react";
+import { ScheduleFold, ScheduleUnfold } from "@icons";
 
-import Button from "@ui/Button";
-import Svg from "@ui/Svg";
+import { Button, Icon } from "@ui";
 import { ScheduleDetail } from "@components/Homepage";
 
 export default function ScheduleBox({ schedule }) {
@@ -19,7 +18,7 @@ export default function ScheduleBox({ schedule }) {
             <ScheduleDetail schedule={schedule} hideDescription={foldBox} />
             <ActionBox>
                 <FoldButton onClick={handleFoldButtonClick}>
-                    <Svg src={foldBox ? ScheduleUnfold : ScheduleFold} />
+                    <Icon src={foldBox ? ScheduleUnfold : ScheduleFold} size={14} />
                 </FoldButton>
             </ActionBox>
         </Container>

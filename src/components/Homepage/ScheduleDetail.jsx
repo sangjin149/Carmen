@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
 import { ScheduleTime, ScheduleLocation, ScheduleAlarm } from "@icons";
 
-import Svg from "@ui/Svg";
+import { Icon } from "@ui";
 
 function getProcessedTime(date, displayAs24 = true) {
     const month = date.getMonth();
@@ -44,15 +44,15 @@ export default function ScheduleDetail({ schedule, hideDescription }) {
         <Container>
             <Title>{schedule.title}</Title>
             <Details>
-                <Svg src={ScheduleTime} alt="time icon" containerStyle={clockStyle} center />
+                <Icon src={ScheduleTime} alt="time icon" width={18} />
                 {processedTime}
             </Details>
             <Details>
-                <Svg src={ScheduleLocation} alt="location icon" containerStyle={locationStyle} />
+                <Icon src={ScheduleLocation} alt="location icon" width={18} />
                 {schedule.location}
             </Details>
             <Details>
-                <Svg src={ScheduleAlarm} alt="alarm icon" containerStyle={alarmStyle} />
+                <Icon src={ScheduleAlarm} alt="alarm icon" width={18} />
                 추후 구현 예정
             </Details>
             {!hideDescription && <Description>{schedule.description}</Description>}
@@ -90,28 +90,6 @@ const Details = styled.div`
     font-size: 0.875rem;
     line-height: 1.5rem;
 `;
-
-const iconContainerStyle = {
-    width: "1.5rem",
-    height: "1.5rem",
-};
-
-const clockStyle = {
-    ...iconContainerStyle,
-    paddingTop: "0.25rem",
-    paddingLeft: "1px",
-};
-
-const locationStyle = {
-    ...iconContainerStyle,
-    paddingTop: "0.25rem",
-    paddingLeft: "2px",
-};
-
-const alarmStyle = {
-    ...iconContainerStyle,
-    paddingTop: "0.25rem",
-};
 
 const Description = styled.div`
     margin-top: 0.8rem;
