@@ -3,8 +3,7 @@ import { Link } from "react-router-dom";
 import LogoIcon from "@assets/Logo.png";
 
 import { SidebarAlarm, SidebarFold } from "@icons";
-import Button from "@ui/Button";
-import Svg from "@ui/Svg";
+import { Icon, Button } from "@ui";
 
 export default function Header() {
     return (
@@ -14,10 +13,10 @@ export default function Header() {
             </Link>
             <ButtonPanel>
                 <HeaderButton>
-                    <Svg src={SidebarAlarm} alt="alarm" containerStyle={AlarmContainerStyle} />
+                    <Icon src={SidebarAlarm} alt="alarm" />
                 </HeaderButton>
                 <HeaderButton>
-                    <Svg src={SidebarFold} alt="fold" containerStyle={FoldContainerStyle} />
+                    <Icon src={SidebarFold} alt="fold" />
                 </HeaderButton>
             </ButtonPanel>
         </Container>
@@ -33,11 +32,13 @@ const Container = styled.header`
 
 const Logo = styled.img`
     width: 8rem;
+    height: 2.5rem;
 `;
 
 const ButtonPanel = styled.div`
     height: 100%;
     flex-grow: 1;
+    padding-left: 0.75rem;
 
     display: flex;
     place-content: center flex-end;
@@ -45,14 +46,6 @@ const ButtonPanel = styled.div`
 
 const HeaderButton = styled(Button)`
     width: 2rem;
+    height: 2.5rem;
+    padding-left: 2px;
 `;
-
-const AlarmContainerStyle = {
-    paddingBottom: "1px",
-    paddingLeft: "4px",
-};
-
-const FoldContainerStyle = {
-    paddingTop: "8px",
-    paddingLeft: "4px",
-};
