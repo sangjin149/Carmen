@@ -44,15 +44,15 @@ export default function ScheduleDetail({ schedule, hideDescription }) {
         <Container>
             <Title>{schedule.title}</Title>
             <Details>
-                <Icon src={ScheduleTime} alt="time icon" size={16} width={18} />
+                <Icon src={ScheduleTime} alt="time icon" width={18} />
                 {processedTime}
             </Details>
             <Details>
-                <Icon src={ScheduleLocation} alt="location icon" size={16} width={18} />
+                <Icon src={ScheduleLocation} alt="location icon" width={18} />
                 {schedule.location}
             </Details>
             <Details>
-                <Icon src={ScheduleAlarm} alt="alarm icon" size={16} width={18} />
+                <Icon src={ScheduleAlarm} alt="alarm icon" width={18} />
                 추후 구현 예정
             </Details>
             {!hideDescription && <Description>{schedule.description}</Description>}
