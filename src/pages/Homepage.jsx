@@ -29,7 +29,6 @@ const Container = styled.div`
 
 const Content = styled.div`
     padding-top: 64px;
-    //좀 넓어보여서 figma 명세보다 줄여놓음
     display: flex;
     flex-direction: row;
     justify-content: space-between;
