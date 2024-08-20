@@ -9,6 +9,10 @@ import dayjs from "dayjs";
 
 const inputInfo = {
     //TODO: isRequired 추가
+    group: {
+        initialValue: "group 1",
+        validation: (newValue) => "",
+    },
     title: {
         initialValue: "",
         validation: (newValue) => {
@@ -35,6 +39,14 @@ const alarmList = [
     { key: "1 day", value: "1 day", description: "하루 전" },
 ];
 
+const groupList = [
+    { key: "group 1 ", value: "group 1 ", description: "그룹 1" },
+    { key: "group 2", value: "group 2", description: "그룹 2" },
+    { key: "group 3", value: "group 3", description: "그룹 3" },
+    { key: "group 4", value: "group 4", description: "그룹 4" },
+    { key: "group 5", value: "group 5", description: "그룹 5" },
+];
+
 function dummySubmit(formResult) {
     console.table(formResult);
 }
@@ -56,7 +68,9 @@ export default function NewScheduleForm() {
             <Container onSubmit={(e) => e.preventDefault()}>
                 <TitleInput placeholder="제목을 입력해주세요" onChange={generateChangeHandler("title")} />
                 <OptionList>
-                    <OptionLabel optionType="group"></OptionLabel>
+                    <OptionLabel optionType="group">
+                        <DropDown itemList={groupList} onChange={generateChangeHandler("group")} />
+                    </OptionLabel>
                     <OptionLabel optionType="time">
                         <DateTimePicker value={inputValues.time} onChange={generateChangeHandler("time")} />
                     </OptionLabel>
