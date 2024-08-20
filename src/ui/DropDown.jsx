@@ -1,47 +1,42 @@
-import { Button, Svg } from "@ui";
 import { styled } from "styled-components";
 import { ArrowDropDown } from "@icons";
 import { useCallback, useState } from "react";
-import ClickAwayListener from "./ClickAwayListener";
+import { Icon, ClickAwayListener } from "@ui";
 
-export default function DropDown({ itemList, onChange, ...props }) {
+export default function DropDown({ itemList, onChange, placeholder = "placeholder", ...props }) {
     const [showMenu, setShowMenu] = useState(false);
-    const [inputValue, setInputValue] = useState("");
+    const [selectedIndex, setSelectedIndex] = useState(-1);
 
-    function handleInputClick() {
+    function handleClick() {
         setShowMenu((oldShowMenu) => !oldShowMenu);
     }
 
-    function handleMenuItemClick(description, menuValue) {
+    function handleMenuItemClick(index) {
         setShowMenu(false);
-        setInputValue(description);
-        onChange(menuValue);
+        setSelectedIndex(index);
+        onChange(itemList[index].value);
     }
 
     const handleOutsideClick = useCallback(() => {
         setShowMenu(false);
     }, []);
 
-    const generateMenuItemClassName = (itemDescription) => {
-        let className = "";
-        if (itemDescription === inputValue) className += "selected ";
-        return className.trim();
-    };
-
     return (
         <ClickAwayListener onClickAway={handleOutsideClick}>
-            <Container onClick={handleInputClick}>
-                <TextInput placeholder="입력 없음" value={inputValue} readOnly {...props} />
-                <Button>
-                    <Svg src={ArrowDropDown} containerStyle={DropDownIconStyle} />
-                </Button>
+            <Container>
+                <CurrentValueShower onClick={handleClick} {...props}>
+                    <CurrentValueSpace>
+                        {selectedIndex > -1 ? itemList[selectedIndex].description : placeholder}
+                    </CurrentValueSpace>
+                    <Icon src={ArrowDropDown} />
+                </CurrentValueShower>
                 {showMenu && (
                     <DropDownMenu>
-                        {itemList.map(({ key, value, description }) => (
+                        {itemList.map(({ key, description }, index) => (
                             <MenuItem
                                 key={key}
-                                onClick={() => handleMenuItemClick(description, value)}
-                                className={generateMenuItemClassName(description)}
+                                onClick={() => handleMenuItemClick(index)}
+                                className={selectedIndex === index && "selected"}
                             >
                                 {description}
                             </MenuItem>
@@ -60,31 +55,34 @@ const Container = styled.div`
     cursor: pointer;
 `;
 
-const TextInput = styled.input`
+const CurrentValueShower = styled.div`
     width: 4.5rem;
     padding: 0px;
+    display: flex;
     font-size: 1rem;
     font-family: "NanumGothic";
     cursor: pointer;
 `;
 
-const DropDownIconStyle = {
-    width: "24px",
-    height: "24px",
-};
+const CurrentValueSpace = styled.div`
+    min-width: 4.5rem;
+`;
 
 const DropDownMenu = styled.ul`
     position: absolute;
     top: 1.375rem;
     left: 0px;
+    z-index: 8;
 
     display: flex;
     flex-direction: column;
 
     width: 62.5%;
-    min-width: 6rem;
+    min-width: 8rem;
     padding: 0.375rem 0px;
     margin: 0px;
+
+    background-color: white;
 
     border-radius: 0.5rem;
     box-shadow: 2px 2px 20px 0px rgba(0, 0, 0, 0.175);
@@ -94,7 +92,7 @@ const DropDownMenu = styled.ul`
 
 const MenuItem = styled.li`
     padding: 0.375rem 0.75rem;
-    font-size: 0.75rem;
+    font-size: 0.9rem;
     cursor: pointer;
     &:hover {
         background-color: #f0f0f0;

@@ -1,14 +1,18 @@
 import { styled } from "styled-components";
 import { useForm } from "@hooks";
-import Button from "@ui/Button";
 import OptionLabel from "./OptionLabel";
 import DateTimePicker from "./DateTimePicker";
 import DescriptionInput from "./DescriptionInput";
-import { DropDown } from "@ui";
+import GroupInputItem from "./GroupInputItem";
+import { DropDown, Button } from "@ui";
 import dayjs from "dayjs";
 
 const inputInfo = {
     //TODO: isRequired 추가
+    group: {
+        initialValue: "group 1",
+        validation: (newValue) => "",
+    },
     title: {
         initialValue: "",
         validation: (newValue) => {
@@ -27,20 +31,26 @@ const inputInfo = {
     },
 };
 
-const alarmList = [
-    { key: "1 minute", value: "1 minute", description: "1분 전" },
-    { key: "5 minute", value: "5 minute", description: "5분 전" },
-    { key: "10 minute", value: "10 minute", description: "10분 전" },
-    { key: "1 hour", value: "1 hour", description: "한시간 전" },
-    { key: "1 day", value: "1 day", description: "하루 전" },
-];
+const DUMMY_DATA = {
+    alarmList: [
+        { key: "1 minute", value: "1 minute", description: "1분 전" },
+        { key: "5 minute", value: "5 minute", description: "5분 전" },
+        { key: "10 minute", value: "10 minute", description: "10분 전" },
+        { key: "1 hour", value: "1 hour", description: "한시간 전" },
+        { key: "1 day", value: "1 day", description: "하루 전" },
+    ],
+    groupList: [
+        { name: "그룹 1", id: "group1" },
+        { name: "그룹 2", id: "group2" },
+        { name: "그룹 3", id: "group3" },
+    ],
+    dummySubmit(formResult) {
+        console.table(formResult);
+    },
+};
 
-function dummySubmit(formResult) {
-    console.table(formResult);
-}
-
-export default function NewScheduleForm() {
-    const { inputValues, onInputValueChange, onSubmit } = useForm(inputInfo, dummySubmit);
+export default function NewScheduleForm({ onSubmit: submitAPI = DUMMY_DATA.dummySubmit, ...props }) {
+    const { inputValues, onInputValueChange, onSubmit } = useForm(inputInfo, submitAPI);
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -51,17 +61,31 @@ export default function NewScheduleForm() {
         return (newValue) => onInputValueChange(key, newValue);
     }
 
+    const { alarmList, groupList } = DUMMY_DATA;
+
+    const groupInputItemList = groupList.map(({ name, id }) => ({
+        key: name,
+        value: id,
+        description: <GroupInputItem name={name} groupColor="#03C75A" />,
+    }));
+
     return (
         <FakeCon>
             <Container onSubmit={(e) => e.preventDefault()}>
                 <TitleInput placeholder="제목을 입력해주세요" onChange={generateChangeHandler("title")} />
                 <OptionList>
-                    <OptionLabel optionType="group"></OptionLabel>
+                    <OptionLabel optionType="group">
+                        <DropDown
+                            itemList={groupInputItemList}
+                            onChange={generateChangeHandler("group")}
+                            placeholder="그룹"
+                        />
+                    </OptionLabel>
                     <OptionLabel optionType="time">
                         <DateTimePicker value={inputValues.time} onChange={generateChangeHandler("time")} />
                     </OptionLabel>
                     <OptionLabel optionType="alarm">
-                        <DropDown itemList={alarmList} onChange={generateChangeHandler("alarm")} />
+                        <DropDown itemList={alarmList} onChange={generateChangeHandler("alarm")} placeholder="알람" />
                     </OptionLabel>
                     <OptionLabel optionType="add"></OptionLabel>
                 </OptionList>

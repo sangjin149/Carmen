@@ -1,5 +1,5 @@
 import { styled } from "styled-components";
-import Svg from "@ui/Svg";
+import { Icon } from "@ui";
 import { ScheduleTime, ScheduleAlarm, SidebarAddSchedule, Draft } from "@icons";
 
 const LABELS = {
@@ -30,15 +30,7 @@ export default function OptionLabel({ optionType, children }) {
 
     return (
         <Container>
-            <Svg
-                src={src}
-                alt={alt}
-                style={IconStyle}
-                containerStyle={IconContaierStyle}
-                width={16}
-                height={16}
-                center
-            />
+            <LabelIcon src={src} alt={alt} containerWidth={24} containerHeight={24} />
             <AdditionalInfoLabel>{text}</AdditionalInfoLabel>
             {children}
         </Container>
@@ -51,20 +43,15 @@ const Container = styled.label`
     align-items: center;
 `;
 
-const IconContaierStyle = {
-    width: "21px",
-    height: "24px",
-    display: "flex",
-};
-
-const IconStyle = {
-    width: "1rem",
-    height: "1rem",
-};
-
 const AdditionalInfoLabel = styled.div`
     width: 7rem;
     padding-left: 4px;
     font-size: 1rem;
     line-height: 1.125rem;
+`;
+
+const LabelIcon = styled(Icon)`
+    fill: #adadad;
+    width: 18px;
+    height: 18px;
 `;
