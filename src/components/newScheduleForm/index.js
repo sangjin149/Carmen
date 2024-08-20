@@ -69,13 +69,13 @@ export default function NewScheduleForm() {
                 <TitleInput placeholder="제목을 입력해주세요" onChange={generateChangeHandler("title")} />
                 <OptionList>
                     <OptionLabel optionType="group">
-                        <DropDown itemList={groupList} onChange={generateChangeHandler("group")} />
+                        <DropDown itemList={groupList} onChange={generateChangeHandler("group")} placeholder="그룹" />
                     </OptionLabel>
                     <OptionLabel optionType="time">
                         <DateTimePicker value={inputValues.time} onChange={generateChangeHandler("time")} />
                     </OptionLabel>
                     <OptionLabel optionType="alarm">
-                        <DropDown itemList={alarmList} onChange={generateChangeHandler("alarm")} />
+                        <DropDown itemList={alarmList} onChange={generateChangeHandler("alarm")} placeholder="알람" />
                     </OptionLabel>
                     <OptionLabel optionType="add"></OptionLabel>
                 </OptionList>

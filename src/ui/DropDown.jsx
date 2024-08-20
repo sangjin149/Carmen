@@ -1,14 +1,13 @@
-import { Button, Svg } from "@ui";
 import { styled } from "styled-components";
 import { ArrowDropDown } from "@icons";
 import { useCallback, useState } from "react";
-import ClickAwayListener from "./ClickAwayListener";
+import { Icon, ClickAwayListener } from "@ui";
 
-export default function DropDown({ itemList, onChange, ...props }) {
+export default function DropDown({ itemList, onChange, placeholder = "placeholder", ...props }) {
     const [showMenu, setShowMenu] = useState(false);
     const [inputValue, setInputValue] = useState("");
 
-    function handleInputClick() {
+    function handleClick() {
         setShowMenu((oldShowMenu) => !oldShowMenu);
     }
 
@@ -30,11 +29,11 @@ export default function DropDown({ itemList, onChange, ...props }) {
 
     return (
         <ClickAwayListener onClickAway={handleOutsideClick}>
-            <Container onClick={handleInputClick}>
-                <TextInput placeholder="입력 없음" value={inputValue} readOnly {...props} />
-                <Button>
-                    <Svg src={ArrowDropDown} />
-                </Button>
+            <Container onClick={handleClick}>
+                <CurrentValueShower {...props}>
+                    <CurrentValueSpace>{inputValue !== "" ? inputValue : placeholder}</CurrentValueSpace>
+                    <Icon src={ArrowDropDown} />
+                </CurrentValueShower>
                 {showMenu && (
                     <DropDownMenu>
                         {itemList.map(({ key, value, description }) => (
@@ -60,18 +59,30 @@ const Container = styled.div`
     cursor: pointer;
 `;
 
-const TextInput = styled.input`
+const HiddenInput = styled.input`
+    width: 0;
+    height: 0;
+    padding: 0;
+`;
+
+const CurrentValueShower = styled.div`
     width: 4.5rem;
     padding: 0px;
+    display: flex;
     font-size: 1rem;
     font-family: "NanumGothic";
     cursor: pointer;
+`;
+
+const CurrentValueSpace = styled.div`
+    min-width: 4.5rem;
 `;
 
 const DropDownMenu = styled.ul`
     position: absolute;
     top: 1.375rem;
     left: 0px;
+    z-index: 8;
 
     display: flex;
     flex-direction: column;
@@ -80,6 +91,8 @@ const DropDownMenu = styled.ul`
     min-width: 6rem;
     padding: 0.375rem 0px;
     margin: 0px;
+
+    background-color: white;
 
     border-radius: 0.5rem;
     box-shadow: 2px 2px 20px 0px rgba(0, 0, 0, 0.175);
