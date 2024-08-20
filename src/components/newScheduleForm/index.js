@@ -3,8 +3,8 @@ import { useForm } from "@hooks";
 import OptionLabel from "./OptionLabel";
 import DateTimePicker from "./DateTimePicker";
 import DescriptionInput from "./DescriptionInput";
-import { Dot } from "@icons";
-import { DropDown, Button, Icon } from "@ui";
+import GroupInputItem from "./GroupInputItem";
+import { DropDown, Button } from "@ui";
 import dayjs from "dayjs";
 
 const inputInfo = {
@@ -31,47 +31,26 @@ const inputInfo = {
     },
 };
 
-const alarmList = [
-    { key: "1 minute", value: "1 minute", description: "1분 전" },
-    { key: "5 minute", value: "5 minute", description: "5분 전" },
-    { key: "10 minute", value: "10 minute", description: "10분 전" },
-    { key: "1 hour", value: "1 hour", description: "한시간 전" },
-    { key: "1 day", value: "1 day", description: "하루 전" },
-];
+const DUMMY_DATA = {
+    alarmList: [
+        { key: "1 minute", value: "1 minute", description: "1분 전" },
+        { key: "5 minute", value: "5 minute", description: "5분 전" },
+        { key: "10 minute", value: "10 minute", description: "10분 전" },
+        { key: "1 hour", value: "1 hour", description: "한시간 전" },
+        { key: "1 day", value: "1 day", description: "하루 전" },
+    ],
+    groupList: [
+        { name: "그룹 1", id: "group1" },
+        { name: "그룹 2", id: "group2" },
+        { name: "그룹 3", id: "group3" },
+    ],
+    dummySubmit(formResult) {
+        console.table(formResult);
+    },
+};
 
-const groupList = [
-    { name: "그룹 1", id: "group1" },
-    { name: "그룹 2", id: "group2" },
-    { name: "그룹 3", id: "group3" },
-];
-
-function GroupInputItem({ name, groupColor = "#000000" }) {
-    return (
-        <ItemContainer>
-            <GroupColorIcon src={Dot} containerWidth={14} size={14} fill={groupColor} />
-            {name}
-        </ItemContainer>
-    );
-}
-
-const ItemContainer = styled.div`
-    display: flex;
-    width: 4rem;
-    height: 1.5rem;
-    align-items: center;
-`;
-
-const GroupColorIcon = styled(Icon)`
-    margin-right: 4px;
-    fill: ${(props) => props.fill};
-`;
-
-function dummySubmit(formResult) {
-    console.table(formResult);
-}
-
-export default function NewScheduleForm() {
-    const { inputValues, onInputValueChange, onSubmit } = useForm(inputInfo, dummySubmit);
+export default function NewScheduleForm({ onSubmit: submitAPI = DUMMY_DATA.dummySubmit, ...props }) {
+    const { inputValues, onInputValueChange, onSubmit } = useForm(inputInfo, submitAPI);
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -81,6 +60,8 @@ export default function NewScheduleForm() {
     function generateChangeHandler(key) {
         return (newValue) => onInputValueChange(key, newValue);
     }
+
+    const { alarmList, groupList } = DUMMY_DATA;
 
     const groupInputItemList = groupList.map(({ name, id }) => ({
         key: name,
