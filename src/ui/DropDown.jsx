@@ -5,42 +5,38 @@ import { Icon, ClickAwayListener } from "@ui";
 
 export default function DropDown({ itemList, onChange, placeholder = "placeholder", ...props }) {
     const [showMenu, setShowMenu] = useState(false);
-    const [inputValue, setInputValue] = useState("");
+    const [selectedIndex, setSelectedIndex] = useState(-1);
 
     function handleClick() {
         setShowMenu((oldShowMenu) => !oldShowMenu);
     }
 
-    function handleMenuItemClick(description, menuValue) {
+    function handleMenuItemClick(index) {
         setShowMenu(false);
-        setInputValue(description);
-        onChange(menuValue);
+        setSelectedIndex(index);
+        onChange(itemList[index].value);
     }
 
     const handleOutsideClick = useCallback(() => {
         setShowMenu(false);
     }, []);
 
-    const generateMenuItemClassName = (itemDescription) => {
-        let className = "";
-        if (itemDescription === inputValue) className += "selected ";
-        return className.trim();
-    };
-
     return (
         <ClickAwayListener onClickAway={handleOutsideClick}>
             <Container>
                 <CurrentValueShower onClick={handleClick} {...props}>
-                    <CurrentValueSpace>{inputValue !== "" ? inputValue : placeholder}</CurrentValueSpace>
+                    <CurrentValueSpace>
+                        {selectedIndex > -1 ? itemList[selectedIndex].description : placeholder}
+                    </CurrentValueSpace>
                     <Icon src={ArrowDropDown} />
                 </CurrentValueShower>
                 {showMenu && (
                     <DropDownMenu>
-                        {itemList.map(({ key, value, description }) => (
+                        {itemList.map(({ key, description }, index) => (
                             <MenuItem
                                 key={key}
-                                onClick={() => handleMenuItemClick(description, value)}
-                                className={generateMenuItemClassName(description)}
+                                onClick={() => handleMenuItemClick(index)}
+                                className={selectedIndex === index && "selected"}
                             >
                                 {description}
                             </MenuItem>
@@ -57,12 +53,6 @@ const Container = styled.div`
     display: flex;
     align-items: center;
     cursor: pointer;
-`;
-
-const HiddenInput = styled.input`
-    width: 0;
-    height: 0;
-    padding: 0;
 `;
 
 const CurrentValueShower = styled.div`

@@ -1,10 +1,10 @@
 import { styled } from "styled-components";
 import { useForm } from "@hooks";
-import Button from "@ui/Button";
 import OptionLabel from "./OptionLabel";
 import DateTimePicker from "./DateTimePicker";
 import DescriptionInput from "./DescriptionInput";
-import { DropDown } from "@ui";
+import { Dot } from "@icons";
+import { DropDown, Button, Icon } from "@ui";
 import dayjs from "dayjs";
 
 const inputInfo = {
@@ -40,12 +40,31 @@ const alarmList = [
 ];
 
 const groupList = [
-    { key: "group 1 ", value: "group 1 ", description: "그룹 1" },
-    { key: "group 2", value: "group 2", description: "그룹 2" },
-    { key: "group 3", value: "group 3", description: "그룹 3" },
-    { key: "group 4", value: "group 4", description: "그룹 4" },
-    { key: "group 5", value: "group 5", description: "그룹 5" },
+    { name: "그룹 1", id: "group1" },
+    { name: "그룹 2", id: "group2" },
+    { name: "그룹 3", id: "group3" },
 ];
+
+function GroupInputItem({ name, groupColor = "#000000" }) {
+    return (
+        <ItemContainer>
+            <GroupColorIcon src={Dot} containerWidth={14} size={14} fill={groupColor} />
+            {name}
+        </ItemContainer>
+    );
+}
+
+const ItemContainer = styled.div`
+    display: flex;
+    width: 4rem;
+    height: 1.5rem;
+    align-items: center;
+`;
+
+const GroupColorIcon = styled(Icon)`
+    margin-right: 4px;
+    fill: ${(props) => props.fill};
+`;
 
 function dummySubmit(formResult) {
     console.table(formResult);
@@ -63,13 +82,23 @@ export default function NewScheduleForm() {
         return (newValue) => onInputValueChange(key, newValue);
     }
 
+    const groupInputItemList = groupList.map(({ name, id }) => ({
+        key: name,
+        value: id,
+        description: <GroupInputItem name={name} groupColor="#03C75A" />,
+    }));
+
     return (
         <FakeCon>
             <Container onSubmit={(e) => e.preventDefault()}>
                 <TitleInput placeholder="제목을 입력해주세요" onChange={generateChangeHandler("title")} />
                 <OptionList>
                     <OptionLabel optionType="group">
-                        <DropDown itemList={groupList} onChange={generateChangeHandler("group")} placeholder="그룹" />
+                        <DropDown
+                            itemList={groupInputItemList}
+                            onChange={generateChangeHandler("group")}
+                            placeholder="그룹"
+                        />
                     </OptionLabel>
                     <OptionLabel optionType="time">
                         <DateTimePicker value={inputValues.time} onChange={generateChangeHandler("time")} />
