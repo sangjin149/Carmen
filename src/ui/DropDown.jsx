@@ -33,7 +33,7 @@ export default function DropDown({ itemList, onChange, ...props }) {
             <Container onClick={handleInputClick}>
                 <TextInput placeholder="입력 없음" value={inputValue} readOnly {...props} />
                 <Button>
-                    <Svg src={ArrowDropDown} containerStyle={DropDownIconStyle} />
+                    <Svg src={ArrowDropDown} />
                 </Button>
                 {showMenu && (
                     <DropDownMenu>
@@ -67,11 +67,6 @@ const TextInput = styled.input`
     font-family: "NanumGothic";
     cursor: pointer;
 `;
-
-const DropDownIconStyle = {
-    width: "24px",
-    height: "24px",
-};
 
 const DropDownMenu = styled.ul`
     position: absolute;
