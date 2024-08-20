@@ -29,8 +29,8 @@ export default function DropDown({ itemList, onChange, placeholder = "placeholde
 
     return (
         <ClickAwayListener onClickAway={handleOutsideClick}>
-            <Container onClick={handleClick}>
-                <CurrentValueShower {...props}>
+            <Container>
+                <CurrentValueShower onClick={handleClick} {...props}>
                     <CurrentValueSpace>{inputValue !== "" ? inputValue : placeholder}</CurrentValueSpace>
                     <Icon src={ArrowDropDown} />
                 </CurrentValueShower>
@@ -88,7 +88,7 @@ const DropDownMenu = styled.ul`
     flex-direction: column;
 
     width: 62.5%;
-    min-width: 6rem;
+    min-width: 8rem;
     padding: 0.375rem 0px;
     margin: 0px;
 
@@ -102,7 +102,7 @@ const DropDownMenu = styled.ul`
 
 const MenuItem = styled.li`
     padding: 0.375rem 0.75rem;
-    font-size: 0.75rem;
+    font-size: 0.9rem;
     cursor: pointer;
     &:hover {
         background-color: #f0f0f0;
