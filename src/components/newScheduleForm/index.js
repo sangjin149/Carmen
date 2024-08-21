@@ -8,7 +8,13 @@ import { DropDown, Button } from "@ui";
 import dayjs from "dayjs";
 
 const inputInfo = {
-    //TODO: isRequired 추가
+    //TODO: value 제어 추가
+    //TODO: 필수 입력 추가
+    //TODO: #5 입력 오류시 메시지 표시 추가
+    //TODO: 스켈레톤 추가
+    //TODO: 애니메이션 추가
+    //TODO: API 추가
+    //BUG: #6 label마다 id 추가
     group: {
         initialValue: "group 1",
         validation: (newValue) => "",
