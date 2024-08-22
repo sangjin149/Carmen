@@ -10,10 +10,14 @@ import ScheduleOption from "./ScheduleOption";
 
 // issue #10
 //TODO: value 제어 추가
+//TODO: description 폼 필드에 추가
 //TODO: 필수 입력 추가
 //TODO: 입력 오류시 메시지 표시 추가
 //TODO: 스켈레톤 추가
 //TODO: 애니메이션 추가
+// -ScheduleForm 호출
+// -오류 항목 한번 반짝임
+// -드롭다운 켜고 닫는거
 //TODO: API 추가
 // issue #6
 //BUG: label마다 id 추가
@@ -60,11 +64,11 @@ const formValueInfo = {
 };
 
 export default function NewScheduleForm({ onSubmit: submitAPI = DUMMY_DATA.dummySubmit, ...props }) {
-    const { inputValues, onInputValueChange, onSubmit } = useForm(formValueInfo, submitAPI);
+    const { inputValues, errors, onInputValueChange, onSubmit } = useForm(formValueInfo, submitAPI);
 
     function handleSubmit(e) {
         e.preventDefault();
-        onSubmit();
+        onSubmit(inputValues);
     }
 
     function generateChangeHandler(key) {
@@ -79,13 +83,16 @@ export default function NewScheduleForm({ onSubmit: submitAPI = DUMMY_DATA.dummy
         description: <GroupInputItem name={name} groupColor="#03C75A" />,
     }));
 
+    const errorMessages = [];
+    for (const formItemName in errors) errorMessages.push(`* ${formItemName}: ${errors[formItemName]}`);
+
     return (
         <FakeCon>
             <Container onSubmit={(e) => e.preventDefault()}>
                 <TitleInput
                     value={inputValues.title}
                     placeholder="제목을 입력해주세요"
-                    onChange={generateChangeHandler("title")}
+                    onChange={(e) => onInputValueChange("title", e.target.value)}
                 />
                 <ScheduleOptions>
                     <ScheduleOption
@@ -107,13 +114,22 @@ export default function NewScheduleForm({ onSubmit: submitAPI = DUMMY_DATA.dummy
                         itemList={alarmList}
                         placeholder="알람"
                     />
-                    <AddOption>
-                        <AddIcon src={SidebarAddSchedule} alt="속성 추가" containerWidth={24} containerHeight={24} />
-                        <Desc>속성 추가...</Desc>
-                    </AddOption>
+                    <AddOption.Container>
+                        <AddOption.Icon
+                            src={SidebarAddSchedule}
+                            alt="속성 추가"
+                            containerWidth={24}
+                            containerHeight={24}
+                        />
+                        <AddOption.Desc>속성 추가...</AddOption.Desc>
+                    </AddOption.Container>
+                    <ErrorMessage>
+                        {errorMessages.map((errorMessage) => (
+                            <div className="error-message">{errorMessage}</div>
+                        ))}
+                    </ErrorMessage>
                 </ScheduleOptions>
                 <Description placeholder="일정 설명..." />
-
                 <Control>
                     <CancelButton>취소</CancelButton>
                     <ConfirmButton onClick={handleSubmit}>분류</ConfirmButton>
@@ -149,26 +165,26 @@ const ScheduleOptions = styled.div`
     gap: 2px;
 `;
 
-const AddOption = styled(Button)`
-    height: 1.5rem;
-    display: flex;
-    align-items: center;
-`;
-
-const Desc = styled.div`
-    width: 7rem;
-    padding-left: 4px;
-    font-size: 1rem;
-    line-height: 1.125rem;
-    text-align: start;
-    font-family: "NanumGothic";
-`;
-
-const AddIcon = styled(Icon)`
-    fill: #adadad;
-    width: 18px;
-    height: 18px;
-`;
+const AddOption = {
+    Container: styled(Button)`
+        height: 1.5rem;
+        display: flex;
+        align-items: center;
+    `,
+    Desc: styled.div`
+        width: 7rem;
+        padding-left: 4px;
+        font-size: 1rem;
+        line-height: 1.125rem;
+        text-align: start;
+        font-family: "NanumGothic";
+    `,
+    Icon: styled(Icon)`
+        fill: #adadad;
+        width: 18px;
+        height: 18px;
+    `,
+};
 
 const Control = styled.div`
     padding: 10px 0;
@@ -188,4 +204,13 @@ const ConfirmButton = styled(Button)`
     border-radius: 0.25rem;
     background-color: black;
     color: white;
+`;
+
+const ErrorMessage = styled.div`
+    display: flex;
+    flex-direction: column;
+    & .error-message {
+        color: red;
+        font-size: 14px;
+    }
 `;

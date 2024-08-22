@@ -15,10 +15,14 @@ export default function useForm(inputInformation, submitFunction) {
     const { defaultValues, validations } = sortFormInfo(inputInformation);
 
     const [inputValues, setInputValues] = useState(defaultValues);
-    const errors = {};
+    const [errors, setErrors] = useState({});
 
     function onInputValueChange(key, newValue) {
         const validationMessage = validations[key](newValue);
+        setErrors((errors) => ({
+            ...errors,
+            [key]: validationMessage,
+        }));
         errors[key] = validationMessage;
         setInputValues((oldValue) => ({ ...oldValue, [key]: newValue }));
     }
