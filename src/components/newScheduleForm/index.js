@@ -7,35 +7,15 @@ import GroupInputItem from "./GroupInputItem";
 import { DropDown, Button } from "@ui";
 import dayjs from "dayjs";
 
-const inputInfo = {
-    //TODO: value 제어 추가
-    //TODO: 필수 입력 추가
-    //TODO: #5 입력 오류시 메시지 표시 추가
-    //TODO: 스켈레톤 추가
-    //TODO: 애니메이션 추가
-    //TODO: API 추가
-    //BUG: #6 label마다 id 추가
-    group: {
-        initialValue: "group 1",
-        validation: (newValue) => "",
-    },
-    title: {
-        initialValue: "",
-        validation: (newValue) => {
-            let errorMessage = "";
-            if (newValue.length < 1) return "제목을 입력해주세요!";
-            return errorMessage;
-        },
-    },
-    time: {
-        initialValue: dayjs(),
-        validation: (newValue) => "",
-    },
-    alarm: {
-        initialValue: "1시간 전",
-        validation: (newValue) => "",
-    },
-};
+// issue #10
+//TODO: value 제어 추가
+//TODO: 필수 입력 추가
+//TODO: 입력 오류시 메시지 표시 추가
+//TODO: 스켈레톤 추가
+//TODO: 애니메이션 추가
+//TODO: API 추가
+// issue #6
+//BUG: label마다 id 추가
 
 const DUMMY_DATA = {
     alarmList: [
@@ -55,8 +35,31 @@ const DUMMY_DATA = {
     },
 };
 
+const formValueInfo = {
+    title: {
+        defaultValue: "",
+        validation: (newValue) => {
+            let errorMessage = "";
+            if (newValue.length < 1) return "제목을 입력해주세요!";
+            return errorMessage;
+        },
+    },
+    group: {
+        defaultValue: "",
+        validation: (newValue) => "",
+    },
+    time: {
+        defaultValue: dayjs(),
+        validation: (newValue) => "",
+    },
+    alarm: {
+        defaultValue: "",
+        validation: (newValue) => "",
+    },
+};
+
 export default function NewScheduleForm({ onSubmit: submitAPI = DUMMY_DATA.dummySubmit, ...props }) {
-    const { inputValues, onInputValueChange, onSubmit } = useForm(inputInfo, submitAPI);
+    const { inputValues, onInputValueChange, onSubmit } = useForm(formValueInfo, submitAPI);
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -78,10 +81,15 @@ export default function NewScheduleForm({ onSubmit: submitAPI = DUMMY_DATA.dummy
     return (
         <FakeCon>
             <Container onSubmit={(e) => e.preventDefault()}>
-                <TitleInput placeholder="제목을 입력해주세요" onChange={generateChangeHandler("title")} />
+                <TitleInput
+                    value={inputValues.title}
+                    placeholder="제목을 입력해주세요"
+                    onChange={generateChangeHandler("title")}
+                />
                 <OptionList>
                     <OptionLabel optionType="group">
                         <DropDown
+                            value={inputValues.group}
                             itemList={groupInputItemList}
                             onChange={generateChangeHandler("group")}
                             placeholder="그룹"
@@ -91,7 +99,12 @@ export default function NewScheduleForm({ onSubmit: submitAPI = DUMMY_DATA.dummy
                         <DateTimePicker value={inputValues.time} onChange={generateChangeHandler("time")} />
                     </OptionLabel>
                     <OptionLabel optionType="alarm">
-                        <DropDown itemList={alarmList} onChange={generateChangeHandler("alarm")} placeholder="알람" />
+                        <DropDown
+                            value={inputValues.alarm}
+                            itemList={alarmList}
+                            onChange={generateChangeHandler("alarm")}
+                            placeholder="알람"
+                        />
                     </OptionLabel>
                     <OptionLabel optionType="add"></OptionLabel>
                 </OptionList>
