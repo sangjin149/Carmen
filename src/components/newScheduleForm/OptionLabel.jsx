@@ -25,13 +25,15 @@ const LABELS = {
     },
 };
 
-export default function OptionLabel({ optionType, children }) {
+export default function OptionLabel({ optionType, error = "", children, ...props }) {
     const { src, alt, text } = LABELS[optionType];
 
     return (
-        <Container>
-            <LabelIcon src={src} alt={alt} containerWidth={24} containerHeight={24} />
-            <AdditionalInfoLabel>{text}</AdditionalInfoLabel>
+        <Container {...props}>
+            <Label>
+                <LabelIcon src={src} alt={alt} containerWidth={24} containerHeight={24} />
+                <LabelName>{text}</LabelName>
+            </Label>
             {children}
         </Container>
     );
@@ -43,7 +45,12 @@ const Container = styled.label`
     align-items: center;
 `;
 
-const AdditionalInfoLabel = styled.div`
+const Label = styled.div`
+    display: flex;
+    align-items: center;
+`;
+
+const LabelName = styled.div`
     width: 7rem;
     padding-left: 4px;
     font-size: 1rem;
