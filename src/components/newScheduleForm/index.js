@@ -1,11 +1,12 @@
 import { styled } from "styled-components";
-import { useForm } from "@hooks";
-import OptionLabel from "./OptionLabel";
-import DateTimePicker from "./DateTimePicker";
-import DescriptionInput from "./DescriptionInput";
-import GroupInputItem from "./GroupInputItem";
-import { DropDown, Button } from "@ui";
 import dayjs from "dayjs";
+import { useForm } from "@hooks";
+import { DropDown, Button } from "@ui";
+
+import OptionLabel from "./OptionLabel";
+import TimePicker from "./ScheduleTimePicker";
+import Description from "./ScheduleDescription";
+import GroupInputItem from "./GroupInputItem";
 
 // issue #10
 //TODO: value 제어 추가
@@ -86,7 +87,7 @@ export default function NewScheduleForm({ onSubmit: submitAPI = DUMMY_DATA.dummy
                     placeholder="제목을 입력해주세요"
                     onChange={generateChangeHandler("title")}
                 />
-                <OptionList>
+                <ScheduleOptions>
                     <OptionLabel optionType="group">
                         <DropDown
                             value={inputValues.group}
@@ -96,7 +97,7 @@ export default function NewScheduleForm({ onSubmit: submitAPI = DUMMY_DATA.dummy
                         />
                     </OptionLabel>
                     <OptionLabel optionType="time">
-                        <DateTimePicker value={inputValues.time} onChange={generateChangeHandler("time")} />
+                        <TimePicker value={inputValues.time} onChange={generateChangeHandler("time")} />
                     </OptionLabel>
                     <OptionLabel optionType="alarm">
                         <DropDown
@@ -107,8 +108,8 @@ export default function NewScheduleForm({ onSubmit: submitAPI = DUMMY_DATA.dummy
                         />
                     </OptionLabel>
                     <OptionLabel optionType="add"></OptionLabel>
-                </OptionList>
-                <DescriptionInput placeholder="일정 설명..." />
+                </ScheduleOptions>
+                <Description placeholder="일정 설명..." />
                 <Control>
                     <CancelButton>취소</CancelButton>
                     <ConfirmButton onClick={handleSubmit}>분류</ConfirmButton>
@@ -137,7 +138,7 @@ const TitleInput = styled.input`
     font-weight: 900;
 `;
 
-const OptionList = styled.div`
+const ScheduleOptions = styled.div`
     padding: 8px 0px;
     display: flex;
     flex-direction: column;

@@ -3,7 +3,7 @@ import DatePicker from "./DatePicker";
 import TimePicker from "./TimePicker";
 import dayjs from "dayjs";
 
-export default function DateTimePicker({ value, onChange }) {
+export default function ScheduleTimePicker({ value, onChange }) {
     if (!(value instanceof dayjs)) throw new Error('form value "time" is not a dayjs instance');
 
     return (

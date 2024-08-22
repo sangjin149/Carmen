@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
 import { useRef, useState } from "react";
 
-export default function DescriptionInput({ ...props }) {
+export default function ScheduleDescription({ ...props }) {
     const ref = useRef();
     const [inputHeight, setInputHeight] = useState(0);
 
