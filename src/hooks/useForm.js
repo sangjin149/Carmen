@@ -20,7 +20,6 @@ export default function useForm(inputInformation, submitFunction) {
     function onInputValueChange(key, newValue) {
         const validationMessage = validations[key](newValue);
         errors[key] = validationMessage;
-        if (validationMessage.length > 0) return;
         setInputValues((oldValue) => ({ ...oldValue, [key]: newValue }));
     }
 
