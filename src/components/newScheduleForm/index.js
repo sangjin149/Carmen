@@ -1,12 +1,12 @@
 import { styled } from "styled-components";
 import dayjs from "dayjs";
 import { useForm } from "@hooks";
-import { DropDown, Button } from "@ui";
+import { Button, Icon } from "@ui";
+import { SidebarAddSchedule } from "@icons";
 
-import OptionLabel from "./OptionLabel";
-import TimePicker from "./ScheduleTimePicker";
 import Description from "./ScheduleDescription";
 import GroupInputItem from "./GroupInputItem";
+import ScheduleOption from "./ScheduleOption";
 
 // issue #10
 //TODO: value 제어 추가
@@ -88,28 +88,32 @@ export default function NewScheduleForm({ onSubmit: submitAPI = DUMMY_DATA.dummy
                     onChange={generateChangeHandler("title")}
                 />
                 <ScheduleOptions>
-                    <OptionLabel optionType="group">
-                        <DropDown
-                            value={inputValues.group}
-                            itemList={groupInputItemList}
-                            onChange={generateChangeHandler("group")}
-                            placeholder="그룹"
-                        />
-                    </OptionLabel>
-                    <OptionLabel optionType="time">
-                        <TimePicker value={inputValues.time} onChange={generateChangeHandler("time")} />
-                    </OptionLabel>
-                    <OptionLabel optionType="alarm">
-                        <DropDown
-                            value={inputValues.alarm}
-                            itemList={alarmList}
-                            onChange={generateChangeHandler("alarm")}
-                            placeholder="알람"
-                        />
-                    </OptionLabel>
-                    <OptionLabel optionType="add"></OptionLabel>
+                    <ScheduleOption
+                        optionType="group"
+                        value={inputValues.group}
+                        onChange={generateChangeHandler("group")}
+                        itemList={groupInputItemList}
+                        placeholder="그룹"
+                    />
+                    <ScheduleOption
+                        optionType="time"
+                        value={inputValues.time}
+                        onChange={generateChangeHandler("time")}
+                    />
+                    <ScheduleOption
+                        optionType="alarm"
+                        value={inputValues.alarm}
+                        onChange={generateChangeHandler("alarm")}
+                        itemList={alarmList}
+                        placeholder="알람"
+                    />
+                    <AddOption>
+                        <AddIcon src={SidebarAddSchedule} alt="속성 추가" containerWidth={24} containerHeight={24} />
+                        <Desc>속성 추가...</Desc>
+                    </AddOption>
                 </ScheduleOptions>
                 <Description placeholder="일정 설명..." />
+
                 <Control>
                     <CancelButton>취소</CancelButton>
                     <ConfirmButton onClick={handleSubmit}>분류</ConfirmButton>
@@ -143,6 +147,27 @@ const ScheduleOptions = styled.div`
     display: flex;
     flex-direction: column;
     gap: 2px;
+`;
+
+const AddOption = styled(Button)`
+    height: 1.5rem;
+    display: flex;
+    align-items: center;
+`;
+
+const Desc = styled.div`
+    width: 7rem;
+    padding-left: 4px;
+    font-size: 1rem;
+    line-height: 1.125rem;
+    text-align: start;
+    font-family: "NanumGothic";
+`;
+
+const AddIcon = styled(Icon)`
+    fill: #adadad;
+    width: 18px;
+    height: 18px;
 `;
 
 const Control = styled.div`

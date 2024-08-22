@@ -1,6 +1,7 @@
 import { styled } from "styled-components";
-import { Icon } from "@ui";
+import { DropDown, Icon } from "@ui";
 import { ScheduleTime, ScheduleAlarm, SidebarAddSchedule, Draft } from "@icons";
+import ScheduleTimePicker from "./ScheduleTimePicker";
 
 const LABELS = {
     time: {
@@ -25,16 +26,24 @@ const LABELS = {
     },
 };
 
-export default function OptionLabel({ optionType, error = "", children, ...props }) {
+const InputMap = {
+    group: DropDown,
+    time: ScheduleTimePicker,
+    alarm: DropDown,
+};
+
+export default function ScheduleOption({ optionType, ...props }) {
     const { src, alt, text } = LABELS[optionType];
 
+    const Input = InputMap[optionType];
+
     return (
-        <Container {...props}>
+        <Container>
             <Label>
                 <LabelIcon src={src} alt={alt} containerWidth={24} containerHeight={24} />
                 <LabelName>{text}</LabelName>
             </Label>
-            {children}
+            <Input {...props} />
         </Container>
     );
 }
