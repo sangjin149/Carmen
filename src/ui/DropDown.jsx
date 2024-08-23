@@ -4,6 +4,8 @@ import { useCallback, useState } from "react";
 import { Icon, ClickAwayListener } from "@ui";
 
 export default function DropDown({ itemList, onChange, placeholder = "placeholder", ...props }) {
+    //TODO: item 별 disable, display 여부 지정
+    //TODO:
     const [showMenu, setShowMenu] = useState(false);
     const [selectedIndex, setSelectedIndex] = useState(-1);
 

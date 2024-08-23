@@ -1,35 +1,22 @@
 import { styled } from "styled-components";
-import { useForm } from "@hooks";
-import OptionLabel from "./OptionLabel";
-import DateTimePicker from "./DateTimePicker";
-import DescriptionInput from "./DescriptionInput";
-import GroupInputItem from "./GroupInputItem";
-import { DropDown, Button } from "@ui";
 import dayjs from "dayjs";
+import { useForm } from "@hooks";
+import { Button, Icon } from "@ui";
+import { SidebarAddSchedule } from "@icons";
 
-const inputInfo = {
-    //TODO: isRequired 추가
-    group: {
-        initialValue: "group 1",
-        validation: (newValue) => "",
-    },
-    title: {
-        initialValue: "",
-        validation: (newValue) => {
-            let errorMessage = "";
-            if (newValue.length < 1) return "제목을 입력해주세요!";
-            return errorMessage;
-        },
-    },
-    time: {
-        initialValue: dayjs(),
-        validation: (newValue) => "",
-    },
-    alarm: {
-        initialValue: "1시간 전",
-        validation: (newValue) => "",
-    },
-};
+import Description from "./ScheduleDescription";
+import GroupInputItem from "./GroupInputItem";
+import ScheduleOption from "./ScheduleOption";
+
+// issue #10
+//TODO: 스켈레톤 추가
+//TODO: 애니메이션 추가
+// -ScheduleForm 호출
+// -오류 항목 한번 반짝임
+// -드롭다운 켜고 닫는거
+//TODO: API 추가
+// issue #6
+//BUG: label마다 id 추가
 
 const DUMMY_DATA = {
     alarmList: [
@@ -40,17 +27,49 @@ const DUMMY_DATA = {
         { key: "1 day", value: "1 day", description: "하루 전" },
     ],
     groupList: [
-        { name: "그룹 1", id: "group1" },
-        { name: "그룹 2", id: "group2" },
-        { name: "그룹 3", id: "group3" },
+        { name: "그룹 1", id: "group1", groupColor: "#AD49E1" },
+        { name: "그룹 2", id: "group2", groupColor: "#E85C0D" },
+        { name: "그룹 3", id: "group3", groupColor: "#3795BD" },
     ],
     dummySubmit(formResult) {
         console.table(formResult);
     },
 };
 
+const formInfo = {
+    title: {
+        defaultValue: "",
+        validation: (newValue) => {
+            let errorMessage = "";
+            if (newValue.length < 1) return "제목을 입력해주세요!";
+            return errorMessage;
+        },
+        isRequired: true,
+    },
+    group: {
+        defaultValue: "",
+        validation: (newValue) => "",
+        isRequired: false,
+    },
+    time: {
+        defaultValue: dayjs(),
+        validation: (newValue) => "",
+        isRequired: false,
+    },
+    alarm: {
+        defaultValue: "",
+        validation: (newValue) => "",
+        isRequired: false,
+    },
+    description: {
+        defaultValue: "",
+        validation: (newValue) => "",
+        isRequired: true,
+    },
+};
+
 export default function NewScheduleForm({ onSubmit: submitAPI = DUMMY_DATA.dummySubmit, ...props }) {
-    const { inputValues, onInputValueChange, onSubmit } = useForm(inputInfo, submitAPI);
+    const { inputValues, errors, onInputValueChange, onSubmit } = useForm(formInfo, submitAPI);
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -63,33 +82,68 @@ export default function NewScheduleForm({ onSubmit: submitAPI = DUMMY_DATA.dummy
 
     const { alarmList, groupList } = DUMMY_DATA;
 
-    const groupInputItemList = groupList.map(({ name, id }) => ({
+    const groupInputItemList = groupList.map(({ name, id, groupColor }) => ({
         key: name,
         value: id,
-        description: <GroupInputItem name={name} groupColor="#03C75A" />,
+        description: <GroupInputItem name={name} groupColor={groupColor} />,
     }));
+
+    const errorMessages = [];
+    for (const errorIndex in errors) {
+        const errorMessage = errors[errorIndex];
+        if (errorMessage.length > 0) errorMessages.push({ name: errorIndex, message: errorMessage });
+    }
 
     return (
         <FakeCon>
             <Container onSubmit={(e) => e.preventDefault()}>
-                <TitleInput placeholder="제목을 입력해주세요" onChange={generateChangeHandler("title")} />
-                <OptionList>
-                    <OptionLabel optionType="group">
-                        <DropDown
-                            itemList={groupInputItemList}
-                            onChange={generateChangeHandler("group")}
-                            placeholder="그룹"
+                <TitleInput
+                    value={inputValues.title}
+                    placeholder="제목을 입력해주세요"
+                    onChange={(e) => onInputValueChange("title", e.target.value)}
+                />
+                <ScheduleOptions>
+                    <ScheduleOption
+                        optionType="group"
+                        value={inputValues.group}
+                        onChange={generateChangeHandler("group")}
+                        itemList={groupInputItemList}
+                        placeholder="그룹"
+                    />
+                    <ScheduleOption
+                        optionType="time"
+                        value={inputValues.time}
+                        onChange={generateChangeHandler("time")}
+                    />
+                    <ScheduleOption
+                        optionType="alarm"
+                        value={inputValues.alarm}
+                        onChange={generateChangeHandler("alarm")}
+                        itemList={alarmList}
+                        placeholder="알람"
+                    />
+                    <AddOption.Container>
+                        <AddOption.Icon
+                            src={SidebarAddSchedule}
+                            alt="속성 추가"
+                            containerWidth={24}
+                            containerHeight={24}
                         />
-                    </OptionLabel>
-                    <OptionLabel optionType="time">
-                        <DateTimePicker value={inputValues.time} onChange={generateChangeHandler("time")} />
-                    </OptionLabel>
-                    <OptionLabel optionType="alarm">
-                        <DropDown itemList={alarmList} onChange={generateChangeHandler("alarm")} placeholder="알람" />
-                    </OptionLabel>
-                    <OptionLabel optionType="add"></OptionLabel>
-                </OptionList>
-                <DescriptionInput placeholder="일정 설명..." />
+                        <AddOption.Desc>속성 추가...</AddOption.Desc>
+                    </AddOption.Container>
+                    <ErrorMessage>
+                        {errorMessages.map(({ name, message }) => (
+                            <div key={name} className="error-message">
+                                *{message}
+                            </div>
+                        ))}
+                    </ErrorMessage>
+                </ScheduleOptions>
+                <Description
+                    value={inputValues.description}
+                    onChange={(e) => onInputValueChange("description", e.target.value)}
+                    placeholder="일정 설명..."
+                />
                 <Control>
                     <CancelButton>취소</CancelButton>
                     <ConfirmButton onClick={handleSubmit}>분류</ConfirmButton>
@@ -118,12 +172,33 @@ const TitleInput = styled.input`
     font-weight: 900;
 `;
 
-const OptionList = styled.div`
+const ScheduleOptions = styled.div`
     padding: 8px 0px;
     display: flex;
     flex-direction: column;
     gap: 2px;
 `;
+
+const AddOption = {
+    Container: styled(Button)`
+        height: 1.5rem;
+        display: flex;
+        align-items: center;
+    `,
+    Desc: styled.div`
+        width: 7rem;
+        padding-left: 4px;
+        font-size: 1rem;
+        line-height: 1.125rem;
+        text-align: start;
+        font-family: "NanumGothic";
+    `,
+    Icon: styled(Icon)`
+        fill: #adadad;
+        width: 18px;
+        height: 18px;
+    `,
+};
 
 const Control = styled.div`
     padding: 10px 0;
@@ -143,4 +218,13 @@ const ConfirmButton = styled(Button)`
     border-radius: 0.25rem;
     background-color: black;
     color: white;
+`;
+
+const ErrorMessage = styled.div`
+    display: flex;
+    flex-direction: column;
+    & .error-message {
+        color: red;
+        font-size: 14px;
+    }
 `;
