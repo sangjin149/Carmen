@@ -91,7 +91,7 @@ export default function NewScheduleForm({ onSubmit: submitAPI = DUMMY_DATA.dummy
     const errorMessages = [];
     for (const errorIndex in errors) {
         const errorMessage = errors[errorIndex];
-        if (errorMessage.length > 0) errorMessages.push(errorMessage);
+        if (errorMessage.length > 0) errorMessages.push({ name: errorIndex, message: errorMessage });
     }
 
     return (
@@ -132,8 +132,10 @@ export default function NewScheduleForm({ onSubmit: submitAPI = DUMMY_DATA.dummy
                         <AddOption.Desc>속성 추가...</AddOption.Desc>
                     </AddOption.Container>
                     <ErrorMessage>
-                        {errorMessages.map((errorMessage) => (
-                            <div className="error-message">*{errorMessage}</div>
+                        {errorMessages.map(({ name, message }) => (
+                            <div key={name} className="error-message">
+                                *{message}
+                            </div>
                         ))}
                     </ErrorMessage>
                 </ScheduleOptions>
