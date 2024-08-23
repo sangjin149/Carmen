@@ -10,6 +10,8 @@ import ScheduleOption from "./ScheduleOption";
 
 // issue #10
 //TODO: 필수 입력 추가
+// 필수 입력 항목 오른쪽에 별표
+// 필수 입력 항목 작성 안 하고 제출하면 강조 표시
 //TODO: 스켈레톤 추가
 //TODO: 애니메이션 추가
 // -ScheduleForm 호출
@@ -37,7 +39,7 @@ const DUMMY_DATA = {
     },
 };
 
-const formValueInfo = {
+const formInfo = {
     title: {
         defaultValue: "",
         validation: (newValue) => {
@@ -45,27 +47,32 @@ const formValueInfo = {
             if (newValue.length < 1) return "제목을 입력해주세요!";
             return errorMessage;
         },
+        isRequired: true,
     },
     group: {
         defaultValue: "",
         validation: (newValue) => "",
+        isRequired: false,
     },
     time: {
         defaultValue: dayjs(),
-        validation: (newValue) => "",
+        validation: (newValue) => "rse",
+        isRequired: false,
     },
     alarm: {
         defaultValue: "",
         validation: (newValue) => "",
+        isRequired: false,
     },
     description: {
         defaultValue: "",
         validation: (newValue) => "",
+        isRequired: true,
     },
 };
 
 export default function NewScheduleForm({ onSubmit: submitAPI = DUMMY_DATA.dummySubmit, ...props }) {
-    const { inputValues, errors, onInputValueChange, onSubmit } = useForm(formValueInfo, submitAPI);
+    const { inputValues, errors, onInputValueChange, onSubmit } = useForm(formInfo, submitAPI);
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -85,9 +92,9 @@ export default function NewScheduleForm({ onSubmit: submitAPI = DUMMY_DATA.dummy
     }));
 
     const errorMessages = [];
-    for (const formItemName in errors) {
-        const errorMessage = `* ${formItemName}: ${errors[formItemName]}`;
-        if (errorMessage.length > 0) errorMessages.push();
+    for (const errorIndex in errors) {
+        const errorMessage = errors[errorIndex];
+        if (errorMessage.length > 0) errorMessages.push(errorMessage);
     }
 
     return (
@@ -129,7 +136,7 @@ export default function NewScheduleForm({ onSubmit: submitAPI = DUMMY_DATA.dummy
                     </AddOption.Container>
                     <ErrorMessage>
                         {errorMessages.map((errorMessage) => (
-                            <div className="error-message">{errorMessage}</div>
+                            <div className="error-message">*{errorMessage}</div>
                         ))}
                     </ErrorMessage>
                 </ScheduleOptions>
