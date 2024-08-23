@@ -9,9 +9,7 @@ import GroupInputItem from "./GroupInputItem";
 import ScheduleOption from "./ScheduleOption";
 
 // issue #10
-//TODO: description 폼 필드에 추가
 //TODO: 필수 입력 추가
-//TODO: 입력 오류시 메시지 표시 추가
 //TODO: 스켈레톤 추가
 //TODO: 애니메이션 추가
 // -ScheduleForm 호출
