@@ -9,9 +9,6 @@ import GroupInputItem from "./GroupInputItem";
 import ScheduleOption from "./ScheduleOption";
 
 // issue #10
-//TODO: 필수 입력 추가
-// 필수 입력 항목 오른쪽에 별표
-// 필수 입력 항목 작성 안 하고 제출하면 강조 표시
 //TODO: 스켈레톤 추가
 //TODO: 애니메이션 추가
 // -ScheduleForm 호출
@@ -30,9 +27,9 @@ const DUMMY_DATA = {
         { key: "1 day", value: "1 day", description: "하루 전" },
     ],
     groupList: [
-        { name: "그룹 1", id: "group1" },
-        { name: "그룹 2", id: "group2" },
-        { name: "그룹 3", id: "group3" },
+        { name: "그룹 1", id: "group1", groupColor: "#AD49E1" },
+        { name: "그룹 2", id: "group2", groupColor: "#E85C0D" },
+        { name: "그룹 3", id: "group3", groupColor: "#3795BD" },
     ],
     dummySubmit(formResult) {
         console.table(formResult);
@@ -56,7 +53,7 @@ const formInfo = {
     },
     time: {
         defaultValue: dayjs(),
-        validation: (newValue) => "rse",
+        validation: (newValue) => "",
         isRequired: false,
     },
     alarm: {
@@ -76,7 +73,7 @@ export default function NewScheduleForm({ onSubmit: submitAPI = DUMMY_DATA.dummy
 
     function handleSubmit(e) {
         e.preventDefault();
-        onSubmit(inputValues);
+        onSubmit();
     }
 
     function generateChangeHandler(key) {
@@ -85,10 +82,10 @@ export default function NewScheduleForm({ onSubmit: submitAPI = DUMMY_DATA.dummy
 
     const { alarmList, groupList } = DUMMY_DATA;
 
-    const groupInputItemList = groupList.map(({ name, id }) => ({
+    const groupInputItemList = groupList.map(({ name, id, groupColor }) => ({
         key: name,
         value: id,
-        description: <GroupInputItem name={name} groupColor="#03C75A" />,
+        description: <GroupInputItem name={name} groupColor={groupColor} />,
     }));
 
     const errorMessages = [];
