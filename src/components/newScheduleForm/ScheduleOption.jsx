@@ -32,7 +32,7 @@ const InputMap = {
     alarm: DropDown,
 };
 
-export default function ScheduleOption({ optionType, ...props }) {
+export default function ScheduleOption({ optionType, isRequired, ...props }) {
     const { src, alt, text } = LABELS[optionType];
 
     const Input = InputMap[optionType];
@@ -41,7 +41,9 @@ export default function ScheduleOption({ optionType, ...props }) {
         <Container>
             <Label>
                 <LabelIcon src={src} alt={alt} containerWidth={24} containerHeight={24} />
-                <LabelName>{text}</LabelName>
+                <LabelName>
+                    {text} {isRequired && <span className="required-mark">*</span>}
+                </LabelName>
             </Label>
             <Input {...props} />
         </Container>
@@ -64,6 +66,9 @@ const LabelName = styled.div`
     padding-left: 4px;
     font-size: 1rem;
     line-height: 1.125rem;
+    .required-mark {
+        color: red;
+    }
 `;
 
 const LabelIcon = styled(Icon)`
