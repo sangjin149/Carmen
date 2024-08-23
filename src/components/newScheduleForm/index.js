@@ -9,7 +9,6 @@ import GroupInputItem from "./GroupInputItem";
 import ScheduleOption from "./ScheduleOption";
 
 // issue #10
-//TODO: value 제어 추가
 //TODO: description 폼 필드에 추가
 //TODO: 필수 입력 추가
 //TODO: 입력 오류시 메시지 표시 추가
@@ -61,6 +60,10 @@ const formValueInfo = {
         defaultValue: "",
         validation: (newValue) => "",
     },
+    description: {
+        defaultValue: "",
+        validation: (newValue) => "",
+    },
 };
 
 export default function NewScheduleForm({ onSubmit: submitAPI = DUMMY_DATA.dummySubmit, ...props }) {
@@ -84,7 +87,10 @@ export default function NewScheduleForm({ onSubmit: submitAPI = DUMMY_DATA.dummy
     }));
 
     const errorMessages = [];
-    for (const formItemName in errors) errorMessages.push(`* ${formItemName}: ${errors[formItemName]}`);
+    for (const formItemName in errors) {
+        const errorMessage = `* ${formItemName}: ${errors[formItemName]}`;
+        if (errorMessage.length > 0) errorMessages.push();
+    }
 
     return (
         <FakeCon>
@@ -129,7 +135,11 @@ export default function NewScheduleForm({ onSubmit: submitAPI = DUMMY_DATA.dummy
                         ))}
                     </ErrorMessage>
                 </ScheduleOptions>
-                <Description placeholder="일정 설명..." />
+                <Description
+                    value={inputValues.description}
+                    onChange={(e) => onInputValueChange("description", e.target.value)}
+                    placeholder="일정 설명..."
+                />
                 <Control>
                     <CancelButton>취소</CancelButton>
                     <ConfirmButton onClick={handleSubmit}>분류</ConfirmButton>

@@ -1,9 +1,9 @@
 import { styled } from "styled-components";
 import { useRef, useState } from "react";
 
-export default function ScheduleDescription({ ...props }) {
+export default function ScheduleDescription({ onChange, minHeight = 72, ...props }) {
     const ref = useRef();
-    const [inputHeight, setInputHeight] = useState(0);
+    const [inputHeight, setInputHeight] = useState(minHeight);
 
     const style = props.style ?? {};
     const typoStyle = {
@@ -17,7 +17,10 @@ export default function ScheduleDescription({ ...props }) {
         const realTextarea = e.target;
         const newValue = realTextarea.value;
         ref.current.value = newValue;
-        setInputHeight(ref.current.scrollHeight);
+        const extendedHeight = ref.current.scrollHeight;
+        setInputHeight(extendedHeight > minHeight ? extendedHeight : minHeight);
+
+        onChange(e);
     }
 
     return (
