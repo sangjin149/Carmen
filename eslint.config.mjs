@@ -4,7 +4,7 @@ import pluginReact from 'eslint-plugin-react';
 import stylisticjs from '@stylistic/eslint-plugin-js';
 
 export default [
-  { name: 'Carmen Lint'},
+  { name: 'Carmen Lint' },
   { files: ['**/*.{js,mjs,cjs,jsx}'] },
   { languageOptions: { globals: globals.browser } },
   pluginJs.configs.recommended,

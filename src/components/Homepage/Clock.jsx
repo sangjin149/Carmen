@@ -12,7 +12,7 @@ export default function Clock() {
     seconds: '00',
     day: 'None',
   });
- 
+
   function updateTime() {
     setTime(updateClock());
   }
@@ -28,7 +28,9 @@ export default function Clock() {
 
   return (
     <Container>
-      <Date>{timeNotUpdated ? '' : `${time.month}.${time.date} ${time.day}`}</Date>
+      <Date>
+        {timeNotUpdated ? '' : `${time.month}.${time.date} ${time.day}`}
+      </Date>
       <Time>
         {timeNotUpdated ? (
           <LoadingIndicator>Loading...</LoadingIndicator>

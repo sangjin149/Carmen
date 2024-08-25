@@ -1,1 +1,1 @@
-export { default as clickAwayContext } from "./clickAwayContext";
+export { default as clickAwayContext } from './clickAwayContext';

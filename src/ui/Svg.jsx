@@ -1,5 +1,5 @@
 export default function Svg({ src, alt, ...props }) {
-    const Src = src;
+  const Src = src;
 
-    return <Src alt={alt} {...props} />;
+  return <Src alt={alt} {...props} />;
 }
