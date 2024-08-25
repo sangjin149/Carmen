@@ -1,7 +1,7 @@
-import { createGlobalStyle } from "styled-components";
-import NanumGothic from "./fonts/NanumGothic.woff";
-import NanumSquareB from "./fonts/NanumSquareB.woff";
-import NanumGothicLight from "./fonts/NanumGothicLight.woff";
+import { createGlobalStyle } from 'styled-components';
+import NanumGothic from './fonts/NanumGothic.woff';
+import NanumSquareB from './fonts/NanumSquareB.woff';
+import NanumGothicLight from './fonts/NanumGothicLight.woff';
 
 const FontStyles = createGlobalStyle`
 
