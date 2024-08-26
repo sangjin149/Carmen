@@ -38,10 +38,8 @@ const DUMMY_DATA = {
 
 export default function NewScheduleForm({
   formInfo,
-  onSubmit: submitAPI = DUMMY_DATA.dummySubmit,
-  onCancel = () => {
-    console.log('cacenled new schedule');
-  },
+  onSubmit: submitAPI,
+  onCancel,
   ...props
 }) {
   const { inputValues, errors, onInputValueChange, onSubmit } = useForm(
@@ -79,6 +77,7 @@ export default function NewScheduleForm({
         value={inputValues.title}
         placeholder="제목을 입력해주세요"
         onChange={(e) => onInputValueChange('title', e.target.value)}
+        autoFocus
       />
       <ScheduleOptions>
         <ScheduleOption
@@ -123,7 +122,7 @@ export default function NewScheduleForm({
         placeholder="일정 설명..."
       />
       <Control>
-        <CancelButton>취소</CancelButton>
+        <CancelButton onClick={onCancel}>취소</CancelButton>
         <ConfirmButton onClick={handleSubmit}>분류</ConfirmButton>
       </Control>
     </Container>
@@ -133,6 +132,9 @@ export default function NewScheduleForm({
 const Container = styled.form`
   width: 100%;
   padding: 1rem;
+
+  position: relative;
+
   display: flex;
   flex-direction: column;
   align-items: stretch;
