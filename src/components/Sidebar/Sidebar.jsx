@@ -1,16 +1,59 @@
 import { styled } from 'styled-components';
 import { useRef } from 'react';
 import { SidebarAddSchedule } from '@icons';
+import dayjs from 'dayjs';
 
 import { Button, Svg, Modal } from '@ui';
 import { Header, SidebarMenu, GroupMenu } from '@components/Sidebar';
 import NewScheduleForm from '@components/NewScheduleForm';
+
+const formInfo = {
+  title: {
+    defaultValue: '',
+    validation: (newValue) => {
+      let errorMessage = '';
+      if (newValue.length < 1) return '제목을 입력해주세요!';
+      return errorMessage;
+    },
+    isRequired: true,
+  },
+  group: {
+    defaultValue: '',
+    validation: (newValue) => '',
+    isRequired: false,
+  },
+  time: {
+    defaultValue: dayjs(),
+    validation: (newValue) => '',
+    isRequired: false,
+  },
+  alarm: {
+    defaultValue: '',
+    validation: (newValue) => '',
+    isRequired: false,
+  },
+  description: {
+    defaultValue: '',
+    validation: (newValue) => '',
+    isRequired: true,
+  },
+};
 
 export default function Sidebar() {
   const modalRef = useRef();
 
   function handleNewScheduleClick() {
     modalRef.current.open();
+  }
+
+  function handleSubmitNewSchedule() {
+    console.log('~~Sidebar.jsx~~ submitted new schedule');
+    modalRef.current.close();
+  }
+
+  function handleCancelNewSchedule() {
+    console.log('~~Sidebar.jsx~~ canceled new schedule');
+    modalRef.current.close();
   }
 
   return (
@@ -25,7 +68,11 @@ export default function Sidebar() {
         <GroupMenu />
       </nav>
       <Modal ref={modalRef}>
-        <NewScheduleForm />
+        <NewScheduleForm
+          formInfo={formInfo}
+          onSubmit={handleSubmitNewSchedule}
+          onCancel={handleCancelNewSchedule}
+        />
       </Modal>
       <div id="modal"></div>
     </Container>

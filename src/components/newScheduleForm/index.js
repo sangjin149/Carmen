@@ -1,5 +1,5 @@
 import { styled } from 'styled-components';
-import dayjs from 'dayjs';
+
 import { useForm } from '@hooks';
 import { Button, Icon } from '@ui';
 import { SidebarAddSchedule } from '@icons';
@@ -36,40 +36,12 @@ const DUMMY_DATA = {
   },
 };
 
-const formInfo = {
-  title: {
-    defaultValue: '',
-    validation: (newValue) => {
-      let errorMessage = '';
-      if (newValue.length < 1) return '제목을 입력해주세요!';
-      return errorMessage;
-    },
-    isRequired: true,
-  },
-  group: {
-    defaultValue: '',
-    validation: (newValue) => '',
-    isRequired: false,
-  },
-  time: {
-    defaultValue: dayjs(),
-    validation: (newValue) => '',
-    isRequired: false,
-  },
-  alarm: {
-    defaultValue: '',
-    validation: (newValue) => '',
-    isRequired: false,
-  },
-  description: {
-    defaultValue: '',
-    validation: (newValue) => '',
-    isRequired: true,
-  },
-};
-
 export default function NewScheduleForm({
+  formInfo,
   onSubmit: submitAPI = DUMMY_DATA.dummySubmit,
+  onCancel = () => {
+    console.log('cacenled new schedule');
+  },
   ...props
 }) {
   const { inputValues, errors, onInputValueChange, onSubmit } = useForm(
@@ -102,67 +74,61 @@ export default function NewScheduleForm({
   }
 
   return (
-    <FakeCon>
-      <Container onSubmit={(e) => e.preventDefault()}>
-        <TitleInput
-          value={inputValues.title}
-          placeholder="제목을 입력해주세요"
-          onChange={(e) => onInputValueChange('title', e.target.value)}
+    <Container onSubmit={(e) => e.preventDefault()}>
+      <TitleInput
+        value={inputValues.title}
+        placeholder="제목을 입력해주세요"
+        onChange={(e) => onInputValueChange('title', e.target.value)}
+      />
+      <ScheduleOptions>
+        <ScheduleOption
+          optionType="group"
+          value={inputValues.group}
+          onChange={generateChangeHandler('group')}
+          itemList={groupInputItemList}
+          placeholder="그룹"
         />
-        <ScheduleOptions>
-          <ScheduleOption
-            optionType="group"
-            value={inputValues.group}
-            onChange={generateChangeHandler('group')}
-            itemList={groupInputItemList}
-            placeholder="그룹"
-          />
-          <ScheduleOption
-            optionType="time"
-            value={inputValues.time}
-            onChange={generateChangeHandler('time')}
-          />
-          <ScheduleOption
-            optionType="alarm"
-            value={inputValues.alarm}
-            onChange={generateChangeHandler('alarm')}
-            itemList={alarmList}
-            placeholder="알람"
-          />
-          <AddOption.Container>
-            <AddOption.Icon
-              src={SidebarAddSchedule}
-              alt="속성 추가"
-              containerWidth={24}
-              containerHeight={24}
-            />
-            <AddOption.Desc>속성 추가...</AddOption.Desc>
-          </AddOption.Container>
-          <ErrorMessage>
-            {errorMessages.map(({ name, message }) => (
-              <div key={name} className="error-message">
-                *{message}
-              </div>
-            ))}
-          </ErrorMessage>
-        </ScheduleOptions>
-        <Description
-          value={inputValues.description}
-          onChange={(e) => onInputValueChange('description', e.target.value)}
-          placeholder="일정 설명..."
+        <ScheduleOption
+          optionType="time"
+          value={inputValues.time}
+          onChange={generateChangeHandler('time')}
         />
-        <Control>
-          <CancelButton>취소</CancelButton>
-          <ConfirmButton onClick={handleSubmit}>분류</ConfirmButton>
-        </Control>
-      </Container>
-    </FakeCon>
+        <ScheduleOption
+          optionType="alarm"
+          value={inputValues.alarm}
+          onChange={generateChangeHandler('alarm')}
+          itemList={alarmList}
+          placeholder="알람"
+        />
+        <AddOption.Container>
+          <AddOption.Icon
+            src={SidebarAddSchedule}
+            alt="속성 추가"
+            containerWidth={24}
+            containerHeight={24}
+          />
+          <AddOption.Desc>속성 추가...</AddOption.Desc>
+        </AddOption.Container>
+        <ErrorMessage>
+          {errorMessages.map(({ name, message }) => (
+            <div key={name} className="error-message">
+              *{message}
+            </div>
+          ))}
+        </ErrorMessage>
+      </ScheduleOptions>
+      <Description
+        value={inputValues.description}
+        onChange={(e) => onInputValueChange('description', e.target.value)}
+        placeholder="일정 설명..."
+      />
+      <Control>
+        <CancelButton>취소</CancelButton>
+        <ConfirmButton onClick={handleSubmit}>분류</ConfirmButton>
+      </Control>
+    </Container>
   );
 }
-
-const FakeCon = styled.div`
-  width: 560px;
-`;
 
 const Container = styled.form`
   width: 100%;
