@@ -25,7 +25,7 @@ export default function ClickAwayListener({ children: child, onClickAway }) {
     };
   }, [onClickAway]);
 
-  const wrppedElement = cloneElement(child, { ref: combineExistingRef });
+  const wrappedElement = cloneElement(child, { ref: combineExistingRef });
 
-  return Children.only(wrppedElement);
+  return Children.only(wrappedElement);
 }
