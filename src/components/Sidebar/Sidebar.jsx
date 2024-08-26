@@ -1,24 +1,30 @@
 import { styled } from 'styled-components';
-import { Link } from 'react-router-dom';
+import { useRef } from 'react';
 import { SidebarAddSchedule } from '@icons';
 
-import { Button, Svg } from '@ui';
+import { Button, Svg, Modal } from '@ui';
 import { Header, SidebarMenu, GroupMenu } from '@components/Sidebar';
 
 export default function Sidebar() {
+  const modalRef = useRef();
+
+  function handleNewScheduleClick() {
+    modalRef.current.open();
+  }
+
   return (
     <Container>
       <Header />
       <nav>
-        <AddScheduleButton>
+        <AddScheduleButton onClick={handleNewScheduleClick}>
           <Svg src={SidebarAddSchedule} alt="add schedule icon" />
-          <AddScheduleLink to="/addschedule">
-            <strong>작업 추가</strong>
-          </AddScheduleLink>
+          <strong>작업 추가</strong>
         </AddScheduleButton>
         <SidebarMenu />
         <GroupMenu />
       </nav>
+      <Modal ref={modalRef}></Modal>
+      <div id="modal"></div>
     </Container>
   );
 }
@@ -49,10 +55,4 @@ const AddScheduleButton = styled(Button)`
   filter: drop-shadow(0px 4px 4px rgb(0, 0, 0, 0.25));
 
   font-family: 'NanumSquareB';
-`;
-
-const AddScheduleLink = styled(Link)`
-  padding-left: 0.7rem;
-  text-decoration: none;
-  color: black;
 `;
