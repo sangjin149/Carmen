@@ -4,6 +4,7 @@ import { SidebarAddSchedule } from '@icons';
 
 import { Button, Svg, Modal } from '@ui';
 import { Header, SidebarMenu, GroupMenu } from '@components/Sidebar';
+import NewScheduleForm from '@components/NewScheduleForm';
 
 export default function Sidebar() {
   const modalRef = useRef();
@@ -23,7 +24,9 @@ export default function Sidebar() {
         <SidebarMenu />
         <GroupMenu />
       </nav>
-      <Modal ref={modalRef}></Modal>
+      <Modal ref={modalRef}>
+        <NewScheduleForm />
+      </Modal>
       <div id="modal"></div>
     </Container>
   );
