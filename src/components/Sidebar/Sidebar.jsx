@@ -1,24 +1,80 @@
 import { styled } from 'styled-components';
-import { Link } from 'react-router-dom';
+import { useRef } from 'react';
 import { SidebarAddSchedule } from '@icons';
+import dayjs from 'dayjs';
 
-import { Button, Svg } from '@ui';
+import { Button, Svg, Modal } from '@ui';
 import { Header, SidebarMenu, GroupMenu } from '@components/Sidebar';
+import NewScheduleForm from '@components/NewScheduleForm';
+
+const formInfo = {
+  title: {
+    defaultValue: '',
+    validation: (newValue) => {
+      let errorMessage = '';
+      if (newValue.length < 1) return '제목을 입력해주세요!';
+      return errorMessage;
+    },
+    isRequired: true,
+  },
+  group: {
+    defaultValue: '',
+    validation: (newValue) => '',
+    isRequired: false,
+  },
+  time: {
+    defaultValue: dayjs(),
+    validation: (newValue) => '',
+    isRequired: false,
+  },
+  alarm: {
+    defaultValue: '',
+    validation: (newValue) => '',
+    isRequired: false,
+  },
+  description: {
+    defaultValue: '',
+    validation: (newValue) => '',
+    isRequired: true,
+  },
+};
 
 export default function Sidebar() {
+  const modalRef = useRef();
+
+  function handleNewScheduleClick() {
+    modalRef.current.open();
+  }
+
+  function handleSubmitNewSchedule() {
+    console.log('~~Sidebar.jsx~~ submitted new schedule');
+    modalRef.current.close();
+  }
+
+  function handleCancelNewSchedule() {
+    console.log('~~Sidebar.jsx~~ canceled new schedule');
+    modalRef.current.close();
+  }
+
   return (
     <Container>
       <Header />
       <nav>
-        <AddScheduleButton>
+        <AddScheduleButton onClick={handleNewScheduleClick}>
           <Svg src={SidebarAddSchedule} alt="add schedule icon" />
-          <AddScheduleLink to="/addschedule">
-            <strong>작업 추가</strong>
-          </AddScheduleLink>
+          <strong>작업 추가</strong>
         </AddScheduleButton>
         <SidebarMenu />
         <GroupMenu />
       </nav>
+      <Modal ref={modalRef}>
+        <NewScheduleForm
+          formInfo={formInfo}
+          onSubmit={handleSubmitNewSchedule}
+          onCancel={handleCancelNewSchedule}
+        />
+      </Modal>
+      <div id="modal"></div>
     </Container>
   );
 }
@@ -49,10 +105,4 @@ const AddScheduleButton = styled(Button)`
   filter: drop-shadow(0px 4px 4px rgb(0, 0, 0, 0.25));
 
   font-family: 'NanumSquareB';
-`;
-
-const AddScheduleLink = styled(Link)`
-  padding-left: 0.7rem;
-  text-decoration: none;
-  color: black;
 `;
