@@ -72,7 +72,7 @@ export default function NewScheduleForm({
   }
 
   return (
-    <Container onSubmit={(e) => e.preventDefault()}>
+    <Container onSubmit={(e) => e.preventDefault()} {...props}>
       <TitleInput
         value={inputValues.title}
         placeholder="제목을 입력해주세요"
@@ -131,7 +131,7 @@ export default function NewScheduleForm({
 
 const Container = styled.form`
   width: 100%;
-  padding: 1rem;
+  padding: 2rem;
 
   position: relative;
 
