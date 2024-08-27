@@ -5,8 +5,8 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { ConfigProvider } from 'antd';
 import koKR from 'antd/locale/ko_KR';
 
-import NewScheduleForm from '@components/NewScheduleForm';
 import MainLayout from '@pages/MainLayout';
+import Homepage from '@pages/Homepage';
 
 const router = createBrowserRouter([
   {
@@ -16,7 +16,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <NewScheduleForm />,
+        element: <Homepage />,
       },
       {
         path: '/addschedule',
