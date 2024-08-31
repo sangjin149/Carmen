@@ -13,4 +13,6 @@ const firebaseConfig = {
 
 export const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
-export const scheduleRef = collection(db, 'schedule');
+export const userRef = collection(db, 'User');
+export const groupRef = collection(db, 'Group');
+export const scheduleRef = collection(db, 'Schedule');

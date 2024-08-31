@@ -5,6 +5,7 @@ import dayjs from 'dayjs';
 
 import { Button, Svg, Modal } from '@ui';
 import { Header, SidebarMenu, GroupMenu } from '@components/Sidebar';
+import { postNewSchedule } from 'src/apis/firebaseAPI';
 import NewScheduleForm from '@components/NewScheduleForm';
 
 const formInfo = {
@@ -46,8 +47,8 @@ export default function Sidebar() {
     modalRef.current.open();
   }
 
-  function handleSubmitNewSchedule() {
-    console.log('~~Sidebar.jsx~~ submitted new schedule');
+  function handleSubmitNewSchedule(formResult) {
+    postNewSchedule(formResult);
     modalRef.current.close();
   }
 
