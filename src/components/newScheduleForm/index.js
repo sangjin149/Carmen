@@ -14,7 +14,6 @@ import ScheduleOption from './ScheduleOption';
 // -ScheduleForm 호출
 // -오류 항목 한번 반짝임
 // -드롭다운 켜고 닫는거
-//TODO: API 추가
 // issue #6
 //BUG: label마다 id 추가
 
