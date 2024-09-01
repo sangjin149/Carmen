@@ -1,8 +1,8 @@
 import { styled } from 'styled-components';
-
 import { useForm } from '@hooks';
 import { Button, Icon } from '@ui';
 import { SidebarAddSchedule } from '@icons';
+import { BounceLoader } from 'react-spinners';
 
 import Description from './ScheduleDescription';
 import GroupInputItem from './GroupInputItem';
@@ -121,7 +121,9 @@ export default function NewScheduleForm({ formInfo, onSubmit: submitAPI, onCance
       />
       <Control>
         <CancelButton onClick={onCancel}>취소</CancelButton>
-        <ConfirmButton onClick={handleSubmit}>분류</ConfirmButton>
+        <ConfirmButton onClick={handleSubmit} disabled={isLoading}>
+          {isLoading ? <BounceLoader color="black" size={20} /> : '분류'}
+        </ConfirmButton>
       </Control>
     </Container>
   );
@@ -188,8 +190,12 @@ const ConfirmButton = styled(Button)`
   width: 4rem;
   height: 2rem;
 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   border-radius: 0.25rem;
-  background-color: black;
+  background-color: ${(props) => (props.disabled ? '#D9D9D9' : 'black')};
   color: white;
 `;
 
