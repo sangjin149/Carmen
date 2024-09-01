@@ -47,9 +47,9 @@ export default function Sidebar() {
     modalRef.current.open();
   }
 
-  function handleSubmitNewSchedule(formResult) {
-    postNewSchedule(formResult);
-    modalRef.current.close();
+  async function handleSubmitNewSchedule(formResult) {
+    await postNewSchedule(formResult);
+    // modalRef.current.close();
   }
 
   function handleCancelNewSchedule() {
