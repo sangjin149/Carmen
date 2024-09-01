@@ -36,20 +36,16 @@ const DUMMY_DATA = {
   },
 };
 
-export default function NewScheduleForm({
-  formInfo,
-  onSubmit: submitAPI,
-  onCancel,
-  ...props
-}) {
-  const { inputValues, errors, onInputValueChange, onSubmit } = useForm(
-    formInfo,
-    submitAPI,
-  );
+export default function NewScheduleForm({ formInfo, onSubmit: submitAPI, onCancel, ...props }) {
+  const { inputValues, errors, onInputValueChange, onSubmit } = useForm(formInfo, submitAPI);
 
   function handleSubmit(e) {
     e.preventDefault();
-    onSubmit();
+    try {
+      onSubmit();
+    } catch (e) {
+      console.error(`Submit failed: ${e}`);
+    }
   }
 
   function generateChangeHandler(key) {
@@ -67,8 +63,7 @@ export default function NewScheduleForm({
   const errorMessages = [];
   for (const errorIndex in errors) {
     const errorMessage = errors[errorIndex];
-    if (errorMessage.length > 0)
-      errorMessages.push({ name: errorIndex, message: errorMessage });
+    if (errorMessage.length > 0) errorMessages.push({ name: errorIndex, message: errorMessage });
   }
 
   return (
