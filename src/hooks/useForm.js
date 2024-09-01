@@ -14,11 +14,11 @@ function sortFormInfo(inputInformation) {
 }
 
 export default function useForm(inputInformation, submitFunction) {
-  const { defaultValues, validations, isRequired } =
-    sortFormInfo(inputInformation);
+  const { defaultValues, validations, isRequired } = sortFormInfo(inputInformation);
 
   const [inputValues, setInputValues] = useState(defaultValues);
   const [errors, setErrors] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
 
   function onInputValueChange(key, newValue) {
     const validationMessage = validations[key](newValue);
@@ -32,7 +32,6 @@ export default function useForm(inputInformation, submitFunction) {
 
   async function onSubmit() {
     let fireSubmit = true;
-
     for (const inputKey in isRequired) {
       if (isRequired[inputKey] && !inputValues[inputKey]) {
         setErrors((errors) => ({
@@ -45,13 +44,16 @@ export default function useForm(inputInformation, submitFunction) {
       if (errors[inputKey]) fireSubmit = false;
     }
 
-    if (fireSubmit) {
-      console.log('submit successed');
-      return submitFunction(inputValues);
-    }
+    if (!fireSubmit) return console.log('submit failed due to remaining form error');
 
-    console.log('submit failed due to remaining form error');
+    try {
+      setIsLoading(true);
+      await submitFunction(inputValues);
+      setIsLoading(false);
+    } catch (e) {
+      console.error(`Submit failure: ${e}`);
+    }
   }
 
-  return { inputValues, errors, isRequired, onInputValueChange, onSubmit };
+  return { inputValues, errors, isRequired, isLoading, onInputValueChange, onSubmit };
 }

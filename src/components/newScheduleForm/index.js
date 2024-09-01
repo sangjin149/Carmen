@@ -37,7 +37,10 @@ const DUMMY_DATA = {
 };
 
 export default function NewScheduleForm({ formInfo, onSubmit: submitAPI, onCancel, ...props }) {
-  const { inputValues, errors, onInputValueChange, onSubmit } = useForm(formInfo, submitAPI);
+  const { inputValues, errors, isLoading, onInputValueChange, onSubmit } = useForm(
+    formInfo,
+    submitAPI,
+  );
 
   function handleSubmit(e) {
     e.preventDefault();
