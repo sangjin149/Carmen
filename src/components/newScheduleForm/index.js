@@ -1,8 +1,8 @@
 import { styled } from 'styled-components';
-
 import { useForm } from '@hooks';
 import { Button, Icon } from '@ui';
 import { SidebarAddSchedule } from '@icons';
+import { BounceLoader } from 'react-spinners';
 
 import Description from './ScheduleDescription';
 import GroupInputItem from './GroupInputItem';
@@ -14,7 +14,6 @@ import ScheduleOption from './ScheduleOption';
 // -ScheduleForm 호출
 // -오류 항목 한번 반짝임
 // -드롭다운 켜고 닫는거
-//TODO: API 추가
 // issue #6
 //BUG: label마다 id 추가
 
@@ -36,20 +35,19 @@ const DUMMY_DATA = {
   },
 };
 
-export default function NewScheduleForm({
-  formInfo,
-  onSubmit: submitAPI,
-  onCancel,
-  ...props
-}) {
-  const { inputValues, errors, onInputValueChange, onSubmit } = useForm(
+export default function NewScheduleForm({ formInfo, onSubmit: submitAPI, onCancel, ...props }) {
+  const { inputValues, errors, isLoading, onInputValueChange, onSubmit } = useForm(
     formInfo,
     submitAPI,
   );
 
   function handleSubmit(e) {
     e.preventDefault();
-    onSubmit();
+    try {
+      onSubmit();
+    } catch (e) {
+      console.error(`Submit failed: ${e}`);
+    }
   }
 
   function generateChangeHandler(key) {
@@ -67,8 +65,7 @@ export default function NewScheduleForm({
   const errorMessages = [];
   for (const errorIndex in errors) {
     const errorMessage = errors[errorIndex];
-    if (errorMessage.length > 0)
-      errorMessages.push({ name: errorIndex, message: errorMessage });
+    if (errorMessage.length > 0) errorMessages.push({ name: errorIndex, message: errorMessage });
   }
 
   return (
@@ -123,7 +120,9 @@ export default function NewScheduleForm({
       />
       <Control>
         <CancelButton onClick={onCancel}>취소</CancelButton>
-        <ConfirmButton onClick={handleSubmit}>분류</ConfirmButton>
+        <ConfirmButton onClick={handleSubmit} disabled={isLoading}>
+          {isLoading ? <BounceLoader color="black" size={20} /> : '분류'}
+        </ConfirmButton>
       </Control>
     </Container>
   );
@@ -190,8 +189,12 @@ const ConfirmButton = styled(Button)`
   width: 4rem;
   height: 2rem;
 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   border-radius: 0.25rem;
-  background-color: black;
+  background-color: ${(props) => (props.disabled ? '#D9D9D9' : 'black')};
   color: white;
 `;
 

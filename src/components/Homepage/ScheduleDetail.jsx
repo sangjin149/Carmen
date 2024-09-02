@@ -2,43 +2,47 @@ import { styled } from 'styled-components';
 import { ScheduleTime, ScheduleLocation, ScheduleAlarm } from '@icons';
 
 import { Icon } from '@ui';
+import dayjs from 'dayjs';
 
-function getProcessedTime(date, displayAs24 = true) {
-  const month = date.getMonth();
-  const day = date.getDate();
-  const hour = date.getHours();
-  const minute = date.getMinutes();
+function processDateText(date) {
+  const today = dayjs();
+  const tomorrow = today.add(1, 'day');
 
-  let dateDisplay = `${month + 1}월 ${day}일`;
+  if (today.diff(date, 'day')) return '오늘';
+  if (tomorrow.diff(date, 'day')) return '내일';
+  return `${date.month()}월 ${date.date()}일`;
+}
 
-  const today = new window.Date();
-  const tomorrow = new window.Date();
-  tomorrow.setDate(today.getDate() + 1);
+function processHourText(date, displayAs24) {
+  const hour = date.hour();
+  const minute = date.minute();
 
-  if (tomorrow.toDateString() === date.toDateString()) dateDisplay = '내일';
-  if (today.toDateString() === date.toDateString()) dateDisplay = '오늘';
-
+  let ampm = '';
   let processedHour = hour;
-  let processedMinute = minute;
-  let ojunOhoo = '';
 
   if (!displayAs24) {
-    ojunOhoo = hour > 11 ? '오전 ' : '오후 ';
+    ampm = hour > 11 ? '오전 ' : '오후 ';
     processedHour = hour > 12 ? hour - 12 : hour;
   }
 
   processedHour = processedHour.toString().padStart(2, '0');
-  processedMinute = processedMinute.toString().padStart(2, '0');
+  const processedMinute = minute.toString().padStart(2, '0');
+  const result = `${ampm} ${processedHour}:${processedMinute}`;
 
-  const timeDisplay = `${ojunOhoo} ${processedHour}:${processedMinute}`;
+  return result;
+}
+
+function dateToText(date, displayAs24 = true) {
+  const dateDisplay = processDateText(date);
+  const timeDisplay = processHourText(date, displayAs24);
 
   return `${dateDisplay} ${timeDisplay}`;
 }
 
 export default function ScheduleDetail({ schedule, hideDescription }) {
-  const { date } = schedule;
+  const { time } = schedule;
 
-  const processedTime = getProcessedTime(date);
+  const processedTime = dateToText(time);
 
   return (
     <Container>
