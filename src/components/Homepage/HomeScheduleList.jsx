@@ -10,12 +10,7 @@ export default function HomeScheduleList({ scheduleList }) {
         <ScheduleBox schedule={schedule} key={schedule.id} />
       ))}
       <ProgressbarWrapper>
-        <Progress
-          progress={80}
-          direction="column"
-          barColor="#f9f7c9"
-          progressColor="#AAD9BB"
-        />
+        <Progress progress={80} direction="column" barColor="#f9f7c9" progressColor="#AAD9BB" />
       </ProgressbarWrapper>
     </Container>
   );

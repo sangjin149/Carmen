@@ -7,3 +7,5 @@ export { default as Svg } from './Svg';
 export { default as Icon } from './Icon';
 export { default as ClickAwayListener } from './ClickAwayListener';
 export { default as Modal } from './Modal';
+export { default as Skeleton } from './Skeleton';
+export { default as TextSkeleton } from './TextSkeleton';
