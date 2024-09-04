@@ -1,12 +1,13 @@
 import { styled } from 'styled-components';
-
 import Progressbar from '@ui/Progressbar';
-import { ScheduleBox } from '@components/Homepage';
+import ScheduleBox from './ScheduleBox';
 
-export default function HomeScheduleList({ scheduleList }) {
+export default function ScheduleTimeLine({ scheduleList }) {
+  const list = scheduleList.data.read();
+
   return (
     <Container>
-      {scheduleList.map((schedule) => (
+      {list.map((schedule) => (
         <ScheduleBox schedule={schedule} key={schedule.id} />
       ))}
       <ProgressbarWrapper>

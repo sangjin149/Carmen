@@ -1,28 +1,23 @@
 import { styled } from 'styled-components';
-import { useState, useEffect } from 'react';
+import { Suspense } from 'react';
 import { getTodaysSchedules } from 'src/apis/firebaseAPI';
 
-import { Clock, HomeScheduleList, HomeTodoList } from '@components/Homepage';
+import { Clock, ScheduleTimeLine, HomeTodoList } from '@components/Homepage';
+import { prepareSuspense } from 'src/apis/prepareSuspense';
 import generateDummyTodo from '@utils/dummyToDo';
 
 const DUMMY_TODO_LIST = generateDummyTodo(4);
 
 export default function Homepage() {
-  const [todaysSchedules, setTodaysSchedule] = useState([]);
-
-  useEffect(() => {
-    async function fetchTodaysSchedule() {
-      const scheduleList = await getTodaysSchedules();
-      setTodaysSchedule(scheduleList);
-    }
-    fetchTodaysSchedule();
-  }, []);
+  const wrappedPromise = prepareSuspense(getTodaysSchedules());
 
   return (
     <Container>
       <Clock />
       <Content>
-        <HomeScheduleList scheduleList={todaysSchedules} />
+        <Suspense fallback={<h1>loading</h1>}>
+          <ScheduleTimeLine scheduleList={wrappedPromise} />
+        </Suspense>
         <HomeTodoList todoGroupList={DUMMY_TODO_LIST} />
       </Content>
     </Container>
