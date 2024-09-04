@@ -1,12 +1,10 @@
 import { styled } from 'styled-components';
-import { Clock, HomeScheduleList, HomeTodoList } from '@components/Homepage';
-import generateDummyTodo from '@utils/dummyToDo';
-import generateDummySchedule from '@utils/dummySchedule';
 import { useState, useEffect } from 'react';
-
 import { getTodaysSchedules } from 'src/apis/firebaseAPI';
 
-const DUMMY_SCHEDULE_LIST = generateDummySchedule(16);
+import { Clock, HomeScheduleList, HomeTodoList } from '@components/Homepage';
+import generateDummyTodo from '@utils/dummyToDo';
+
 const DUMMY_TODO_LIST = generateDummyTodo(4);
 
 export default function Homepage() {
