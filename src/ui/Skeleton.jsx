@@ -10,6 +10,7 @@ const Container = styled.div`
   background-color: #f2f2f2;
   position: relative;
   overflow: hidden;
+  border-radius: 4px;
 
   @keyframes skeleton-gradient {
     0% {
