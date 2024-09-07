@@ -1,15 +1,24 @@
 import { styled } from 'styled-components';
 import Progressbar from '@ui/Progressbar';
-import ScheduleBox from './ScheduleBox';
+import ScheduleBoxList from './ScheduleBoxList';
+import ScheduleBoxSkeleton from './ScheduleBoxSkeleton';
+import { Suspense } from 'react';
+
+const ScheduleListSkeleton = (
+  <>
+    <ScheduleBoxSkeleton />
+    <ScheduleBoxSkeleton />
+    <ScheduleBoxSkeleton />
+    <ScheduleBoxSkeleton />
+  </>
+);
 
 export default function ScheduleTimeLine({ scheduleList }) {
-  const list = scheduleList.data.read();
-
   return (
     <Container>
-      {list.map((schedule) => (
-        <ScheduleBox schedule={schedule} key={schedule.id} />
-      ))}
+      <Suspense fallback={ScheduleListSkeleton}>
+        <ScheduleBoxList scheduleListPromise={scheduleList} />
+      </Suspense>
       <ProgressbarWrapper>
         <Progress progress={80} direction="column" barColor="#f9f7c9" progressColor="#AAD9BB" />
       </ProgressbarWrapper>
@@ -27,7 +36,6 @@ const Container = styled.section`
 `;
 
 const ProgressbarWrapper = styled.div`
-  width: 100%;
   height: 100%;
 
   position: absolute;
