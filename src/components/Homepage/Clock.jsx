@@ -4,20 +4,11 @@ import { useState, useEffect } from 'react';
 import { updateClock } from '@utils/time';
 
 export default function Clock() {
-  const [time, setTime] = useState({
-    month: '1',
-    date: '00',
-    hours: '00',
-    minutes: '00',
-    seconds: '00',
-    day: 'None',
-  });
+  const [time, setTime] = useState(updateClock());
 
   function updateTime() {
     setTime(updateClock());
   }
-
-  const timeNotUpdated = time.date === '00';
 
   useEffect(() => {
     const interval = setInterval(updateTime, 1000);
@@ -28,28 +19,15 @@ export default function Clock() {
 
   return (
     <Container>
-      <Date>
-        {timeNotUpdated ? '' : `${time.month}.${time.date} ${time.day}`}
-      </Date>
-      <Time>
-        {timeNotUpdated ? (
-          <LoadingIndicator>Loading...</LoadingIndicator>
-        ) : (
-          `${time.hours}:${time.minutes}`
-        )}
-      </Time>
+      <Date>{`${time.month}.${time.date} ${time.day}`}</Date>
+      <Time>{`${time.hours}:${time.minutes}`}</Time>
     </Container>
   );
 }
 
 const Container = styled.div`
-  height: 6rem;
-  width: 26rem;
-
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  justify-content: flex-end;
 `;
 
 const Date = styled.div`
