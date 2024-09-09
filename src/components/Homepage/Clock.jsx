@@ -41,7 +41,3 @@ const Time = styled.div`
   line-height: 4.5rem;
   font-size: 5rem;
 `;
-
-const LoadingIndicator = styled.div`
-  font-size: 5rem;
-`;
