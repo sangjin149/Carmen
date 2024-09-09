@@ -1,13 +1,13 @@
-export const updateClock = () => {
-  let now = new window.Date();
-  const month = (now.getMonth() + 1).toString().padStart(2, '0');
-  const date = now.getDate().toString().padStart(2, '0');
-  const hours = now.getHours().toString().padStart(2, '0');
-  const minutes = now.getMinutes().toString().padStart(2, '0');
-  const seconds = now.getSeconds().toString().padStart(2, '0');
-  let day = now.getDay();
+import dayjs from 'dayjs';
 
-  switch (day) {
+export const updateClock = () => {
+  const now = dayjs();
+  const [month, date, dayInNum, hours, minutes, seconds] = now
+    .format('MM DD d HH mm ss')
+    .split(' ');
+  let day = '일요일';
+
+  switch (Number(dayInNum)) {
     case 0:
       day = '일요일';
       break;
