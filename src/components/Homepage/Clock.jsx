@@ -39,5 +39,6 @@ const Date = styled.div`
 const Time = styled.div`
   height: 4rem;
   line-height: 4.5rem;
+  text-align: end;
   font-size: 5rem;
 `;

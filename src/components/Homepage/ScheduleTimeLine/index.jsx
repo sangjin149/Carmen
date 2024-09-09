@@ -13,9 +13,9 @@ const ScheduleListSkeleton = (
   </>
 );
 
-export default function ScheduleTimeLine({ scheduleList }) {
+export default function ScheduleTimeLine({ scheduleList, ...props }) {
   return (
-    <Container>
+    <Container {...props}>
       <Suspense fallback={ScheduleListSkeleton}>
         <ScheduleBoxList scheduleListPromise={scheduleList} />
       </Suspense>

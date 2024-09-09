@@ -1,5 +1,4 @@
 import { styled } from 'styled-components';
-import { Suspense } from 'react';
 import { getTodaysSchedules } from 'src/apis/firebaseAPI';
 
 import { Clock, ScheduleTimeLine, HomeTodoList } from '@components/Homepage';
@@ -13,13 +12,13 @@ export default function Homepage() {
 
   return (
     <Container>
-      <Clock />
-      <Content>
-        <Suspense fallback={<h1>loading</h1>}>
-          <ScheduleTimeLine scheduleList={wrappedPromise} />
-        </Suspense>
+      <MainColumn>
+        <Clock />
+        <TimeLine scheduleList={wrappedPromise} />
+      </MainColumn>
+      <SubColumn>
         <HomeTodoList todoGroupList={DUMMY_TODO_LIST} />
-      </Content>
+      </SubColumn>
     </Container>
   );
 }
@@ -29,13 +28,18 @@ const Container = styled.div`
   padding-left: 1rem;
 
   display: flex;
-  flex-direction: column;
-  align-items: start;
+  flex-direction: row;
+  gap: 1rem;
 `;
 
-const Content = styled.div`
-  padding-top: 64px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+const MainColumn = styled.div`
+  width: 27rem;
+`;
+
+const SubColumn = styled.div`
+  margin-top: 9rem;
+`;
+
+const TimeLine = styled(ScheduleTimeLine)`
+  margin-top: 3rem;
 `;
