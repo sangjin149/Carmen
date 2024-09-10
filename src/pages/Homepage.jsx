@@ -8,6 +8,9 @@ import generateDummyTodo from '@utils/dummyToDo';
 const DUMMY_TODO_LIST = generateDummyTodo(4);
 
 export default function Homepage() {
+  //TODO: 타임라인 현재 시간 따라 게이지 차오르게
+  //TODO: 일정 없을 때 표시할 거 만들기
+  //TODO: ScheduleBox 브랜치 파서 레이아웃이랑 받는 정보 개선
   const wrappedPromise = prepareSuspense(getTodaysSchedules());
 
   return (
