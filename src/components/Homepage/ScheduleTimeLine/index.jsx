@@ -5,6 +5,7 @@ import Progressbar from '@ui/Progressbar';
 import ScheduleBoxList from './ScheduleBoxList';
 import ScheduleBoxSkeleton from './ScheduleBoxSkeleton';
 import Placeholder from './TimeLinePlaceholder';
+import ScrollView from './ScrollView';
 
 const ScheduleListSkeleton = (
   <>
@@ -16,8 +17,6 @@ const ScheduleListSkeleton = (
 );
 
 export default function ScheduleTimeLine({ scheduleList, ...props }) {
-  //TODO: Suspense는 별로 안 좋은 듯, Suspense 지우고 Skeleton 컴포넌트 새로 만들기
-  //TODO: ClickawayListener 응용해서 만들면 될 듯
   const [listIsEmpty, setListIsEmpty] = useState(false);
   function handleListFetch(list) {
     if (list.length === 0) setListIsEmpty(true);
@@ -26,16 +25,33 @@ export default function ScheduleTimeLine({ scheduleList, ...props }) {
   if (listIsEmpty) return <Placeholder />;
 
   return (
-    <Container {...props}>
-      <Suspense fallback={ScheduleListSkeleton}>
-        <ScheduleBoxList scheduleListPromise={scheduleList} onGetList={handleListFetch} />
-      </Suspense>
-      <ProgressbarWrapper>
-        <Progress progress={80} direction="column" barColor="#f9f7c9" progressColor="#AAD9BB" />
-      </ProgressbarWrapper>
-    </Container>
+    <Scroller {...props}>
+      <Container>
+        <Suspense fallback={ScheduleListSkeleton}>
+          <ScheduleBoxList scheduleListPromise={scheduleList} onGetList={handleListFetch} />
+        </Suspense>
+        <ProgressbarWrapper>
+          <Progress progress={80} direction="column" barColor="#f9f7c9" progressColor="#AAD9BB" />
+        </ProgressbarWrapper>
+      </Container>
+    </Scroller>
   );
 }
+
+const Scroller = styled(ScrollView)`
+  padding: 2rem 0px;
+  width: 28rem;
+  height: 60rem;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #cfcfcf;
+    border-radius: 4px;
+  }
+`;
 
 const Container = styled.section`
   position: relative;
