@@ -1,7 +1,11 @@
 import ScheduleBox from './ScheduleBox';
+import { useEffect } from 'react';
 
-export default function ScheduleBoxList({ scheduleListPromise }) {
+export default function ScheduleBoxList({ scheduleListPromise, onGetList }) {
   const list = scheduleListPromise.data.read();
+  useEffect(() => {
+    onGetList(list);
+  }, [list, onGetList]);
 
   return (
     <>
