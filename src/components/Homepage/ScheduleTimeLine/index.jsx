@@ -50,6 +50,7 @@ const Scroller = styled(ScrollView)`
   &::-webkit-scrollbar-thumb {
     background: #cfcfcf;
     border-radius: 4px;
+    min-height: 8px;
   }
 `;
 
