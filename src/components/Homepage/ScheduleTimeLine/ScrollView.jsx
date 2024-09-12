@@ -1,18 +1,20 @@
 import { styled } from 'styled-components';
-import { useRef, useState, useCallback, useEffect } from 'react';
+import { useRef, useState } from 'react';
+import { useTrailingThrottle } from '@hooks';
 
 export default function ScrollView({ children, ...props }) {
   const [isScrolling, setIsScrolling] = useState(false);
   const prevTimeoutRef = useRef();
 
-  function handleScroll() {
+  function checkScrollingState() {
     if (isScrolling) clearTimeout(prevTimeoutRef.current);
     setIsScrolling(true);
     prevTimeoutRef.current = setTimeout(() => {
       setIsScrolling(false);
-      console.log('scroll stoped!');
-    }, 1000);
+    }, 500);
   }
+
+  const handleScroll = useTrailingThrottle(checkScrollingState, 200);
 
   return (
     <Container onScroll={handleScroll} $isScrolling={isScrolling} {...props}>
