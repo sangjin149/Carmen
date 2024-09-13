@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { ScheduleFold, ScheduleUnfold } from '@icons';
 
 import { Button, Icon } from '@ui';
-import { ScheduleDetail } from '@components/Homepage';
+import ScheduleDetail from './ScheduleDetail';
 
 export default function ScheduleBox({ schedule }) {
   const [foldBox, setFoldBox] = useState(true);

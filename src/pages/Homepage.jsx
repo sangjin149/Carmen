@@ -1,32 +1,26 @@
 import { styled } from 'styled-components';
-import { Clock, HomeScheduleList, HomeTodoList } from '@components/Homepage';
-import generateDummyTodo from '@utils/dummyToDo';
-import generateDummySchedule from '@utils/dummySchedule';
-import { useState, useEffect } from 'react';
-
 import { getTodaysSchedules } from 'src/apis/firebaseAPI';
 
-const DUMMY_SCHEDULE_LIST = generateDummySchedule(16);
+import { Clock, ScheduleTimeLine, HomeTodoList } from '@components/Homepage';
+import { prepareSuspense } from 'src/apis/prepareSuspense';
+import generateDummyTodo from '@utils/dummyToDo';
+
 const DUMMY_TODO_LIST = generateDummyTodo(4);
 
 export default function Homepage() {
-  const [todaysSchedules, setTodaysSchedule] = useState([]);
-
-  useEffect(() => {
-    async function fetchTodaysSchedule() {
-      const scheduleList = await getTodaysSchedules();
-      setTodaysSchedule(scheduleList);
-    }
-    fetchTodaysSchedule();
-  }, []);
+  //TODO: 타임라인 현재 시간 보여주는 막대기 추가
+  //TODO: ScheduleBox 브랜치 파서 레이아웃이랑 받는 정보 개선
+  const wrappedPromise = prepareSuspense(getTodaysSchedules());
 
   return (
     <Container>
-      <Clock />
-      <Content>
-        <HomeScheduleList scheduleList={todaysSchedules} />
+      <MainColumn>
+        <Clock />
+        <TimeLine scheduleList={wrappedPromise} />
+      </MainColumn>
+      <SubColumn>
         <HomeTodoList todoGroupList={DUMMY_TODO_LIST} />
-      </Content>
+      </SubColumn>
     </Container>
   );
 }
@@ -36,13 +30,18 @@ const Container = styled.div`
   padding-left: 1rem;
 
   display: flex;
-  flex-direction: column;
-  align-items: start;
+  flex-direction: row;
+  gap: 1rem;
 `;
 
-const Content = styled.div`
-  padding-top: 64px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+const MainColumn = styled.div`
+  width: 27rem;
+`;
+
+const SubColumn = styled.div`
+  margin-top: 9rem;
+`;
+
+const TimeLine = styled(ScheduleTimeLine)`
+  margin-top: 3rem;
 `;

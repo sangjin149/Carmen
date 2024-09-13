@@ -1,55 +1,56 @@
 import { styled } from 'styled-components';
-import { useState, useEffect } from 'react';
+import { useCurrentTime } from '@hooks';
 
-import { updateClock } from '@utils/time';
+function getTexts(dayjsObj) {
+  const [month, date, dayInNum, hours, minutes] = dayjsObj.format('MM DD d HH mm').split(' ');
+  let day = '일요일';
 
-export default function Clock() {
-  const [time, setTime] = useState({
-    month: '1',
-    date: '00',
-    hours: '00',
-    minutes: '00',
-    seconds: '00',
-    day: 'None',
-  });
-
-  function updateTime() {
-    setTime(updateClock());
+  switch (Number(dayInNum)) {
+    case 0:
+      day = '일요일';
+      break;
+    case 1:
+      day = '월요일';
+      break;
+    case 2:
+      day = '화요일';
+      break;
+    case 3:
+      day = '수요일';
+      break;
+    case 4:
+      day = '목요일';
+      break;
+    case 5:
+      day = '금요일';
+      break;
+    case 6:
+      day = '토요일';
+      break;
+    default:
+      day = '날짜 계산 오류';
   }
 
-  const timeNotUpdated = time.date === '00';
+  const dateText = `${month}.${date} ${day}`;
+  const timeText = `${hours}:${minutes}`;
 
-  useEffect(() => {
-    const interval = setInterval(updateTime, 1000);
-    return () => {
-      clearInterval(interval);
-    };
-  }, []);
+  return [dateText, timeText];
+}
 
+export default function Clock() {
+  const now = useCurrentTime();
+  const [dateText, timeText] = getTexts(now);
   return (
     <Container>
-      <Date>
-        {timeNotUpdated ? '' : `${time.month}.${time.date} ${time.day}`}
-      </Date>
-      <Time>
-        {timeNotUpdated ? (
-          <LoadingIndicator>Loading...</LoadingIndicator>
-        ) : (
-          `${time.hours}:${time.minutes}`
-        )}
-      </Time>
+      <Date>{dateText}</Date>
+      <Time>{timeText}</Time>
     </Container>
   );
 }
 
 const Container = styled.div`
-  height: 6rem;
-  width: 26rem;
-
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  justify-content: flex-end;
 `;
 
 const Date = styled.div`
@@ -61,9 +62,6 @@ const Date = styled.div`
 const Time = styled.div`
   height: 4rem;
   line-height: 4.5rem;
-  font-size: 5rem;
-`;
-
-const LoadingIndicator = styled.div`
+  text-align: end;
   font-size: 5rem;
 `;

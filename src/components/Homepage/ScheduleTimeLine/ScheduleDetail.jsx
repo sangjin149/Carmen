@@ -1,8 +1,8 @@
 import { styled } from 'styled-components';
+import dayjs from 'dayjs';
 import { ScheduleTime, ScheduleLocation, ScheduleAlarm } from '@icons';
 
 import { Icon } from '@ui';
-import dayjs from 'dayjs';
 
 function processDateText(date) {
   const today = dayjs();

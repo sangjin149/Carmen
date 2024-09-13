@@ -1,5 +1,5 @@
-import { Skeleton } from '@ui';
 import { styled } from 'styled-components';
+import { Skeleton } from '@ui';
 
 export default function ScheduleBoxSkeleton() {
   return (
