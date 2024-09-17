@@ -19,10 +19,6 @@ const router = createBrowserRouter([
         element: <Homepage />,
       },
       {
-        path: '/addschedule',
-        element: <div>새 작업 추가</div>,
-      },
-      {
         path: '/today',
         element: <div>오늘의 일정</div>,
       },
