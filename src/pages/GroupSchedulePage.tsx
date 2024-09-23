@@ -32,9 +32,16 @@ const Container = styled.div`
   flex-direction: column;
 `;
 
-const GroupTitle = styled.h1``;
+const GroupTitle = styled.h1`
+  font-size: 1.75rem;
+`;
 
-const NewGroupSchedule = styled(Button)``;
+const NewGroupSchedule = styled(Button)`
+  margin: 0.25rem;
+  border-radius: 0.25rem;
+  display: flex;
+  align-items: center;
+`;
 
 const DateGroupedSchedules = styled.div``;
 
