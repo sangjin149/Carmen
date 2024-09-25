@@ -43,7 +43,9 @@ const NewGroupSchedule = styled(Button)`
   align-items: center;
 `;
 
-const DateGroupedSchedules = styled.div``;
+const DateGroupedSchedules = styled.div`
+  margin: 0.5rem 0;
+`;
 
 const DateGroupTitle = styled.div``;
 
