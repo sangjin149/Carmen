@@ -28,11 +28,13 @@ export default function GroupSchedulePage() {
 }
 
 const Container = styled.div`
+  margin: 2rem;
   display: flex;
   flex-direction: column;
 `;
 
 const GroupTitle = styled.h1`
+  height: 64px;
   font-size: 1.75rem;
 `;
 
@@ -41,6 +43,8 @@ const NewGroupSchedule = styled(Button)`
   border-radius: 0.25rem;
   display: flex;
   align-items: center;
+  font-size: 0.75rem;
+  color: #e4617a;
 `;
 
 const DateGroupedSchedules = styled.div`
