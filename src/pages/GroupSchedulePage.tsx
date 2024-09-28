@@ -51,6 +51,17 @@ const DateGroupedSchedules = styled.div`
   margin: 0.5rem 0;
 `;
 
-const DateGroupTitle = styled.div``;
+const DateGroupTitle = styled.div`
+  position: relative;
+  padding-left: 0.5rem;
+  &::before {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 2px;
+    height: 100%;
+    color: #e4617a;
+  }
+`;
 
 const Schedule = styled.div``;
