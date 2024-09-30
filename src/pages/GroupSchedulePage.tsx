@@ -64,4 +64,7 @@ const DateGroupTitle = styled.div`
   }
 `;
 
-const Schedule = styled.div``;
+const Schedule = styled.div`
+  width: 100%;
+  overflow: hidden;
+`;
