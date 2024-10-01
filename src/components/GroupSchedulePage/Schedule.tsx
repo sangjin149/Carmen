@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { Dayjs } from 'dayjs';
-
+import { styled } from 'styled-components';
 interface Props {
   title: string;
   description: string;
