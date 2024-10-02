@@ -40,11 +40,18 @@ const GroupTitle = styled.h1`
 
 const NewGroupSchedule = styled(Button)`
   margin: 0.25rem;
-  border-radius: 0.25rem;
+  width: 30rem;
+  height: 1.75rem;
+  padding: 0.25rem 0.75rem;
+
+  border-radius: 0.5rem;
   display: flex;
   align-items: center;
   font-size: 0.75rem;
   color: #e4617a;
+  -webkit-box-shadow: 0px 0px 5px 1px rgba(219, 219, 219, 1);
+  -moz-box-shadow: 0px 0px 5px 1px rgba(219, 219, 219, 1);
+  box-shadow: 0px 0px 5px 1px rgba(219, 219, 219, 1);
 `;
 
 const DateGroupedSchedules = styled.div`
