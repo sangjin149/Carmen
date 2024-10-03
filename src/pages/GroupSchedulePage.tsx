@@ -62,12 +62,13 @@ const DateGroupTitle = styled.div`
   position: relative;
   padding-left: 0.5rem;
   &::before {
+    content: '';
     position: absolute;
     top: 0px;
     left: 0px;
-    width: 2px;
+    width: 4px;
     height: 100%;
-    color: #e4617a;
+    background-color: #e4617a;
   }
 `;
 
