@@ -1,4 +1,4 @@
-import { Button } from '@ui';
+import { Button, Checkbox } from '@ui';
 import { styled } from 'styled-components';
 
 export default function GroupSchedulePage() {
@@ -15,13 +15,15 @@ export default function GroupSchedulePage() {
       <NewGroupSchedule>+ 새 작업</NewGroupSchedule>
       <DateGroupedSchedules>
         <DateGroupTitle>그룹1</DateGroupTitle>
-        <Schedule>스케쥴1</Schedule>
+        <Schedule>
+          <ScheduleTitle>
+            <Checkbox checkedColor="#e4617a" />
+            스케쥴1
+          </ScheduleTitle>
+          <ScheduleDetail></ScheduleDetail>
+          <ScheduleContent></ScheduleContent>
+        </Schedule>
         <Schedule>스케쥴2</Schedule>
-      </DateGroupedSchedules>
-      <DateGroupedSchedules>
-        <DateGroupTitle>그룹2</DateGroupTitle>
-        <Schedule>스케쥴3</Schedule>
-        <Schedule>스케쥴4</Schedule>
       </DateGroupedSchedules>
     </Container>
   );
@@ -74,5 +76,13 @@ const DateGroupTitle = styled.div`
 
 const Schedule = styled.div`
   width: 100%;
+  display: flex;
+  flex-direction: column;
   overflow: hidden;
 `;
+
+const ScheduleTitle = styled.div``;
+
+const ScheduleDetail = styled.div``;
+
+const ScheduleContent = styled.div``;
