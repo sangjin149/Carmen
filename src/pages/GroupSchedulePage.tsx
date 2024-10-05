@@ -81,7 +81,9 @@ const Schedule = styled.div`
   overflow: hidden;
 `;
 
-const ScheduleTitle = styled.div``;
+const ScheduleTitle = styled.div`
+  font-size: 1.25rem;
+`;
 
 const ScheduleDetail = styled.div``;
 
