@@ -13,12 +13,12 @@ interface Props {
 export default function Schedule({ title, description, time, color, alarm }: Props) {
   return (
     <Container>
-      <ScheduleTitle>
+      <Title>
         <Checkbox checkedColor="#e4617a" />
         스케쥴1
-      </ScheduleTitle>
-      <ScheduleDetail></ScheduleDetail>
-      <ScheduleContent></ScheduleContent>
+      </Title>
+      <Detail></Detail>
+      <Content></Content>
     </Container>
   );
 }
@@ -30,10 +30,10 @@ const Container = styled.div`
   overflow: hidden;
 `;
 
-const ScheduleTitle = styled.div`
+const Title = styled.div`
   font-size: 1.25rem;
 `;
 
-const ScheduleDetail = styled.div``;
+const Detail = styled.div``;
 
-const ScheduleContent = styled.div``;
+const Content = styled.div``;
