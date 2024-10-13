@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Dayjs } from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
 import { styled } from 'styled-components';
 import { Checkbox } from '@ui';
 interface Props {
@@ -9,6 +9,13 @@ interface Props {
   color: string;
   alarm?: string;
 }
+
+const DUMMY_SCHEDULE = {
+  title: '더미 스케쥴',
+  description: '아무 내용',
+  time: dayjs(),
+  color: '#e4617a',
+};
 
 export default function Schedule({ title, description, time, color, alarm }: Props) {
   return (
