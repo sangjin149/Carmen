@@ -2,6 +2,7 @@ import { FC } from 'react';
 import dayjs, { Dayjs } from 'dayjs';
 import { styled } from 'styled-components';
 import { Checkbox } from '@ui';
+import { useState } from 'react';
 interface Props {
   title: string;
   description: string;
@@ -18,13 +19,15 @@ const DUMMY_SCHEDULE = {
 };
 
 export default function Schedule({ title, description, time, color, alarm }: Props) {
+  const [scheduleInfo, setScheduleInfo] = useState(DUMMY_SCHEDULE);
+
   return (
     <Container>
       <Title>
-        <Checkbox checkedColor="#e4617a" />
-        스케쥴1
+        <Checkbox checkedColor={scheduleInfo.color} />
+        {scheduleInfo.title}
       </Title>
-      <Detail></Detail>
+      <Detail>{scheduleInfo.description}</Detail>
       <Content></Content>
     </Container>
   );
