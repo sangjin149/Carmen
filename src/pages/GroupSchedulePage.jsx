@@ -1,5 +1,6 @@
 import { Button, Checkbox } from '@ui';
 import { styled } from 'styled-components';
+import Schedule from '@components/GroupSchedulePage/Schedule';
 
 export default function GroupSchedulePage() {
   // TODO: 내용 로딩 전 (쉿..로딩 중!) 화면 띄우기
@@ -15,15 +16,7 @@ export default function GroupSchedulePage() {
       <NewGroupSchedule>+ 새 작업</NewGroupSchedule>
       <DateGroupedSchedules>
         <DateGroupTitle>그룹1</DateGroupTitle>
-        <Schedule>
-          <ScheduleTitle>
-            <Checkbox checkedColor="#e4617a" />
-            스케쥴1
-          </ScheduleTitle>
-          <ScheduleDetail></ScheduleDetail>
-          <ScheduleContent></ScheduleContent>
-        </Schedule>
-        <Schedule>스케쥴2</Schedule>
+        <Schedule />
       </DateGroupedSchedules>
     </Container>
   );
@@ -73,18 +66,3 @@ const DateGroupTitle = styled.div`
     background-color: #e4617a;
   }
 `;
-
-const Schedule = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-`;
-
-const ScheduleTitle = styled.div`
-  font-size: 1.25rem;
-`;
-
-const ScheduleDetail = styled.div``;
-
-const ScheduleContent = styled.div``;
