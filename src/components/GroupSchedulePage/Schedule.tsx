@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import dayjs, { Dayjs } from 'dayjs';
 import { styled } from 'styled-components';
-import { Checkbox } from '@ui';
+import { Button, Checkbox } from '@ui';
 import { useState } from 'react';
 interface Props {
   title: string;
@@ -47,3 +47,5 @@ const Title = styled.div`
 const Detail = styled.div``;
 
 const Content = styled.div``;
+
+const EditButton = styled(Button)``;
