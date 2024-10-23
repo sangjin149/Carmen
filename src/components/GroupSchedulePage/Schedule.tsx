@@ -19,6 +19,9 @@ const DUMMY_SCHEDULE = {
 };
 
 export default function Schedule({ title, description, time, color, alarm }: Props) {
+  // TODO: 편집 버튼 추가
+  // TODO: 접기 펼치기 기능 추가
+  // TODO: 즐겨찾기 기능
   const [scheduleInfo, setScheduleInfo] = useState(DUMMY_SCHEDULE);
 
   return (
