@@ -1,6 +1,8 @@
-import { Button, Checkbox } from '@ui';
+import { Button, Checkbox, Modal } from '@ui';
 import { styled } from 'styled-components';
 import Schedule from '@components/GroupSchedulePage/Schedule';
+import { useRef } from 'react';
+import NewScheduleForm from '@components/NewScheduleForm';
 
 export default function GroupSchedulePage() {
   // TODO: 내용 로딩 전 (쉿..로딩 중!) 화면 띄우기
@@ -10,6 +12,12 @@ export default function GroupSchedulePage() {
   // [ ] : 새 작업 버튼
   // [ ] : 사이드 바 그룹 컴포넌트
 
+  const modalRef = useRef();
+
+  function handleNewScheduleClick() {
+    modalRef.current.open();
+  }
+
   return (
     <Container>
       <GroupTitle>분류1</GroupTitle>
@@ -18,6 +26,9 @@ export default function GroupSchedulePage() {
         <DateGroupTitle>그룹1</DateGroupTitle>
         <Schedule />
       </DateGroupedSchedules>
+      <Modal ref={modalRef}>
+        <NewScheduleForm />
+      </Modal>
     </Container>
   );
 }
