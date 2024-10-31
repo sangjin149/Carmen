@@ -3,6 +3,7 @@ import { styled } from 'styled-components';
 import Schedule from '@components/GroupSchedulePage/Schedule';
 import { useRef } from 'react';
 import NewScheduleForm from '@components/NewScheduleForm';
+import dayjs from 'dayjs';
 
 const formInfo = {
   title: {

@@ -1,4 +1,3 @@
-import { FC } from 'react';
 import dayjs, { Dayjs } from 'dayjs';
 import { styled } from 'styled-components';
 import { Button, Checkbox } from '@ui';
@@ -23,6 +22,8 @@ export default function Schedule({ title, description, time, color, alarm }: Pro
   // TODO: 접기 펼치기 기능 추가
   // TODO: 즐겨찾기 기능
   const [scheduleInfo, setScheduleInfo] = useState(DUMMY_SCHEDULE);
+
+  function handleEditClick() {}
 
   return (
     <Container>
