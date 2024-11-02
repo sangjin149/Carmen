@@ -30,6 +30,7 @@ export default function Schedule({ title, description, time, color, alarm }: Pro
       <Title>
         <Checkbox checkedColor={scheduleInfo.color} />
         {scheduleInfo.title}
+        <EditButton onClick={handleEditClick}>{'편집'}</EditButton>
       </Title>
       <Detail>{scheduleInfo.description}</Detail>
       <Content></Content>
