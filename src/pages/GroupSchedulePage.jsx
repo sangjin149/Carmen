@@ -54,7 +54,7 @@ export default function GroupSchedulePage() {
   return (
     <Container>
       <GroupTitle>분류1</GroupTitle>
-      <NewGroupSchedule>+ 새 작업</NewGroupSchedule>
+      <NewGroupSchedule onClick={handleNewScheduleClick}>+ 새 작업</NewGroupSchedule>
       <DateGroupedSchedules>
         <DateGroupTitle>그룹1</DateGroupTitle>
         <Schedule />
