@@ -59,9 +59,6 @@ export default function GroupSchedulePage() {
         <DateGroupTitle>그룹1</DateGroupTitle>
         <Schedule />
       </DateGroupedSchedules>
-      <Modal ref={modalRef}>
-        <NewScheduleForm />
-      </Modal>
     </Container>
   );
 }
@@ -73,12 +70,16 @@ const Container = styled.div`
 `;
 
 const GroupTitle = styled.h1`
-  height: 64px;
+  margin: 0px;
+  height: 4rem;
   font-size: 1.75rem;
+  line-height: 4rem;
 `;
 
 const NewGroupSchedule = styled(Button)`
-  margin: 0.25rem;
+  margin-top: 0.25rem;
+  margin-bottom: 1.25rem;
+
   width: 30rem;
   height: 1.75rem;
   padding: 0.25rem 0.75rem;
