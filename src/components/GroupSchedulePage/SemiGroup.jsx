@@ -33,4 +33,8 @@ const Title = styled.div`
   }
 `;
 
-const GroupFoldButton = styled(Button)``;
+const GroupFoldButton = styled(Button)`
+  width: 3rem;
+  height: 1.5rem;
+  margin: 0.25rem;
+`;
