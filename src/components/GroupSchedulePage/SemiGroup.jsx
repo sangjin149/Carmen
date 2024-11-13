@@ -1,12 +1,19 @@
 import { styled } from 'styled-components';
 import { Button } from '@ui';
+import { useState } from 'react';
 
 export default function SemiGroup({ title = '세부 그룹 제목', children }) {
+  const [showGroup, setShowGroup] = useState(true);
+
+  function handleClickFold() {
+    setShowGroup((oldShowGroup) => !oldShowGroup);
+  }
+
   return (
     <Container>
       <TitleLine>
         <Title>{title}</Title>
-        <GroupFoldButton />
+        <GroupFoldButton onClick={handleClickFold} />
       </TitleLine>
       {children}
     </Container>
