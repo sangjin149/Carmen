@@ -38,7 +38,7 @@ export default function Schedule({ title, description, time, color, alarm }: Pro
   );
 }
 
-const Container = styled.div`
+const Container = styled.article`
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -46,11 +46,15 @@ const Container = styled.div`
 `;
 
 const Title = styled.div`
-  font-size: 1.25rem;
+  font-size: 1rem;
 `;
 
-const Detail = styled.div``;
+const Detail = styled.div`
+  font-size: 0.875rem;
+`;
 
-const Content = styled.div``;
+const Content = styled.div`
+  font-size: 0.875rem;
+`;
 
 const EditButton = styled(Button)``;
