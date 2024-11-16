@@ -1,8 +1,9 @@
 import { Button, Checkbox, Modal } from '@ui';
 import { styled } from 'styled-components';
 import Schedule from '@components/GroupSchedulePage/Schedule';
+import SemiGroup from 'src/components/GroupSchedulePage/SemiGroup';
 import { useRef } from 'react';
-import NewScheduleForm from '@components/NewScheduleForm';
+
 import dayjs from 'dayjs';
 
 const formInfo = {
@@ -55,10 +56,9 @@ export default function GroupSchedulePage() {
     <Container>
       <GroupTitle>분류1</GroupTitle>
       <NewGroupSchedule onClick={handleNewScheduleClick}>+ 새 작업</NewGroupSchedule>
-      <DateGroupedSchedules>
-        <DateGroupTitle>그룹1</DateGroupTitle>
+      <SemiGroup>
         <Schedule />
-      </DateGroupedSchedules>
+      </SemiGroup>
     </Container>
   );
 }
