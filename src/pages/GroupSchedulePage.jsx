@@ -38,6 +38,8 @@ const formInfo = {
   },
 };
 
+const dummySchedules = [];
+
 export default function GroupSchedulePage() {
   // TODO: 내용 로딩 전 (쉿..로딩 중!) 화면 띄우기
   // TODO: 컴포넌트 개발
