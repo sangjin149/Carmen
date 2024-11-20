@@ -32,8 +32,10 @@ export default function Schedule({ title, description, time, color, alarm }: Pro
         {scheduleInfo.title}
         <EditButton onClick={handleEditClick}>{'편집'}</EditButton>
       </Title>
-      <Detail>{scheduleInfo.description}</Detail>
-      <Content></Content>
+
+      <Content>
+        <Detail>{scheduleInfo.description}</Detail>
+      </Content>
     </Container>
   );
 }
@@ -47,13 +49,16 @@ const Container = styled.article`
 
 const Title = styled.div`
   font-size: 1rem;
-`;
-
-const Detail = styled.div`
-  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
 `;
 
 const Content = styled.div`
+  font-size: 0.875rem;
+  margin-left: 1.25rem;
+`;
+
+const Detail = styled.div`
   font-size: 0.875rem;
 `;
 
