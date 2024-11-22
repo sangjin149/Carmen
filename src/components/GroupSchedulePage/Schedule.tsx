@@ -1,6 +1,6 @@
 import dayjs, { Dayjs } from 'dayjs';
 import { styled } from 'styled-components';
-import { Button, Checkbox } from '@ui';
+import { Button, Checkbox, Icon } from '@ui';
 import { useState } from 'react';
 interface Props {
   title: string;
@@ -34,7 +34,7 @@ export default function Schedule({ title, description, time, color, alarm }: Pro
       </Title>
 
       <Content>
-        <Detail>{scheduleInfo.description}</Detail>
+        <Description>{scheduleInfo.description}</Description>
       </Content>
     </Container>
   );
@@ -58,7 +58,20 @@ const Content = styled.div`
   margin-left: 1.25rem;
 `;
 
-const Detail = styled.div`
+const ContentItem = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const ContentIcon = styled(Icon)`
+  fill: #adadad;
+  width: 14px;
+  height: 14px;
+`;
+
+const Contenttext = styled.div``;
+
+const Description = styled.div`
   font-size: 0.875rem;
 `;
 
