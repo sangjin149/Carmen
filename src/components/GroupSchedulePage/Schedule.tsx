@@ -14,6 +14,7 @@ const DUMMY_SCHEDULE = {
   title: '더미 스케쥴',
   description: '아무 내용',
   time: dayjs(),
+  alarm: '5 minute',
   color: '#e4617a',
 };
 
@@ -32,10 +33,15 @@ export default function Schedule({ title, description, time, color, alarm }: Pro
         {scheduleInfo.title}
         <EditButton onClick={handleEditClick}>{'편집'}</EditButton>
       </Title>
-
       <Content>
-        <Description>{scheduleInfo.description}</Description>
+        {scheduleInfo.time && (
+          <ContentItem>
+            <ContentIcon />
+            <Contenttext></Contenttext>
+          </ContentItem>
+        )}
       </Content>
+      <Description>{scheduleInfo.description}</Description>
     </Container>
   );
 }
