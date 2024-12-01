@@ -15,6 +15,7 @@ const DUMMY_SCHEDULE = {
   description: '아무 내용',
   time: dayjs(),
   alarm: '5 minute',
+  location: '임의의 위치',
   color: '#e4617a',
 };
 
@@ -36,7 +37,19 @@ export default function Schedule({ title, description, time, color, alarm }: Pro
       <Content>
         {scheduleInfo.time && (
           <ContentItem>
-            <ContentIcon />
+            <ContentIcon src="" size={16} />
+            <Contenttext></Contenttext>
+          </ContentItem>
+        )}
+        {scheduleInfo.location && (
+          <ContentItem>
+            <ContentIcon src="" size={16} />
+            <Contenttext></Contenttext>
+          </ContentItem>
+        )}
+        {scheduleInfo.alarm && (
+          <ContentItem>
+            <ContentIcon src="" size={16} />
             <Contenttext></Contenttext>
           </ContentItem>
         )}
