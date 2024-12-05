@@ -38,38 +38,6 @@ const formInfo = {
   },
 };
 
-const formInfo = {
-  title: {
-    defaultValue: '',
-    validation: (newValue) => {
-      let errorMessage = '';
-      if (newValue.length < 1) return '제목을 입력해주세요!';
-      return errorMessage;
-    },
-    isRequired: true,
-  },
-  group: {
-    defaultValue: '',
-    validation: (newValue) => '',
-    isRequired: false,
-  },
-  time: {
-    defaultValue: dayjs(),
-    validation: (newValue) => '',
-    isRequired: false,
-  },
-  alarm: {
-    defaultValue: '',
-    validation: (newValue) => '',
-    isRequired: false,
-  },
-  description: {
-    defaultValue: '',
-    validation: (newValue) => '',
-    isRequired: true,
-  },
-};
-
 export default function GroupSchedulePage() {
   // TODO: 내용 로딩 전 (쉿..로딩 중!) 화면 띄우기
   // TODO: 컴포넌트 개발
