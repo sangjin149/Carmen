@@ -6,7 +6,8 @@ import { ConfigProvider } from 'antd';
 import koKR from 'antd/locale/ko_KR';
 
 import MainLayout from '@pages/MainLayout';
-import Homepage from '@pages/Homepage';
+// import Homepage from '@pages/Homepage';
+import GroupSchedulePage from '@pages/GroupSchedulePage';
 
 const router = createBrowserRouter([
   {
@@ -16,11 +17,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Homepage />,
-      },
-      {
-        path: '/addschedule',
-        element: <div>새 작업 추가</div>,
+        element: <GroupSchedulePage />,
       },
       {
         path: '/today',
